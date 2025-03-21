@@ -1,0 +1,142 @@
+\documentclass[12pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza I.2*}
+  \subtitle{Rozwiązanie zadań z serii II}
+  \maketitle
+    \section{Zadanie}
+        
+    \begin{zadanie}
+        Udowodnij, ze dla $x \in \left ( 0, \frac{\pi }{2} \right )$ prawdziwa jest nierówność
+        \[
+            \text{cos} \left ( x \right ) < \frac{\text{sin}^2 \left ( x \right ) }{x^2}
+        \]
+    \end{zadanie}
+        Znamy wzór Talora dla funkcji cosinus i $x_{0} = 0$:
+        \[
+            \text{cos} \left ( x \right ) = 1 - \frac{1}{2} x^2 + \frac{1}{24} x^4 + R_4(0) 
+        \]
+        Korzystamy z postaci Lagrange'a dla funkcji reszty i mamy
+        \[
+          R_4 (0) = \frac{\text{cos}^{(5)} \left ( \xi \right ) }{5!} x^4 = - \frac{\text{cos} \left ( x \right ) }{120} x^4 < 0
+        \]
+        Zatem mamy nierównosć
+        \[
+            \text{cos} \left ( x \right ) < 1 - \frac{1}{2} x^2 + \frac{1}{24} x^4
+        \]
+        Możemy zapisać teraz nierównosć:
+        \[
+            P = \frac{\text{sin}^2 \left ( x \right ) }{x^2} = \frac{\frac{1}{2} - \frac{1}{2} \text{cos} \left ( 2x \right ) }{x^2} > 1 - \frac{1}{3} x^2 > 1 - \frac{1}{2} x^2 + \frac{1}{24} x^4 > \text{cos} \left ( x \right )  
+        \]
+        po drodze skorzystalismy z nierównosci $\frac{1}{6} x^2 > \frac{1}{24} x^4$, która działa dla warunków zadania.
+  \section{Zadanie}
+      
+    \begin{zadanie}
+        Niech $a, b > 0, a \not = b$. Udowodnij nierówność
+        \[
+            \sqrt{ab} \leq \frac{b - a}{\text{ln} \left ( b \right ) - \text{ln} \left ( a \right ) } \leq \frac{a + b}{2} 
+        \]
+        
+    \end{zadanie}
+    
+    Będziemy korzystać z lematu o biegaczach. Ustalamy $a,b$, wybierzmy trzy funkcje:
+    \begin{gather*}
+       g(x) = \frac{b - a}{ \text{ln} \left ( b \right ) - \text{ln} \left ( a \right ) } \cdot \frac{1}{2} x^2 + ax \\     
+     f(x) = e^{x + \text{ln} \left ( a \right ) } - a \\
+     d(x) = \sqrt{ab} \cdot \left ( \frac{1}{2} x^2 - \frac{\text{ln} \left ( b \right ) - \text{ln} \left ( a \right )  }{2} x \right ) + \sqrt{ab} \cdot x 
+    \end{gather*}
+    
+    Od razu mamy też ich pochodne:
+    \begin{gather*}
+      g'(x) = \frac{b - a}{\text{ln} \left ( b \right )  - \text{ln} \left (  a \right ) } x + a\\
+      f'(x) = e^{x + \text{ln} \left ( a \right ) } \\
+      d'(x) =  \sqrt{ab} \cdot \left ( x - \frac{\text{ln} \left ( b \right ) - \text{ln} \left ( a \right )  }{2} \right )  + \sqrt{ab} 
+    \end{gather*}
+    Łatwo sprawdzić że $f(0) = g(0) > d(0)$
+    Zauważmy też geometrycznie że, funkcja $g$ przeciana $f$ w dwóch punktach (dokładnie w $0$, i $\text{ln} \left ( b \right ) - \text{ln} \left ( a \right )  $ ), i faktu że $f$ jest wypukła wynika że na tym przedziale $g' > f'$. Możemy równierz zauważyć że funkcja $d'$ została tak wybrana żeby być styczną do $f'$ w punkcie $\frac{\text{ln} \left ( b \right ) - \text{ln} \left ( a \right )  }{2}$, i znowu z wypukłosci mamy że $f' > d'$, łącząc możemy skorzystać z lematu o biegaczach, i dla punktu $x_{1} = \text{ln} \left ( b \right ) - \text{ln} \left ( a \right )$ mamy:
+    \[
+        g(x_{1}) \geq f(x_{1}) \geq d(x_1)
+    \]
+    co po podstawieniu daje nam:
+    \[
+        \frac{a+b}{2} \cdot \left ( \text{ln} \left ( b \right ) - \text{ln} \left ( a \right )  \right ) \geq b-a \geq \sqrt{ab} \cdot \left ( \text{ln} \left ( b \right ) - \text{ln} \left ( a \right )  \right ) 
+    \]
+    Wystarczy podzielić i mamy tezę.
+\section{Zadanie}
+    
+    \begin{zadanie}
+        Funkcja $f : [0, 1] \to [0, 1]$ jest wypukła i rosnąca oraz $f (0) = 0, f (1) = 1$. Udowodnij, że
+        \[
+          f(x) \cdot f^{-1} (x) \leq x^2 \qquad x \in [0,1]
+        \]
+        
+    \end{zadanie}
+    
+    Zapiszmy warunek wypukłosci dla $x_{0} = x, x_{1} = 0$:
+    \[
+      f( t \cdot f(x) ) \leq t \cdot f(x) \qquad t \in [0,1]
+    \]
+    Warto jescze zauważyć że funkcja jest "na", co wynika że jest wypukła i osiąga krańce przedziału, zatem możemy zauważyć:
+    \[
+      f(x) \cdot f^{-1} (x) \leq x^2 \iff f(f(y)) \cdot y \leq \left ( f(y) \right )^2 
+    \]
+    i możemy przeliczyć:
+    \[
+        f(f(y)) \cdot y = f(y \cdot \frac{1}{y} \cdot  f(y) ) \cdot y \leq \frac{1}{y} \cdot f(y) \cdot f(y) \cdot y \leq \left ( f(y) \right )^2
+    \]
+    co kończy dowód.
+\newpage
+\section{Zadanie}
+    
+    \begin{zadanie}
+        Udowodnij, że dla $x \in \left ( 0, \frac{\pi }{2} \right )$ zachodzi nierówność
+        \[
+            2 \text{tg} \left ( x \right ) > \text{sinh} \left ( x \right ) 
+        \]
+        
+    \end{zadanie}
+
+    Możemy przekształcić tezę do postaci:
+    \[
+        x - \text{arc tg} \left ( \frac{\text{sinh} \left ( x\right ) }{2} \right ) > 0 \qquad x \in (0, \infty )
+    \]
+    Skorzystamy ponownie z lematu o biegaczach dla naszej funkcji. Oznaczmy funkcje po lewej jako $f$, oczywiscie mamy że $f(0) = 0$, i policzmy pochodną:
+    \[
+        f'(x) = \frac{4 - 2 \text{cosh} \left ( x \right ) + \text{sinh}^2 \left ( x \right )  }{4 + \text{sinh}^2 \left ( x \right ) } = \frac{\left ( \text{cosh} \left ( x \right ) - 1  \right )^2 + 2}{4 + \text{sinh}^2 \left ( x \right ) } > 0
+    \]
+    Zatem nierównosć zachodzi z lematu o biegaczach.
+    
+\section{Zadanie}
+    
+    \begin{zadanie}
+        Udowodnij, że dla dowolnych dodatnich liczb rzeczywistych $a_{1}, a_{2}, \dots , a_n$ zachodzą nierówności
+        \[
+          \sqrt[n]{a_{1} \cdot a_{2} \cdot \dots \cdot a_n} \leq \text{ln} \left ( 1 + \sqrt[n]{\left ( e^{a_1} - 1 \right ) \cdot \dots \cdot \left ( e^{a_n} - 1 \right )}  \right ) \leq \frac{a_{1} + a_{2} + \dots + a_n}{n}
+        \]
+         
+    \end{zadanie}
+
+    Zacznijmy od prawej nierównosci, postawmy $e^{b_i} = e^{a_i} - 1$, mamy 
+    \[
+      \text{ln} \left ( 1 + e^{\frac{1}{n} \sum_{i = 1}^{n} b_i } \right ) \leq \frac{1}{n} \sum_{i = 1}^{n} \text{ln} \left ( 1 + e^{b_i} \right )  
+    \]
+   co wynika z twierdzenia Jensena, wystarczy tylko udwodnić że:
+   \[
+       \left ( \text{ln} \left ( 1 + e^x \right )  \right )^{''} = \frac{e^x}{(e^x + 1)^2} > 0
+   \]
+   co kończy dowód prawej strony.
+   Aby udowodnić lewą nierównosć postawiamy $\text{ln} \left ( 1 + e^{b_i} \right ) = e^{c_i} $ i po przekształceniach mamy:
+   \[
+     \text{ln} \left ( e^{e^{\frac{1}{n} \sum_{i = 1}^{n} c_i }} - 1 \right ) \leq \frac{1}{n} \sum_{i = 1}^{n} \text{ln} \left ( e^{e^{c_i}} - 1 \right )  
+   \]
+   które ponownie możemy wywnioskować z twierdzenia Jensena, wystarczy tylko sprawdzić:
+   \[
+     \left ( \text{ln} \left ( e^{e^x} - 1 \right )  \right )^{''} = \frac{e^{x + e^x} \left ( e^{e^x} + e^x + 1 \right )}{\left ( e^{e^x} + 1 \right )^2} > 0
+   \]
+   
+    
+\end{document}

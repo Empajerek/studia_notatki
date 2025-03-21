@@ -1,0 +1,211 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{
+    compat=1.18,
+}
+\begin{document}
+    \title{Analiza II.2*}
+    \subtitle{Rozwiązanie zadań z serii I}
+    \maketitle
+    \begin{zadanie*}
+        Obliczyć wartość całki
+        \[
+            \int_{I_n} \max \left \{ x_1, \dots, x_n \right \} dl_n \left ( x_1, \dots , x_n \right )
+        \]
+        gdzie $I = [0,1]$
+    \end{zadanie*}
+
+    Podejdźmy do problemu probabilistycznie, niech $x_1, \dots x_n$ będą zmiennymi losowymi wybieranymi z zakeresu $[0,1]$.
+
+    Łatwo widać że dla ustalonego $p \in [0,1]$ zachodzi:
+
+    \[
+        \mathbb{P} \left ( \sqrt[n]{x_1} < p   \right ) = p^n
+    \]
+
+    a także (wystarczy prosty argument polu wewnątrz $[0,p]^n$) że:
+
+    \[
+        \mathbb{P} \left ( \max \left \{ x_1, \dots, x_n  \right \} \leq p \right ) = p^n
+    \]
+
+    czyli funkcje $\max \left \{ x_1, \dots, x_n \right \}$, i $\sqrt[n]{x_1} $ mają te same dystrybuanty, a więc także wartości oczekiwane:
+     \begin{gather*}
+        \int_{I_n} \max \left \{ x_1, \dots, x_n \right \} dl_n \left ( x_1, \dots , x_n \right ) \\
+        = \mathbb{E} \left [ \max \left \{ x_1, \dots, x_n \right \} \right ]
+        = \mathbb{E} \left [ \sqrt[n]{x_1}  \right ] \\
+        = \int_{I} \sqrt[n]{x_1} \; dl_1 (x_1) 
+        = \left ( \frac{n}{n + 1} \right ) \cdot \left ( 1^{\frac{n}{n + 1}} - 0 \right ) = \frac{n}{n + 1}  
+     \end{gather*}
+
+     \newpage
+
+     \begin{zadanie*}
+        Obliczyć objętość obszaru ograniczonego powierzchnią
+        \[
+            S = \left \{ (x, y, z) : \left ( x^2 + y+2 + z^2 \right )^2 = a \left ( x^2 + y^2 - z^2 \right ) \right \}, \quad a > 0
+        \]
+     \end{zadanie*}
+
+     W rozwiązaniu skorzystamy z zdania 10 z serii 1 na ćwiczenia (które również jest znane jako twierdzenie Pappus'a-Guldinus'a), zatem:
+
+     Podstawiając współrzędne sferyczne mamy że $S$ to:
+     \[
+         S = \left \{ r \cdot \cos(\alpha ) \cos(\beta ), r \cdot \cos(\alpha ) \sin(\beta ) , r \sin(\alpha) \mid r^2 = a \cos (2 \alpha ) \right \}
+     \]
+
+     czyli region ograniczony $S$ jest bryłą obrotową. Podstawmy zatem $y = 0$ i oznaczmy:
+     \[
+         D = \left \{ \left ( x, y, z \right ) : \left ( x^2 + z^2 \right ) = a \left ( x^2 - z^2 \right ) \right \}
+     \]
+
+    Oznaczmy przez $P$ pole ograniczone $D$ i gdzie $x > 0$. Obliczmy wartość całki z $x$ w tym obszarze:
+
+    \begin{gather*}
+        \int_P x \; dl_2 = \int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \int_0^{\sqrt{a \cos 2\alpha } } r^2 \cos \alpha  \; dr \; d \alpha \\
+        = \frac{2a^{\frac{3}{2}}}{3} \int_0^{\frac{\pi}{4}} \sqrt{\left ( \cos 2 \alpha  \right )^3} \cos \alpha  \; d \alpha 
+        = \frac{2a^{\frac{3}{2}}}{3} \int_0^{\frac{\pi}{4}} \sqrt{\left ( 1 - 2 \sin^2 \alpha  \right )^3} \cos \alpha  \; d \alpha \\  
+    \end{gather*}
+
+    Dokonajmy podstawienia $s = \frac{1}{\sqrt{2} } \cdot \sin \alpha $:
+    
+    \begin{gather*}
+         = \frac{2a^{\frac{3}{2}}}{3 \sqrt{2} } \int_0^1 \sqrt{\left ( 1 - s^2  \right )^3} \; ds \\  
+    \end{gather*}
+
+    Oraz ponownego podstawienia $s = \sin \delta$
+
+    \begin{gather*}
+        = \frac{2a^{\frac{3}{2}}}{3 \sqrt{2} } \int_0^{\frac{\pi}{2}} \sqrt{\left ( 1 - \sin^2 \delta  \right )^3} \cdot \cos \delta \; d \delta
+        = \frac{2a^{\frac{3}{2}}}{3 \sqrt{2} } \int_0^{\frac{\pi}{2}} \cos^4 \delta \; d \delta \\  
+        = \frac{2a^{\frac{3}{2}}}{3 \sqrt{2} } \cdot \frac{3}{16} = \frac{\pi \sqrt{2} }{16} a^{\frac{3}{2}} 
+    \end{gather*}
+
+    Zatem korzystając z twierdzenia Pappus'a - Guldinusa'a mamy że pole ograniczone krzywą daną w zadaniu jest:
+    \[
+        V = 2 \pi \cdot  \frac{\pi \sqrt{2} }{16} a^{\frac{3}{2}} = \frac{\pi^2 \sqrt{2} }{8} a^{\frac{3}{2}}
+    \]
+
+    \newpage
+
+    \begin{zadanie*}
+        Niech $A = (a_{ij})$ będzie macierzą rzeczywistą taką, że $\det A \not = 0$. Obliczyć n-wymiarową miarę Lebesgue'a zbioru
+        \[
+            B = \left\{ (x_1, \dots, x_n) : \sum_{i=1}^{n} \big| \sum_{j=1}^{n} a_{ij} x_j \big| \leq 1 \right\}
+        \]
+    \end{zadanie*}
+
+    Rozpcznijmy od interpretacji wzoru w zadaniu. Można zauważyć że jest to złożenie przekształcenia zdefiniowanego macierzą $A$, z metryką taksówkową:
+    \[
+        \left\{ (x_1, \dots, x_n) : \sum_{i=1}^{n} \big| \sum_{j=1}^{n} a_{ij} x_j \big| \leq 1 \right\} 
+        = \left \{ x : \norm{Ax} \leq 1 \right \} \quad 
+        \mathrm{gdzie} \; x = (x_1, \dots, x_n)
+    \]
+
+    wprowadźmy oznaczenie:
+    \[
+        B' = \left \{ x : \norm{x} \leq 1 \right \}
+    \]
+
+    Pokażmy że $A^{-1} \left ( B' \right ) = B$ lub ekwiwalentnie $A(B) = B'$:
+    \begin{enumerate}
+        \item $x \in A(B)$ \\ czyli $\exists_y x = Ay$ gdzie $\abs{Ay} \leq 1$, więc mamy $\abs{x} \leq 1$ czyli $x \in B'$
+        \item $x \in B'$ \\ czyli $\exists_y! x = Ay$(z odwracalności $A$), \\
+            więc mamy $\abs{Ay} \leq 1$ i $y \in B$ czyli $x \in A(B)$
+    \end{enumerate}
+
+
+    możemy zastosować twierdzenie o zamianie zmiennych:
+    \[
+        l_n (B) = \int_B \, dl_n = \abs{\det A^{-1}} \int_{B'} \, dl_n = \abs{\det A^{-1}} \cdot l_n (B')  
+    \]
+
+    Wystarczy zatem policzyć objętość n-wymiarowej kuli w metryce taskówkowej, oznaczmy ją przez $B_n$. Narzuca się wzór indukcyjny:
+    \[
+        B_{n+1} = 2 \cdot \int_0^1 (1-x)^n B_n \; d \mu
+        = 2 \cdot B_n \frac{1}{n+1} x^{n+1} \Big|_0^1
+        = B_n \cdot \frac{2}{n + 1}
+    \]
+
+    Łatwo tutaj zauważyć jawny wzór:
+    \[
+        B_n = \frac{2^n}{n!}
+    \]
+    który spełnia rekurencje, a zatem wynikiem jest:
+    \[
+        l_n (B) = \frac{2^n}{n!} \cdot \frac{1}{\abs{\det A} }
+    \]
+    
+    \newpage
+
+    \begin{zadanie*}
+        Niech $K \subset \RR^3$ będzie zbiorem wypukłym, zwartym, $f \in C^\infty \left ( \RR^3 \right )$ 
+        spełnia warunek $\big|_{\partial K} \equiv 0$
+        oraz $\left ( 0, 0, 0 \right ) \not \in \partial K$. Obliczyć wartość całki:
+        \[
+            \int_K \frac{1}{(x^2 + y^2 + z^2)^{3/2}} 
+            \left( x \frac{\partial f}{\partial x} 
+            + y \frac{\partial f}{\partial y} 
+            + z \frac{\partial f}{\partial z} \right) 
+            \, \mathrm{d} l_3 (x,y,z)
+        \]
+    \end{zadanie*}
+
+    Zauważmy że:
+    \begin{gather*}
+        r \cdot \frac{\partial f}{\partial r} =
+        r \cdot \frac{\partial x}{\partial r}  \frac{\partial f}{\partial x} +
+        r \cdot \frac{\partial y}{\partial r}  \frac{\partial f}{\partial y} +  
+        r \cdot \frac{\partial z}{\partial r}  \frac{\partial f}{\partial z} =
+        x \cdot \frac{\partial f}{\partial x} +
+        y \cdot \frac{\partial f}{\partial y} +  
+        z \cdot \frac{\partial f}{\partial z}
+    \end{gather*}
+   
+    Robimy zatem podstawienie sferyczne:
+    \begin{gather*}
+            \int_K \frac{1}{(x^2 + y^2 + z^2)^{3/2}} 
+            \left( x \frac{\partial f}{\partial x} 
+            + y \frac{\partial f}{\partial y} 
+            + z \frac{\partial f}{\partial z} \right) 
+            \, \mathrm{d} l_3 (x,y,z) \\
+            = \int_{K'} \sin \alpha \frac{1}{r^3} r \cdot \frac{\partial f}{\partial r} \cdot r^2
+            \, \mathrm{d} l_3 (r,\alpha , \beta ) 
+            = \int_{K'} \sin \alpha  \frac{\partial f}{\partial r} \, \mathrm{d} l_3 (r,\alpha , \beta )
+    \end{gather*}
+
+    Mamy teraz dwa przypadki:
+    \begin{walk}
+        \item Punkt $(0, 0, 0)$ należy do $K$
+        \item Punkt $(0, 0, 0)$ nie należy do $K$
+    \end{walk}
+
+    Pierwszy przypadek:
+    Jeśli punkt $(0, 0, 0)$ należy do $K$, to całka jest równa:
+    \begin{gather*}
+        \int_{K'} \frac{\partial f}{\partial r} \sin \alpha \, \mathrm{d} l_2 (r,\alpha ) 
+        = 2 \pi \cdot \int_0^{2\pi} \int_0^{r(\alpha)} \frac{\partial f}{\partial r} \sin \alpha  \, \mathrm{d} l_2 (r,\alpha ) \\ 
+        = 2 \pi \cdot \int_0^{2\pi} \sin \alpha \int_0^{r(\alpha)} \frac{\partial f}{\partial r} \, \mathrm{d} l_2 (r,\alpha ) 
+        = 2 \pi \cdot \int_0^{2\pi} \sin \alpha \left ( 0 - f(0) \right ) \mathrm{d} l_1 (\alpha) 
+        = - 4 \pi \cdot f(0)
+    \end{gather*}
+    czyli wynik to $- 4 \pi f(0)$.
+
+    Drugi przypadek:
+    Jeśli punkt $(0, 0, 0)$ nie należy do $K$, to całka jest równa:
+    \begin{gather*}
+        \int_{K'} \frac{\partial f}{\partial r} \sin \alpha \, \mathrm{d} l_3 (r,\alpha , \beta ) 
+        = 2 \pi \cdot \int_0^{2\pi} \int_{r_2(\alpha)}^{r_1(\alpha)} \frac{\partial f}{\partial r} \sin \alpha  \, \mathrm{d} l_2 (r,\alpha) \\
+        = 2 \pi \cdot \int_0^{2\pi} \sin \alpha \left ( 0 - 0) \right ) \mathrm{d} l_1 (\alpha ) 
+        = 0
+    \end{gather*}
+    czyli wynik w tym przypadku to $0$.
+    
+    
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza 2.1*}
+  \subtitle{Rozwiązanie zadania domowego nr.3}
+  \maketitle
+    \begin{zadanie*}
+        Rozważmy funkcje 
+        \[
+          f(x,y) = \frac{\left ( e^{x+y} - 1 \right ) \text{sin} \left ( x - y \right ) }{x^2 - y^2}
+        \]
+        dla $\abs{x} \not = \abs{y}  $
+        \begin{walk}
+            \item Pokazać, że $f$ można przedłużyć do funkcji ciągłej na $\mathbb{R}^2$.
+            \item Czy to przedłużenie jest różniczkowalne?
+        \end{walk}
+        
+    \end{zadanie*}
+    
+    \begin{walk}
+        \item Przeprowadźmy zamianę zmiennych na:
+          \[
+            \begin{cases} s = x - y \\ t = x + y \end{cases}
+          \]
+          wtedy nasza funkcja to 
+          \[
+              f(s,t) = \frac{e^t - 1}{t} \cdot \frac{\text{sin} \left ( s \right ) }{s}
+          \]
+          widać że problematycznymi punktami naszej funkcji są $s = 0$ i $t = 0$, lecz znane są granice:
+          \[
+              \lim_{t \to 0} \frac{e^t - 1}{t} = 1 \qquad \lim_{s \to 0} \frac{\text{sin} \left ( s \right ) }{s} = 1    
+          \]
+          więc wystarzczy dodefiniować:
+          \[
+            f(s,t) = \begin{cases} \frac{e^t - 1}{t} \cdot \frac{\text{sin} \left ( s \right ) }{s} \qquad & x \not = 0 \wedge y \not = 0 \\  
+              \frac{e^t - 1}{t} = f_1(t) \qquad & s = 0 \wedge t \not = 0 \\
+              \frac{\text{sin} \left ( s \right ) }{s} = f_2 (s)  \qquad & t = 0 \wedge s \not = 0 \\
+            1 \qquad & s = 0 \wedge t = 0 \end{cases}
+          \]
+          i nasza funkcja jest ciągła, ponieważ jest iloczynem funkcji ciągłych.
+
+        \item Używając poprzednich oznaczeń, obliczmy dwie pochodne:
+          \[
+            f_1'(x) = \left ( \frac{e^x - 1}{x} \right )' = \frac{e^x (x - 1) + 1}{x^2} \qquad 
+            f_2'(x) = \left ( \frac{\text{sin} \left ( x \right ) }{x} \right )' = \frac{x \cdot  \text{cos} \left ( x \right ) - \text{sin} \left ( x \right ) }{x^2}
+          \]
+
+          których granice w zerze to odpowiednio (używając wzorów Taylora):
+          \[
+              \lim_{x \to 0} \frac{e^x \left ( x - 1 \right ) + 1}{x^2} = \half \qquad 
+              \lim_{x \to 0} \frac{x \cdot \text{cos} \left ( x \right ) - \text{sin} \left ( x \right ) }{x^2} = 0  
+          \]
+          obliczmy teraz $f_1'(0)$ i $f'_2(0)$:
+          \begin{gather*}
+              f'_1(0) = \lim_{x \to 0} \frac{f_1(x) - 1}{x} = \lim_{x \to 0} \frac{e^x - x - 1}{x^2} = \half \\
+              f'_2(0) = \lim_{x \to 0} \frac{f_2(x) - 1}{x} = \lim_{x \to 0} \frac{\text{sin} \left ( x \right ) - x}{x^2} = 0    
+          \end{gather*}
+          korzystając ze wzoru Taylora, a zatem pochodne zdefiniowanych przez nas funkcji są ciągłe. 
+          
+          Teraz wracając do naszej funkcji wyjsciowej $f$ mamy że jej pochodne cząstkowe:
+          \[
+              \frac{\partial f}{\partial s} = f_1 (t) \frac{df_2}{ds} = f_1(t) \cdot f'_2(s) \qquad 
+              \frac{\partial f}{\partial t} = f_2 (s) \frac{df_1}{dt} = f_2(s) \cdot f'_1(t)
+          \]
+          są iloczynami funkcji ciągłych więc są ciągłe, a zatem cała funkcja jest różniczkowalna w każdym punkcie.
+
+    \end{walk}
+    
+\end{document}

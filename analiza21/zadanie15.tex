@@ -1,0 +1,29 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza II.1*}
+  \subtitle{Rozwiązanie zadania nr.15}
+  \maketitle
+  Wystarczy podzielić odcinek $[a,b]$ na $2^n$ równych przedziałów. Niech $P_{k,n}$ będzie k-tym takim przedziałem. Niech
+   \[
+    v_n (y) = \sum_{2^n - 1}^{k = 0} \chi_{f(P_{k,n})} (y)  
+   \]
+   Zauważmy, że z ciągłości $f$ mamy, że  $f(P_{k,n})$ jest przedziałem:
+   $f(P_{k,n} = \left [ \inf_{P_{k,n}}, \sup_{P_{k,n}} f \right ]$. Zatem
+   \begin{gather*}
+     \int_{\RR} v_n (y) dy = \int_{\RR} \sum_{2^n - 1}^{k = 0} \chi_{f(P_{k,n})} (y) dy \\
+     = \sum_{2^n - 1}^{k = 0}  \int_{\RR} \chi_{f(P_{k,n})} (y) dy = \sum_{2^n - 1}^{k = 0} l_1 f(P_{k,n}) \\ 
+     = \sum_{2^n - 1}^{k = 0} (\sup_{P_{k,n}} - \inf_{P_{k,n}}) \to V(f; a, b)
+   \end{gather*}
+
+   Zatem jeśli $v_n \nearrow v$ to z tw. L-L mamy tezę. \\
+
+
+
+   Jeśli $v(y)$ jest skończone to przypadek jest oczywisty. \\
+   Jeśli $v(y)$ jest nieskończone to $v_n(y) \to \infty $, ale z tego wynika że jest to zbiór miary zero, czyli pomijalny.
+\end{document}

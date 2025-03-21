@@ -1,0 +1,181 @@
+\documentclass[12pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza I.2*}
+  \subtitle{Rozwiązanie zadań z serii III}
+  \maketitle
+
+  \section{Zadanie}
+      
+  \begin{zadanie}
+      Oblicz granicę:
+      \begin{walk}
+        \item $$ \lim_{n \to \infty } \left ( 1 + \frac{1}{n^2} \right )^{n^4} \left ( 1 - \frac{1}{n} \right )^{n^3 - \frac{1}{2} n^2} $$
+        \item $$ \lim_{x \to 0} \frac{\frac{x}{6} + \text{cos} \left ( \text{sinh} \left ( x \right )  \right ) - \cbrt{1 - x^2}  }{ \text{cosh} \left ( \text{sin} \left ( x \right )  \right ) - e^{\frac{1}{2} x^2}} $$ 
+      \end{walk}
+  \end{zadanie}
+      
+      \begin{walk}
+          \item Po zlogarytmowaniu mamy granicę:
+            \[
+                \lim_{n \to \infty } n^4 \cdot  \text{ln} \left ( 1 + \frac{1}{n^2} \right ) + \left ( n^3 + \frac{1}{2} n^2 \right ) \cdot \text{ln} \left ( 1 - \frac{1}{n} \right ) 
+            \]
+           skorzystamy teraz z rozwinięcia logarytmu w szereg taylora do stopnia drugiego, trzeciego, i mamy:
+           \begin{gather*}
+              \lim_{n \to \infty } n^4 \cdot \left ( \frac{1}{n^2} - \frac{1}{n^4} + o(\frac{1}{n^4}) \right ) + \left ( n^3 + \frac{1}{2} n^2 \right ) \cdot \left ( - \frac{1}{n} - \frac{1}{n^2} - \frac{1}{n^3} + o(\frac{1}{n^3}) \right ) = \\
+              \lim_{n \to \infty } - \frac{1}{2} n + \frac{1}{2n} + o(1) = - \infty  
+           \end{gather*}
+           Zatem nasza granica to
+           \[
+             \lim_{n \to \infty } \left ( 1 + \frac{1}{n^2} \right )^{n^4} \left ( 1 - \frac{1}{n} \right )^{n^3 - \frac{1}{2} n^2} "=" e^{- \infty } = 0
+           \]
+          \item Rozwijając funkcje w szeregi Taylora wszystkie funkcje mamy:
+            \begin{gather*}
+                \lim_{x \to 0} \frac{\frac{x}{6} + \text{cos} \left ( x + \frac{x^3}{6} + o(x^3) \right ) - 1 + \frac{1}{3} x^2 + o(x^2)}{ \text{cosh} \left ( x - \frac{1}{6} x^3 + \frac{1}{120} x^5 + o(x^5) \right ) - 1 - \frac{1}{2} x^2 + \frac{1}{8} x^4 + o(x^4)} = \frac{\frac{x}{6} - \frac{x^2}{6} + o(x^2)}{- \frac{x^4}{4} + o(x^4)}
+            \end{gather*}
+            Widzimy że granica z lewej jest różna od prawej, więc nie istnieje 
+      \end{walk}
+    
+    \section{Zadanie}
+        
+    \begin{zadanie}
+        Wyznaczyć wszystkie wartości parametru $p \in [0, 1]$ takie, że nierówność
+        \[
+          \left ( \text{tg} \left ( x \right )  \right )^p \left ( \text{sin} \left ( x \right )  \right )^{1-p} > x
+        \]
+        jest prawdziwa dla wszystkich $x \in (0, \frac{\pi }{2} )$.
+    \end{zadanie}
+    
+    Przekszałćmy tezę do postaci
+
+    \[
+      \left ( \frac{\text{sin} \left ( x \right ) }{x} \right )^{\frac{1}{p}} - \text{cos} \left ( x \right ) > 0 
+    \]
+    i rozwińmy w szereg Taylora:
+    \[
+        L = \left ( \frac{1}{2} - \frac{1}{6p} \right ) x^2 + ...
+    \]
+    zauważmy że przy $x \to 0$, najwolniej maleje wyraz z $x^2$, więc musi on być nieujemny więc:
+    \[
+        p \geq \frac{1}{3}
+    \]
+    Możemy jeszcze napisać ciąg nierównosci dla $p = \frac{1}{3}$ i $x \leq 3$:
+     \[
+        \left ( \frac{\text{sin} \left ( x \right ) }{x} \right )^3 \geq \left ( 1 - \frac{1}{6} x^2 \right )^3 \geq 1 - \frac{1}{2} x^2 + \frac{1}{12} x^4 - \frac{1}{216} x^6 \geq 1 - \frac{1}{2} x^2 + \frac{1}{24} x^4 \geq \text{cos} \left ( x \right )  
+    \]
+    Teraz wystarczy zauważyć że pochodna:
+    \[
+      \frac{d}{dp} \left ( \frac{\text{sin} \left ( x \right ) }{x} \right )^{\frac{1}{p}} - \text{cos} \left ( x \right ) = - \text{ln} \left ( \frac{\text{sin} \left ( x \right ) }{x} \right ) \frac{\sqrt[p]{\frac{\text{sin} \left ( x \right ) }{x}} }{p^2} > 0
+    \]
+    jest dodatnia, zatem z lematu o biegaczach, nierównosć w zadaniu jest spełniona dla $p \in [ \frac{1}{3}, 1] $.
+    \section{Zadanie}
+        
+    \begin{zadanie}
+        Funkcja f jest 2-krotnie różniczkowalna na $[a, b]$, $f (a) = f (b) = 0$, a ponadto istnieje $M$ , że $|f''(x)| \leq \frac{1}{2} \frac{M}{(b-a)^2}$ dla każdego $x \in [a, b]$. Udowodnij, że $|f '(x)| \leq \frac{M}{b-a}$ dla każdego $x \in [a, b]$.
+    \end{zadanie}
+    
+    Rozwińmy w Taylora naszą funkcje wokół $x \in [a,b]$:
+    \begin{gather*}
+        0 = f(a) = f(x + (a-x)) = f(x) + f'(x) \cdot (a-x) + \frac{1}{2} f''(\xi_1) \cdot (a-x)^2 \\
+        0 = f(b) = f(x + (b-x)) = f(x) + f'(x) \cdot (b-x) + \frac{1}{2} f''(\xi_2) \cdot (b-x)^2 
+    \end{gather*}
+    
+    Odejmując równania stronami 
+
+    \begin{gather*}
+        0 = f'(x) \cdot (a - b) + \frac{1}{2} \left ( f''(\xi_1) \cdot (a-x)^2 - f''(\xi_2) \cdot (b-x)^2 \right )
+    \end{gather*}
+    
+    po przekształceniu:
+
+    \[
+        f'(x) = \frac{1}{2(b-a)} \left ( f''( \xi_1 ) \cdot (a-x)^2 - f''(\xi_2) \cdot (b-x)^2 \right )
+    \]
+    
+    korzystając z nierównosci trójkąta:
+    \[
+    \abs{f'(x)} \leq \frac{1}{2 (b-a)} \left ( | f''( \xi_1 ) \cdot (a-x)^2 | + | f''(\xi_2) \cdot (b-x)^2 \right | ) \leq \frac{M}{4 (b-a)^3} \left ( (a-x)^2 + (b-x)^2 \right ) 
+    \]
+    i w szczególnie dla $x = \frac{b+a}{2}$ mamy :
+    \[
+        |f'(x)| \leq \frac{M}{8(b-a)} \leq \frac{M}{(b-a)}
+    \]
+    więc otrzymalismy tezę nawet z lepszą stałą.
+    \section{Zadanie}
+        
+    \begin{zadanie}
+      Podaj przykład funkcji $f \in C^{\infty }( \mathbb{R} ) $ takiej, że $f (x) = 0$ dla $x \leq 0$ i $f (x) = 1 $ dla $x \geq 1$.
+    \end{zadanie}
+    
+    Z przykładu 6.86 z skryptu prof. Strzeleckiego, mamy że funkcja:
+    \[
+        f(x) = 
+        \begin{cases}
+          e^{- \frac{1}{x^2}} \qquad & x > 0 \\
+          0 \qquad & x \leq 0
+        \end{cases}
+    \]
+    jest gładka. Rozpatrując teraz funkcje:
+    \[
+        h(x) = \frac{f(x)}{ f(x) + f(1-x) }
+    \]
+    która jest złożeniem funkcji gładkich, czyli jest gładka bo $f(x) + f(1-x) > 0$, i :
+    \begin{gather*}
+      h(x) = \frac{f(x)}{f(x) + f(1-x)} = \frac{f(x)}{f(x)} = 1 \qquad  x \geq 1 \\
+      h(x) = \frac{f(x)}{f(x) + f(1-x)} = \frac{0}{f(1-x)} = 0 \qquad  x \leq 0
+    \end{gather*}
+    \section{Zadanie}
+        
+    \begin{zadanie}
+      Funkcja $f$ jest klasy $C^{\infty }$ i $f ( \frac{1}{n} ) = \frac{n^2}{n^2 + 1}$ dla każdego $n \in \mathbb{N}$. Oblicz $f (0)$ i $f (k)^{(k)} = 0$, $k \in \mathbb{N}$.
+    \end{zadanie}
+
+    Obliczmy bezposrednio $f(0)$ i $f'(0)$:
+    \begin{gather*}
+        f(0) = \lim_{n \to \infty } f(\frac{1}{n}) = \lim_{n \to \infty } \frac{n^2}{n^2 + 1} = 1 \\
+        f'(0) = \lim_{n \to \infty } \frac{f(\frac{1}{n}) - f(0)}{\frac{1}{n}} = \lim_{n \to \infty } n \cdot  \left ( \frac{n^2}{n^2 + 1} - 1 \right ) = \lim_{n \to \infty } \frac{-n}{n^2 + 1} = 0   
+    \end{gather*}
+    Następne pochodne liczymy ze wzoru Taylora:
+
+    \[
+        \frac{n^2}{n^2 + 1} = f(0 + \frac{1}{n}) = f(0) + f'(0) \cdot \frac{1}{n} + \frac{1}{2!n^2} \cdot f''(\xi_n) = 1 + \frac{1}{2! n^2} f''(\xi_n)
+    \]
+    po przekształceniu mamy:
+    \[
+        f''(0) = \lim_{n \to \infty } f''(\xi_n) = \lim_{n \to \infty } - 2! \frac{n^2}{n^2 + 1} = -2  
+    \]
+    i podobnie dla trzeciej pochodnej:
+    \[
+      \frac{n^2}{n^2 + 1} = f(0 + \frac{1}{n}) = f(0) + f'(0) \cdot \frac{1}{n} + \frac{f''(0)}{2} \frac{1}{n^2}+ \frac{f'''(\xi_n)}{3!} \frac{1}{n^3}
+    \]
+    i licząc granice:
+    \[
+        f'''(0) = \lim_{n \to \infty } f(\xi_n) = \lim_{n \to \infty } \frac{6n}{n^2 + 1} = 0  
+    \]
+    Możemy wydedukować że pochodne mają charakter cykliczny:
+    \[
+      f^{(2k)}(0) = (-1)^k \cdot (2k)! \qquad f^{(2k+1)} (0) = 0
+    \]
+    udowonimy to indukcyjnie. Bazę indukcje już mamy, więc rozpocznijmy od przypadku parzystego, i podobnie jak wczesniej liczymy:
+    \begin{gather*}
+      f^{(2k + 2)}(0) = \lim_{n \to \infty } f^{(2k + 2)} (\xi_n) = \lim_{n \to \infty } - (2k + 2)! n^{2k+2} \left ( - \frac{n^2}{n^2 + 1} + \sum_{i = 0}^{2k + 1} \frac{f^{(i)}(0)}{i! n^i} \right ) =  \\
+    \lim_{n \to \infty } -(2k+2)! x^{2k+2} \left ( - \frac{n^2}{n^2 + 1} + \sum_{i = 0 }^{k} \frac{(-1)^i}{n^{2i}} \right ) = \\
+      \lim_{n \to \infty } -(2k+2)! n^{2k+2} \left ( - \frac{n^2}{n^2 + 1} + \frac{1 - \left ( - \frac{1}{n^2} \right )^{k+1}}{1 + \frac{1}{n^2}}  \right ) = \\
+      \lim_{n \to \infty } (2k+2)! (-1)^k \frac{n^2}{n^2 + 1} = (-1)^k (2k+2)! \\
+    \end{gather*}
+
+    I podobnie dla nieparzystych:
+
+    \begin{gather*}
+      f^{(2k + 1)}(0) = \lim_{n \to \infty } f^{(2k + 1)} (\xi_n) = \lim_{n \to \infty } - (2k + 1)! n^{2k+1} \left ( - \frac{n^2}{n^2 + 1} + \sum_{i = 0}^{2k} \frac{f^{(i)}(0)}{i! n^i} \right ) =  \\
+    \lim_{n \to \infty } -(2k+1)! x^{2k+1} \left ( - \frac{n^2}{n^2 + 1} + \sum_{i = 0 }^{k} \frac{(-1)^i}{n^{2i}} \right ) = \\
+      \lim_{n \to \infty } -(2k+1)! n^{2k+1} \left ( - \frac{n^2}{n^2 + 1} + \frac{1 - \left ( - \frac{1}{n^2} \right )^{k+1}}{1 + \frac{1}{n^2}}  \right ) = \\
+      \lim_{n \to \infty } (2k+1)! (-1)^k \frac{n}{n^2 + 1} = 0 \\
+    \end{gather*}
+
+    co kończy dowód.
+\end{document}

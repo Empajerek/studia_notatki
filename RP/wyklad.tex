@@ -1,0 +1,25 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+    \title{Rachunek prawdopodobieństwa I 2025}
+    \subtitle{Notatki z wykłady}
+    \maketitle
+
+    \section{Wykład I}
+
+    \subsection{Zasada włączeń i wyłączeń}
+
+    \begin{twierdzenie}
+        Zasada włączeń i wyłączeń
+        \[
+            \mathbb{P} \left ( \bigcup_{i = 1}^n  A_i \right ) = \sum_{k = 1}^{n} (-1)^{k + 1} \sum_{K \subset [n] \\ \abs{K} = k } \mathbb{P} \left ( \bigcap_{i \in K} A_i \right )    
+        \]
+        
+    \end{twierdzenie}
+    
+    
+\end{document}

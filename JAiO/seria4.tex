@@ -1,0 +1,73 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{JAiO lato 2024}
+  \subtitle{rozwiązanie zadań z serii IV}
+  \maketitle
+    \section{Zadanie}
+        \begin{zadanie}
+            Słowa postaci $ww$ nazywamy \textit{kwadratami}. Dla języka $L \subseteq \Sigma^*$ zdefiniujmy operację \textit{ukwadratowienia}:
+            \[
+                \square L := L \cap \left \{ ww : w \in \Sigma^* \right \}
+            \]
+            W problemie \textit{niepustosci wyrażeń regularnych} pytamy, czy język definiowany przez dane wyrażenie regularne jest niepusty. Pokaż NP-zupełność problemu niepustości dla wyrażeń zbudowanych z liter $a \in \Sigma$, słowa pustego $\varepsilon$, operacji konkatenacji, sumy + i ukwadratowienia $\square$. Zatem w wyrażeniach tych nie wolno używać *, a zamiast tego dysponujemy operacją ukwadratowienia. Przykładową instancją problemu jest wyrażenie 
+            \[
+            \left ( \square \left ( a \left ( b + aaa \right ) \right ) + \varepsilon \right )a
+            \]
+            definiujące język $\left \{ aaaaa, a \right \}$.
+
+            \textit{Wskazówka:} Na rozgrzewkę, pomocne może być rozważenie wyrażeń zbudowanych z liter $a \in \Sigma$, słowa pustego $\varepsilon$, operacji konkatenacji, sumy + i przecięcia $\cap$. W tym wariancie, przykładową instancją jest wyrażenie
+            \[
+                \left ( \left ( ab \cap a(b + ac) \right ) + \varepsilon \right )a
+            \]
+            
+        \end{zadanie}
+  \section{Rozwiązanie}
+      Aby udowodnić, że problem \textit{niepustosci ukwadratowianych wyrażeń pseudo-regularnych} (jak to będe dalej nazywał), wykażemy jego przynależnosć do klasy NP, jak i jego NP-trudnosć
+      
+      \subsection*{Przynależnosć do klasy NP}
+      
+      Niech certyfikatem będzie słowo $w$ i jesli $L$ (czyli ukwadratowione wyrażenie pseudo-regularne) jest niepuste, to możemy w czasie wielomianowym sprawdzić czy $w \in L$, mianowicie:
+      \begin{walk}
+          \item Tworzymy język $L'$ w którym opuszczamy wszystkie \textit{kwadraty}:
+            \[
+              \left ( \square \left ( a (b + aaa) \right ) + \varepsilon \right ) a \rightarrow \left ( \left ( a (b + aaa) \right ) + \varepsilon \right )a
+            \]
+          \item Możemy wielomianowo sprawdzić czy $w \in L'$, i jesli tak jest to znamy przebieg słowa po tym wyrażeniu (które możemy uproscić do automatu niedeterministycznego, gdzie możemy zgadywać jego przebieg).
+          \item znając ten przykładowy przebieg sprawdamy czy słowa wygenerowane w \textit{kwadratach} są w postaci $ww : w \in \Sigma^*$ (jesli są zagnieżdżone to sprawdamy rekurencyjnie)
+          \item Jesli, wszystkie wyrazenia są w odpowiedniej formie to wiemy że $w \in L$, w przeciwnym przypadku sprawdzamy kolejne przejscie.
+      \end{walk}
+          Algorytm ten dla jednego słowa wykonuje się w czasie $P + Q \cdot \abs{w}$ gdzie $P, Q$ są wielomianami. 
+      
+
+      \subsection*{NP-trudnosć}
+
+      Aby wykazać NP-trudność, możemy dokonać redukcji z innego znanego problemu NP-zupełnego, na przykład problemu spełnialności formuł logicznych (SAT).
+
+\subsubsection*{Redukcja z problemu SAT}
+
+\begin{itemize}
+    \item \textbf{Problem 3SAT:} Dany jest zbiór zmiennych \( x_1, x_2, \ldots, x_n \) oraz formuła logiczna w postaci koniunkcji klauzul (3CNF), gdzie każda klauzula jest alternatywą 3 literałów.
+    \item \textbf{Konstrukcja wyrażeń regularnych:}
+    \begin{itemize}
+        \item Zamieniamy każdą zmienną \( x_i \) oraz jej negację \( \neg x_i \) na litery alfabetu \( \Sigma \). Przykładowo, \( x_i \rightarrow a_i \) oraz \( \neg x_i \rightarrow b_i \).
+      \item Dla każdej klauzuli \( (y_k \lor y_l \lor y_m) \), gdzie \( y_i \) jest literą odpowiadającą literałowi w klauzuli, tworzymy wyrażenie regularne 
+        \[ 
+          y_k \prod_{i \not = k} (a_i + b_i) + y_l \prod_{i \not = l} (a_i + b_i) + y_m \prod_{i \not = m} (a_i + b_i)
+        \]
+
+      \item Potraktujmy na chwile powstałe wyrażenia jako języki $L_1, \dots L_p$, dopełnijmy je wyrażeniami $K = (a_1 + b_1 + \varepsilon)(a_2 + b_2 + \varepsilon) \dots (a_n + b_n + \varepsilon)$ tak aby powstała ich liczba była potęgą dwójki, i możemy założyć że $p = 2^c$
+      \item Wprowadzamy nowy symbol $x$, i zauważmy że operacja $\square(L_i x L_{2^{c-1}+i} x)$ tworzy języki $L'_i$ które po dekompozycji $L x L x = L'_i$, spełniają formuły $L \in L_i, L \in L_{2^{c-1}+i}$. W ten sposób możemy zredukować liczbę wyrażeń dzieląc ich ilosc przez 2,
+      \item Powtarzamy proces do momentu gdy zostanie jeden język i nazwijmy go $M$ 
+    \end{itemize}
+      Jeśli $M \not = \varnothing$, istnieje słowo, które na przecięciu wszystkich $L_i$, co oznacza że spełnia ono wszystkie formuły, więc oryginalna formuła 3SAT jest spełnialna.
+\end{itemize}
+
+\section*{Wniosek}
+
+Problem \textit{niepustosci ukwadratowianych wyrażeń pseudo-regularnych} jest NP-zupełny. Wykazaliśmy, że problem jest w klasie NP i przeprowadziliśmy redukcję z problemu SAT, co pokazuje, że problem jest NP-trudny.
+\end{document}

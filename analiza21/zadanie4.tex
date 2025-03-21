@@ -1,0 +1,53 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza II.1*}
+  \subtitle{Rozwiązanie zadania domowego nr.4}
+  \maketitle
+    \begin{zadanie*}
+        Mamy $0 < a < b$ i $n \in \mathbb{N} $. Pomiędzy $a$ i $b$ wstawić $x_{1}, \dots , x_n$, tak aby
+        \[
+            f = \frac{\prod_{i} x_i  }{(a+x_1)(x_1 + x_2)\dots (x_n + b)}
+        \]
+        było jak największe.
+    \end{zadanie*}
+
+    Obliczmy dowolną pochodną cząstkową:
+    \[
+      \frac{\partial f}{\partial x_k} =
+      \frac{x_k^2 - x_{k-1} x_{k+1}}{(x_{k-1} + x_{k})(x_k + x_{k+1})} \cdot 
+      \frac{\prod_{i \not = k} x_i  }{(a + x_1)\dots (x_n + b)}  
+    \]
+    widzimy że pochodna zeruje się tylko dla $x_k = \sqrt{x_{k-1} x_{k+1}} $ (rozważamy wartosci dodatnie). 
+
+    Dodatkowo można też zauważyć że funkcja jest dodatnia dla całej dziedziny oraz jest to minimum tej funkcji (uznając ją za funkcje jednej zmiennej).
+
+    Obliczmy więc gradient i znajdźmy gdzie się zeruje:
+    \[
+        \nabla f =
+        \begin{bmatrix}
+          \frac{\partial f}{\partial x_1} \\
+          \frac{\partial f}{\partial x_2} \\
+          \vdots \\
+          \frac{\partial f}{\partial x_n}
+        \end{bmatrix}
+        = 0
+        \Rightarrow 
+        \begin{bmatrix}
+          x_1^2 = a x_2 \\
+          x_2^2 = x_1 x_3 \\
+          \vdots \\
+          x_n^2 = x_{n-1} b
+        \end{bmatrix}
+        = 0
+    \]
+    łatwo zauważyć że nasze $(x_i)_{i = 1 \dots n}$ tworzą ciąg geometryczny, z warunkami:
+    \[
+      x_0 = a \qquad x_{n+1} = b \qquad \Rightarrow \qquad x_k = a \left ( \sqrt[n+1]{\frac{b}{a}}  \right )^k
+    \]
+    oraz widzimy że jest to minimum funkcji, po sprawdzeniu minimum przy granicach (jedna z $x_i \to a$ lub $b$, zasadniczo wtedy minima dla pozostałych zmiennych też pozostają ciągami geometrycznymi lecz są one większe).
+\end{document}

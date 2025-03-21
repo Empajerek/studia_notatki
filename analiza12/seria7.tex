@@ -1,0 +1,150 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{AM1.2* lato 2024}
+  \subtitle{Rozwiązanie zadań z serii VII}
+  \maketitle
+
+\section*{Zadanie 2}
+Niech \(f \in C^1([0, 1])\). Udowodnij, że
+\[
+\left| f(1) - \int_1^0 f(x) \, dx \right| \leq \frac{1}{2} \max_{x \in [0,1]} |f'(x)|.
+\]
+
+\subsection*{Rozwiązanie}
+
+  Skorzytajmy z rozwiniecia Taylora funkcji:
+  \[
+    f(x) = f(1) - f'(\xi_x) (1-x) \Rightarrow \abs{ f(1) - f(x) }  = \abs{ f'(\xi_x) (1-x) } < \max \abs{f'(x)} (1-x)
+  \]
+  całkując stronami otrzymujemy
+  \[
+    \abs{f(1) - \int_0^1 f(x) dx} = \frac{1}{2} \max \abs{f'(x)} 
+  \]
+  co kończy dowód.
+
+\section*{Zadanie 3}
+Niech \(c_n = \frac{1}{\pi} \int_0^{\pi} \sin^{2n} x \, dx\).
+\begin{itemize}
+    \item[(a)] Uzasadnij, że \(\lim_{n \to \infty} c_n = 0\).
+    \item[(b)] Oblicz granicę
+    \[
+    \lim_{n \to \infty} \int_0^{\infty} \frac{\sin^{2n}(\pi x)}{c_n (x + 1/2)^2} \, dx.
+    \]
+\end{itemize}
+
+\subsection*{Rozwiązanie}
+
+Rozważmy całkę:
+
+\[
+  \int_0^\pi \text{sin}^{2n} \left ( x \right ) dx 
+\]
+Dla dowolnego $\delta$, możemy ją rozbić jako, i ustalmy że $c_n = \text{sin}^{2n} \left ( \frac{\pi}{2} \pm \delta \right )$
+
+\begin{gather*}
+  \int_0^{\frac{\pi}{2} - \delta} \text{sin}^{2n} \left ( x \right ) dx + \int_{\frac{\pi}{2} - \delta}^{\frac{\pi}{2} + \delta} \text{sin}^{2n} \left ( x \right ) dx + \int_{\frac{\pi}{2} }^{\pi} \text{sin}^{2n} \left ( x \right ) dx \\
+  < \left ( \frac{\pi}{2} - \delta \right ) c_n + 2 \delta + \left ( \frac{\pi}{2} - \delta \right ) = \pi c_n + \delta (2 - c_n) < \pi c_n + 2 \delta 
+\end{gather*}
+Przy ustalonym $\delta$, możemy wybrać takie $N$, że dla każdego $n \geq N$ zachodzi że $\pi c_n = \varepsilon - 2 \delta$, dla dowolnego $\varepsilon$ (które wybieramy przed $\delta$ aby wyrażenie było dodatnie), zatem mamy że całka może być dowolnie mała, czyli
+\[
+  c_n = \frac{1}{\pi} \int_0^\pi \text{sin}^{2n} \left ( x \right ) dx \to 0  
+\]
+
+
+\section*{Zadanie 4}
+Niech \(a, b \in \mathbb{R}\), \(b \leq 0\) będą takie, że \(1 + ax + bx^2 \geq 0\) dla każdego \(x \in [0, 1]\). Udowodnij, że
+\[
+\lim_{n \to \infty} n \int_0^1 (1 + ax + bx^2)^n \, dx = 
+\begin{cases} 
+-\frac{1}{a} & \text{jeśli } a < 0, \\ 
++\infty & \text{jeśli } a \geq 0. 
+\end{cases}
+\]
+
+\subsection*{Rozwiązanie}
+
+Niech $a < 0$, pokażemy że wtedy mamy że $\abs{a+1} < 1 $, czyli wystarczy udowodnić że $a > -2$, przez sprzeznosć powiedzmy że tak nie jest, czyli $0 < b \cdot 1^2 + a \cdot 1 + 1 \leq b - 1 < 0$, co jest sprzeczne.
+
+Policzmy teraz całkę dla $b = 0$:
+
+\[
+  \lim_{n \to \infty } n \int_0^1 (1 + ax)^{2n} dx = \lim_{n \to \infty } \frac{a}{n} \int_1^{a + 1} u^n du  = \lim_{n \to \infty } \frac{n}{n+1} \cdot \frac{1}{a} \cdot ((1+a)^{n+1} - 1) = - \frac{1}{a}     
+\]
+
+I teraz dla $b \not = 0$, możemy zapisać
+
+\[
+n \int_{0}^{1} (1 + ax^n)^{n} \, dx - n \int_{0}^{1} (1 + ax + bx^2)^{n} \, dx
+\]
+\[
+  = n \int_{0}^{1} -bx^2 \left ( (1+ax)^{n-1} + (1+ax)^{n-2}(1+ax+bx^2) + \dots + (1+ax+bx^2)^{n-1} \right ) \, dx
+\]
+
+\[
+= -n \int_{0}^{1} bx^2 w(x) \, dx = -nb \int_0^{n^{-\frac{2}{3} - \varepsilon}} x^2 w(x)dx - nb \int_{n^{-\frac{2}{3} - \varepsilon}}^1 x^2 w(x) dx
+\]
+Każdy z składników wielomianu $w(x)$ jest mniejszy od $1$ zatem cały wielomian możemy oszacować przez $n$ i mamy
+\[
+  -nb \int_0^{n^{-\frac{2}{3} - \varepsilon}} x^2 w(x)dx < -b n^2 \int_0^{n^{-\frac{2}{3} - \varepsilon}} x^2 dx = \frac{-b}{3} n^{-\frac{\varepsilon}{3}} \to 0 
+\]
+
+a drugi z czynników całki możemy oszacować tylko przez 
+\[
+  - nb \int_{n^{-\frac{2}{3} - \varepsilon}}^1 x^2 w(x) dx < - nb \int_{n^{-\frac{2}{3} - \varepsilon}}^1 n(1+ax)^n dx = \frac{1}{a} \cdot \frac{n}{n+1} \cdot \left ( (1+a)^{n+1} - (1 + a n^{-\frac{2}{3} - \varepsilon})^{n+1} \right ) \to 0 
+\]
+
+czyli mamy że całka jest z tresci zadania jest zbieżna do $\frac{1}{a}$ dla $a < 0$.
+
+Dla $a = 0$, możemy zauważyć że $\frac{1}{a} = \infty $, a dla $a > 0$, zauważmy że funkcja jest rosnąca w $0$, i całka nie jest zbieżna w zerze.
+\section*{Zadanie 5}
+Niech \(a \notin \mathbb{Z}\) i niech \(f, g : [-\pi, \pi)\) będą zadane wzorami \(f(x) = \sin(ax)\) oraz \(g(x) = \cos(ax)\).
+\begin{itemize}
+    \item[(a)] Wyznacz współczynniki Fouriera funkcji \(f\) i \(g\).
+    \item[(b)] Dla jakich punktów z przedziału \([- \pi, \pi]\) szereg Fouriera funkcji \(f\) jest zbieżny do funkcji \(f\)? Czy szereg Fouriera funkcji \(f\) jest zbieżny jednostajnie na \((- \pi, \pi)\)? Czy jest zbieżny niemal jednostajnie na \((- \pi, \pi)\)?
+    \item[(c)] Korzystając z punktu (a) i z tożsamości Parsevala wykaż, że dla \(t / \pi \notin \mathbb{Z}\) prawdziwa jest równość
+    \[
+    \frac{1}{\sin^2 t} = \sum_{n = -\infty}^{\infty} \frac{1}{(t - n\pi)^2}.
+    \]
+\end{itemize}
+
+\subsection*{Rozwiązanie}
+
+Weźmy funkcje $k(x) = g(x) + i \cdot f(x) = \text{cos} \left ( x \right ) + i \text{sin} \left ( x \right ) = e^{ix} $, teraz $c_n$ to 
+\begin{gather*}
+  c_n = \frac{1}{2 \pi} \int_{- \pi}^{\pi} e^{iax} \cdot e^{-inx} dx = \frac{1}{2 \pi} \int_{-\pi }^{\pi } e^{ix(a-n)} dx = \frac{1}{2 \pi } \cdot \frac{1}{i(a-n)} \left ( e^{i \pi (a - n)  - e^{- i \pi (a-n)}} \right ) \\
+  = \frac{1}{\pi (a - n)} \text{sin} \left ( \pi (a-n)  \right )
+\end{gather*}
+
+więc współczynniki przy $\text{sin} \left ( mx \right ) $ w $f$ to 
+\[
+    b^f_m = \frac{\text{sin} \left ( \pi (a-m) \right ) }{\pi (a-m)} - \frac{\text{sin} \left ( \pi (a+m) \right ) }{\pi (a+m)}
+\]
+
+a współczynniki przy $\text{cos} \left ( mx \right ) $ w $g$ to 
+\[
+    a^g_m = \frac{\text{sin} \left ( \pi (a-m) \right ) }{\pi (a-m)} - \frac{\text{sin} \left ( \pi (a+m) \right ) }{\pi (a+m)} 
+\]
+
+Wiemy że $f$, ma skończoną wariancje na swoim okresie, czyli z kryterium Jordana-Dirichleta, jej szereg foureiera i ciągłosći mamy że zbiega do $f$ w każdym z puntów $x \in (-\pi , \pi )$. W pozostałych punktach (czyli $-\pi $, $\pi $), nie mamy zbieżnosci gdyż następuje tam \textit{przesok}, ale funkcja jest równa $\pm \text{sin} \left ( ax \right ) \not = 0 $, bo $a \not \in \mathbb{Z} $.
+
+Zatem mamy że funkcja na pewno nie jest jednostajnie zbieżna, natomiast z tw. Jordana-Dirichleta, mamy zbieżnnosć jednostajną na dowolnym $(a,b) \in (-\pi , \pi )$
+
+Zastowujmy tożsamosć Persevala:
+
+\[
+  \frac{1}{2 \pi } \int_{- \pi }^{\pi } \abs{k(x)}^2 = \frac{1}{2 \pi } \int_{-\pi }^\pi e^0 dx = 1 = \sum_{n = - \infty }^{\infty } \abs{c_n}^2 = \sum_{n = -\infty }^{\infty } \frac{1}{\pi^2 (a-n)^2} \text{sin}^2 \left ( \pi a \right )       
+\]
+
+i dzieląc przez $\text{sin}^2 \left ( a \pi  \right ) $, i podstawiajac $x = \pi a$ mamy
+
+\[
+    \frac{1}{\text{sin}^2 \left ( x \right ) } = \sum_{n = -\infty }^{\infty } \frac{1}{(x- n \pi )}  
+\]
+
+
+\end{document}

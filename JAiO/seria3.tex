@@ -1,0 +1,42 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{JAiO lato 2024}
+  \subtitle{rozwiązanie zadań z serii III}
+  \maketitle
+    \section{Zadanie}
+        \begin{zadanie}
+            Ustalmy alfabet wejściowy $A = \{0, 1\}$ i alfabet taśmowy $T = \{0, 1, \mathbb{B} \}$. Niech U będzie maszyną uniwersalną. Dla słowa $w \in A^*$ zdefiniujmy maszynę Turinga $M_w$ następująco: jeśli w jest kodem pewnej maszyny $M$ to $M_w := M$ , a w przeciwnym przypadku $M_w := U$ . Dla każdego z poniższych języków ustal czy jest rozstrzygalny, i czy jest częściowo rozstrzygalny. 
+            \begin{walk}
+                \item $L_1 = \{ w \in A^* \mid M_w \; \text{jest maszyną o liczbie stanów, która jest potęgą dwójki} \}$
+                \item $L_2 = \{ w \in A^* \mid \forall v \in L(M_w) \exists n \in \mathbb{N} v = 1^{2^n}  \}$
+                \item $L_3 = \{ w \in A^* \mid \forall v \in L(M_w) v = 1^{\abs{w} } \vee \exists n \in \mathbb{N} v = 1^{2^n}  \}$  
+            \end{walk}
+            
+        \end{zadanie}
+        
+        \section{Rozwiązanie}
+
+          \subsection{a)}
+            
+            Jest to język rostrzygalny, udowodnimy to przez skonstruowanie automatu rozpoznającego ten język.
+
+            Możemy skonstruować maszynę $P$, rozpocznającą poprawnosć kodu $w$, następnie jęsli kod jest poprawny przekazujemy go do maszyny zliczającej stany w kodzie $w$, i przekazujemy ich ilosć do maszyny sprawdzającej czy jest to potęga dwójki (poprzez dzielenie jej przez 2, aż dojdziemy do 1, chyba że jakas liczba nie jest podzielna).
+
+          \subsection{b)}
+
+            Na początku pokażemy, że ten język nie jest rozstrzygalny.
+            Przez sprzeczosć, załużmy że jest roztrzygalny, czyli jest rozpoznawany przez np. całkowitą maszyne $P$, i wynika z tego równierz rostrzygalnosć problemu stopu.
+            Weźmy dowolne słowo $w$ i maszyne $Q$. Niech maszyna $R$, niezależnie od swojego wejscia symuluje bieg słowa $w$ w maszynie $Q$, i jesli jest rozpoznawany daje na wyjsciu $1$, w pozostałym przypadku niech się zawiesza (podobnie jak $Q$). Ale teraz uruchamiamy kod maszyny $R$ na maszynie $P$, i jesli $R$ dla każdego słowa daje $1$, to kod maszyny nie jest rozpoznawalny przez $P$. Łącząc te rzeczy mamy że $P$ rozpoznaje tylko kody maszyn symulujących zawieszające się układy maszyn i słów, co rozstrzyga problem stopu, więc mamy sprzecznosć.
+
+            Teraz pokażemy, że ten język nie jest częsciowo rozstrzygalny.
+            Wystarczy pokazać, że dopełnienie tego języka $A^* - L_2$ jest częsciowo rostrzygalne (teza wtedy wynika z poprzedniego wniosku), czyli kodów maszyn które zawierają conajmniej jedno słowo $v \not = 1^{2^n}$. Mianowicie aby sprawdzić czy $M_w \in A^* - L_2$, możemy symulować jej działanie przez $k$ kroków na kolejno wszystkich słowach o długosci $\leq k$, stopniowo zwiększając $k$ gdy skończą nam sie słowa, gdy znajdziemy takie słowo akceptujące $\not = 1^{2^n}$ to kończymy. Widać że jest to problem częsciowo rostrzygalny, co kończy dowód.
+
+            \subsection{c)}
+            
+            Ten podpunkt nie różni się w zasadnie niczym od poprzedniego, wykazanie że nie jest rozstrzygalny jest identyczne jak poprzednio, a w dowodzie braku cz. rostrzygalnosci do każdego $v \not = 1^{2^n}$, dokładamy warunek że $v \not = 1^{\abs{w} }$ 
+\end{document}

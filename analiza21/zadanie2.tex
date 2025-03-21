@@ -1,0 +1,90 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza 2.1*}
+  \subtitle{Rozwiązanie zdadania 2}
+  \maketitle
+    \begin{zadanie*}
+        Niech $f(z) = \frac{z}{1 + z^2}$
+        Dla danych $g,h : \mathbb{R}^2 \to \mathbb{R} $ definiujemy:
+        \[
+          F = h \cdot f \circ g
+        \]
+        Zbadać istnienie granicy:
+        \[
+            \lim_{(x,y) \to (0,0)}  F(x,y) 
+        \]
+        gdy:
+        \begin{walk}
+            \item 
+              \[
+                g = \begin{cases} \frac{x}{y^2} \qquad &y \not = 0 \\ 0 \qquad & y = 0 \end{cases} \qquad 
+                h = \begin{cases} \frac{y}{\sqrt{\abs{x} }} \qquad &x \not = 0 \\ 0 \qquad &x = 0 \end{cases}
+              \]
+            \item 
+              \[
+                g = \begin{cases} \frac{x}{y} \qquad &y \not = 0 \\ 0 \qquad &y = 0 \end{cases} \qquad h = x
+              \]
+            \item 
+              \[
+                g = x - y \qquad h = \begin{cases} \frac{1}{x-y} \qquad &x \not = y \\ 0 \qquad &x = y \end{cases}
+              \]    
+        \end{walk}
+    \end{zadanie*}
+
+        \begin{walk}
+            \item 
+              \[
+                F = \frac{y}{\sqrt{\abs{x}}} \cdot \frac{\frac{x}{y^2}}{1 + \frac{x^2}{y^4}} = \begin{cases} \frac{y^3 \sqrt{\abs{x} } }{y^4 + x^2} \qquad &x > 0 \\
+                  - \frac{y^3 \sqrt{\abs{x} } }{y^4 + x^2} \qquad &x < 0
+                \end{cases}
+              \]
+            Aby udowodnić że ta funkcja nie ma granicy $(0,0)$ ustalmy że $x = y^2$ i zbadajmy istnienie granicy dla $y \to 0^-$ i $y \to 0^+$:
+            \[
+                F = \frac{y^3 \abs{y} }{y^4 + y^4} = \frac{1}{2} \frac{\abs{y} }{y}
+            \]
+            i widzimy:
+            \[
+                \lim_{y \to 0^-} F(y) = -1 \not = 1 = \lim_{y \to 0^+} F(y)    
+            \]
+            więc funkcja nie ma granicy.
+            \item 
+              W tym przypadku mamy że:
+              \[
+                  F = x \cdot \frac{\frac{x}{y}}{1 + \frac{x^2}{y^2}} = \frac{x^2 y}{x^2 + y^2} 
+              \]
+              po zamianie współrzędnych na barycentryczne:
+              \[
+                  x = r \cdot \text{cos} \left ( \alpha  \right ) \qquad y = r \cdot \text{sin} \left ( \alpha  \right ) 
+              \]
+              
+              mamy
+              \[
+                  F = r \cdot \text{cos}^2 \left ( \alpha  \right ) \text{sin} \left ( \alpha  \right )  
+              \]
+              więc granica to
+              \[
+              \lim_{(x,y) \to (0,0)} F(x,y) = \lim_{r \to 0} F(\alpha , r) = \lim_{r \to 0} r \cdot W(\text{cos} \left ( x \right ), \text{sin} \left ( x \right )  ) = 0     
+              \]
+
+          \item 
+            Oznaczmy $z = x - y$, mamy wtedy że:
+            \[
+                F = \frac{1}{z} \cdot \frac{z}{1 + z^2} = \frac{1}{1 + z^2}
+            \]
+            a przy $(x,y) \to (0,0)$ jest $z \to 0$, więc 
+            \[
+                \lim_{(x,y) \to (0,0)} F(x,y) = \lim_{z \to 0} F(z) = \lim_{z \to 0} \frac{1}{1 + z^2} = 1   
+            \]
+            lecz dla $z = 0$ czyli $x = y$ jest
+            \[
+                F(x,x) = 0
+            \]
+            więc granica nie istnieje.
+        \end{walk}
+        
+\end{document}

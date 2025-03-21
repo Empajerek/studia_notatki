@@ -1,0 +1,46 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza II.1*}
+  \subtitle{Rozwiązanie zadania domowego nr.5}
+  \maketitle
+    \begin{zadanie*}
+        Niech $U = \left \{ x > 0, y > 0 \right \} \subset \mathbb{R}^2$, z przekształceniem \\ $f : U \to \mathbb{R} $ różniczkowalnym i spełniającym:
+        \[
+            x \frac{\partial}{\partial x} f(x,y) = 7 y \frac{\partial}{\partial y} f(x,y) 
+        \]
+        Pokazać, że istnieje $g: \mathbb{R}_+ \to \mathbb{R} $ różniczkowalne, i takie że 
+        \[
+            f(x,y) = g(x^7 y)
+        \]
+        
+    \end{zadanie*}
+    
+    Rozwiązanie rozpoczniemy od podstawienia nowych zmiennych $x = e^u$, $y = e^w$, \\ i $\partial x = x \; \partial u$ i $\partial y = y \; \partial w$:
+    \begin{gather*}
+          x \frac{\partial}{\partial x} f(x,y) = 7 y \frac{\partial}{\partial y} f(x,y) \\
+          \frac{\partial}{\partial u} f(e^u, e^w) = 7 \frac{\partial}{\partial w} f(e^u, e^w)
+    \end{gather*}
+    nazwijmy funkcją $h$ funkcje $h := f(e^u, e^w)$, i mamy że 
+    \[
+        0 = \frac{\partial}{\partial u} h(u,w) - 7 \frac{\partial}{\partial w} h(u,w) = \left ( \nabla h \right )
+        \begin{bmatrix}
+          1 \; -7
+        \end{bmatrix}
+    \]
+    
+    Z czego wynika że jesli:
+    \[
+        h(u_0, w_0) = 0 \qquad \Rightarrow \qquad \forall_\alpha \;  h((u_0, w_0) + \alpha (1, -7)) = c
+    \]
+    czyli poziomice to proste $7x + y = k$, więc funkcje $h$ możęmy zapisać w postaci $h(u,w) = k(7u + w)$, i wracając do funkcji $f$ mamy:
+    \[
+        f(x,y) = h \left (\text{ln} \left ( x \right ), \text{ln} \left ( y \right )  \right ) =
+        k \left ( 7\text{ln} \left ( x \right ) + \text{ln} \left ( y \right )  \right ) = 
+        k \left ( \text{ln} \left ( x^7 y \right )  \right ) = g(x^7 y)
+    \]
+\end{document}

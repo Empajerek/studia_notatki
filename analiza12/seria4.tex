@@ -1,0 +1,184 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{AM1.2* lato 2024}
+  \subtitle{Rozwiązanie zadań z serii IV}
+  \maketitle
+    \section{Zadanie}
+        \begin{zadanie}
+            Zbadaj jednostajną zbieżność na $[ 0, \infty )$ ciągu funkcyjnego $(f_n)$, gdzie
+            \[
+                f_n(x) = 
+                \begin{cases}
+                  \left ( 1 - \frac{x}{n} \right )^n \qquad & x \in [ 0, n ] \\
+                  0 \qquad & x > n
+                \end{cases}
+            \]
+        \end{zadanie}
+        Stosunkowo łatwo znaleźć zbieżnosć punktową naszej funkcji, mianowicie:
+        \[
+          \lim_{n \to \infty } f_n(x) = \lim_{n \to \infty } \left ( 1 - \frac{x}{n} \right )^n = e^{-x}  
+        \]
+        gdzie po drodze zauważylismy że dla dowolnego ustalonego $x$, istnieje $N$, że dla dowolnego $n \geq N$, $x \in [ 0, n]$.
+        Udowodnimy teraz zbieżnosć jednostajną, mianowicie wiemy że, zachodzi:
+        \begin{gather*}
+          \left ( 1 - \frac{x}{n+1} \right )^{n+1} \geq \left ( 1 - \frac{x}{n} \right )^n
+        \end{gather*}
+        co wynika z nierównosci Bernoulliego
+        \[
+          \left ( 1 - \frac{x}{n+1} \right )^{\frac{n+1}{n}} \geq 1 - \frac{n+1}{n} \cdot \frac{x}{n+1} = 1 - \frac{x}{n}
+        \]
+        czyli
+        \[
+          f_{n+1} \geq f_n
+        \]
+        
+        korzystając teraz z pierwszego twierdzenia Diniego, mamy więc że $f_n \rightrightarrows f$, na przedziale $[0,n]$, ale dla dowolnego $\varepsilon > 0$ istnieje takie $N_1$ że dla dowolnego $x > N_1$, $e^{-x} < \varepsilon$, więc widzimy że istnieje takie $N_2$ że dla dowolnego $x \in [0, \infty )$, $|f_n (x) - f(x)| < \varepsilon$, więc jest jednostajnie zbieżna.
+
+        \newpage
+
+    \section{Zadanie}
+      \begin{zadanie}
+          Niech $\phi (x) = \frac{x}{\sqrt{1 + x^2} }$. Definiujemy ciąg funkcji jako n-krotną iteracje przekształcenia $\phi$:
+          \[
+            f_n = \underbrace{\phi \circ \phi \circ \dots \circ \phi}{n}.
+          \]
+          Zbadaj zbieżnosć punktową i zbieżnosc jednostajną ciągu $(f_n)$, prostej $\mathbb{R} $.
+      \end{zadanie}
+      
+      Kluczowym będzie obserwacja że:
+      \[
+          f_n = \frac{x}{\sqrt{1 + n x^2} }
+      \]
+      którą udowodnimy indukcyjnie, mianowice przypadek bazowy zachodzi, a krok:
+      \begin{gather*}
+      f_{n+1} = f_n \left ( \frac{x}{\sqrt{1 + x^2} } \right ) = \frac{\frac{x}{\sqrt{1 + x^2} }}{\sqrt{1+ n \frac{x^2}{1 + x^2 }} } = \frac{x}{\sqrt{1 + (n+1) x^2}}
+      \end{gather*}
+      też zachodzi, więc zbieżnosć punktowa to:
+      \[
+          \lim_{n \to \infty } f_n = \lim_{n \to \infty } \frac{x}{\sqrt{1 + nx^2} } = 0   
+      \]
+      a w przypadku zbieżnosci jednostajniej, wystarczy zauważyć że nasza funkcja jest nieparzysta, oraz że
+      \[
+        \frac{1}{\sqrt{\frac{1}{x} + n }} \qquad x > 0
+      \]
+      jest oczywiscie rosnące, zatem funkcje $f_n$są rosnace, wówczas z drugiego twierdzenia Dini'ego mamy teżę że nasz ciąg jest zbieżny jednostajnie do 0.
+
+    \section{Zadanie}
+      \begin{zadanie}
+          Wiadomo, że (i) ciąg funkcji $(f_n)$ zbiega jednostajne do funkcji $f$ na zbiorze $A$, (ii) $p$ jest punktem skupienia zbioru $A$, (iii) dla każdego $n \in \mathbb{N}$  istnieją skończone granice $A_n := \lim_{x \to p} f_n(x)$. Udowodnij, że:
+          \[
+              \lim_{n \to \infty } A_n = \lim_{x \to p} f(x)  
+          \]
+          
+      \end{zadanie}
+
+      Skorzytamy wielokrotnie z definicji granicy. Oznaczmy przez $P = \lim_{x \to p} f(x) $, i mamy więc że:
+      \[
+        \exists_{N_1} \forall_{m \geq N_1} \abs{f(x_m) - P} < \varepsilon 
+      \]
+      oraz zbieżnosci jednostajniej $f_n$ mamy że, dowolnego $x$, np. $x = x_m$
+      \[
+        \exists_{N} \forall_{n \geq N} \abs{f_n (x_m) - f(x_m)} < \varepsilon 
+      \] 
+      oraz z definicji $A_n$:
+      \[
+        \exists_{N_2} \forall_{m \geq n_3} \abs{A_n - f_n (x_m)} < \varepsilon 
+      \]
+      Wybierając teraz takie że $M = \max (N_1, N_2)$ i sumując stronami nierównosci mamy więc:
+      \[
+        \exists_{N, M} \forall_{n \geq N, m \geq M} \abs{A_n - P} < \abs{A_n - f_n (x_m)} + \abs{f_n (x_m) - f(x_m)} + \abs{f(x_m) - P} < 3 \cdot \varepsilon   
+      \]
+      Podstawiając $\varepsilon := 3 \cdot \varepsilon$ kończymy z:
+      \[
+        \exists_{N} \forall_{n \geq N} \abs{A_n - P} < \varepsilon 
+      \]
+      czyli $P = \lim_{n \to \infty } A_n $, c. k. d.
+
+    \section{Zadanie}
+      \begin{zadanie}
+          Wyznacz zbiór $X \subseteq \mathbb{R} $ złożony z tych $x \in \mathbb{R} $, dla których szereg:
+          \[
+              s(x) := \sum_{n = 1}^{\infty } x \; \text{sin} \left ( \frac{1}{1 + n^2 x^2} \right )   
+          \]
+          jest zbieżny. Czy szereg ten jest jednostajnie zbieżny na zbiorze X? Czy s jest funkcją ciągłą na
+zbiorze X?
+      \end{zadanie}
+      Widzimy że:
+      \[
+          x \; \text{sin} \left ( \frac{x}{1 + n^2 x^2} \right ) = (-x) \cdot \; \text{sin} \left ( \frac{(-x)}{1 + n^2 (-x)^2} \right ) 
+      \]
+      czyli nasza funcja jest parzysta, więc BSO możemy rozważać tylko przypadki gdy $x > 0$ (przypadek gdy $x= 0$, jest trywialny), zatem korzystając z nierównosci $\text{sin} \left ( x \right ) \leq x$:
+      \[
+          x \; \text{sin} \left ( \frac{x}{1 + n^2 x^2} \right ) \leq \frac{x^2}{1 + n^2 x^2} \leq \frac{1}{n^2}
+      \]
+      i teraz korzystamy z kryt. Weierstrassa, gdyż $\sum_{n = 1}^{\infty } \frac{1}{n^2} = \frac{\pi^2 }{6}$, więc nasza funkcja jest jednostajnie zbieżna, na $\mathbb{R} $, czyli ciągła.
+
+      \section{Zadanie}
+        \begin{zadanie}
+            Niech $(a_n)$ będzie dowolnym ciągiem liczb rzeczywistych. Określamy funkcję $f : \mathbb{R}  \to \mathbb{R} $ wzorem
+            \[
+              f(x) = \sum_{n = 1}^{\infty } \frac{\abs{x - a_n} - \abs{a_n}}{2^n}
+            \]
+            Udowodnij, że
+            \begin{walk}
+                \item funkcja $f$ jest wypukła
+                \item wyznacz zbiór punktów, w których $f$ jest różniczkowalna 
+            \end{walk}
+            
+        \end{zadanie}
+        \begin{walk}
+          \item Ustalmy jako $f_n$ funkcje,
+        \[
+            f_n = \sum_{k = 1}^{n} \frac{\abs{x - a_k} - \abs{a_k} }{2^k} 
+        \]
+        i zauważmy że na dowolnym przedziale $A$ dla którego istnieje $s = sup(|x|, x \in A)$, mamy że
+        \[
+          f_n = \sum_{k = 1}^{n} \frac{|x-a_k| - \abs{a_k} }{2^k} \leq s \cdot \sum_{k = 1}^{n} \frac{1}{2^k} = s \cdot (1 - \frac{1}{2^n})  
+        \]
+        zatem z kryterium Diniego mamy że $f$ jest niemal jednostajnie zbieżny.
+        Udowodnimy teraz że $f$ jest ciągła, przez sprzecznosć jesli $f$ jest nieciągła, to ma punkt nieciągłosci $x \in \mathbb{R} $, zatem możemy wybrać taki zbiór $(x_n)_n$ w $\mathbb{R} $, że zawiera się on jakims $[-a,a]$, i $x_n \to x$, ale wiemy że każdym z tych punktów funkcja jest jednostajnie zbieżna, oraz wiemy że $f_n$ są ciągłe, co jest sprzeczne z założeniem że funkcja $f$ ma w punkcie $x$ nieciągłosć.
+        
+        Aby udowodnić wypukłosć pozostaje nam sprawdzić czy dla dowolnych $x <  y  <  z$, zachodzi warunek
+        \[
+            IR(x, y) \leq IR(x,z)
+        \]
+        co łatwo sprawdzić wyraz po wyrazie porównując 
+        \[
+            \frac{\abs{x - a_n} - \abs{y - a_n}  }{x - y} \leq \frac{\abs{x-a_n} - \abs{z - a_n}  }{x - z}
+        \]
+        co rozbiciu na przypadki 
+        \begin{enumerate}
+            \item $a_n \leq x$
+            \item $z \leq a_n$
+            \item $x < a_n \leq y$
+            \item $y < a_n < z$
+        \end{enumerate}
+        W pierwszych dwóch mamy że $1 \leq 1$, a w dwóch pozostałych dochodzimy do założenia, co kończy dowód wypukłosci.
+      \item Skorzytajmy ponownie z $f_n$, weźmy dowolne $\varepsilon > 0$, i $x \not \in \{ (a_n)_n \}$ więc dla dowolnego $n$ istnieje takie $\delta$, że do zbioru $ \left ( x - \delta , x + \delta \right )$, nie należy żadne $a_1 , \dots a_n$, iloraz różnicowy dowolnego $h \in ( - \delta, \delta )$
+        \[
+            \frac{s_n (x + h) - s_n (x)}{h} = \sum_{i = 1}^{n} \frac{\abs{x + h - a_n} - \abs{x - a_n}  }{h} \cdot  \frac{1}{2^i} 
+        \]
+        ma stałą wartosć.
+
+        Obliczmy teraz iloraz różnicowy dla funkcji $f$:
+        \[
+        \abs{ \frac{f(x + h) - f(x)}{h}} < \abs{\frac{f(x+h) - f_n(x+h) - (f(x) - f_n (x))}{h}} + \abs{\frac{f_n(x+h) - f_n (x)}{h}}
+      \]
+        Możemy zauważyć że :
+        \[
+          f(x) - f_n (x) = \sum_{i = n}^{\infty } \frac{\abs{x - a_i}  - \abs{a_i} }{2^i} = \frac{1}{2^n} \sum_{i = 0}^{\infty } \frac{\abs{x - a_{n+i}} - \abs{a_{n+1}}  }{2^i} < \frac{\abs{x} }{2^n}    
+        \]
+        zatem wracając mamy więc że :
+        \[
+            \abs{ \frac{f(x + h) - f(x)}{h} - \; \text{const.} \; } < \frac{\abs{x + h} + \abs{x}  }{2^n} < \varepsilon
+        \]
+        gdzie ostatnia nierównosć wynika z dowolnosci $n$ jaką mielismy od początku.
+        
+      \end{walk}
+        
+\end{document}

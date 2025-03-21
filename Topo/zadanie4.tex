@@ -1,0 +1,55 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Topologia I}
+  \subtitle{Rozwiązanie zadania domowego nr. 4}
+  \maketitle
+
+  \begin{zadanie*}
+      Prozpatrujemy $\RR^2$ z metryką rzeka. Niech:
+      \[
+          X = \left \{ (x, y) \in \RR^2 : - 1 \leq x \leq, 0 \leq y \leq \right \}
+      \]
+
+      \begin{enumerate}
+          \item Czy $X$ jest przestrzenią spójną? Odpowiedź uzasadnij.
+          \item Czy $X$ jest przestrzenią zwartą? Odpowiedź uzasadnij.
+          \item Czy $X$ jest przestrzenią zupełną? Odpowiedź uzasadnij.
+      \end{enumerate}
+  \end{zadanie*}
+
+  \begin{enumerate}
+      \item Tak, przestrzeń jest spójna, a nawet łukowo spójna (oczywstą drogą miedzy punktami jest przejście do rzeki i zniej dostanie się do dowolnego punktu).
+      \item Nie, przestrzeń nie jest zwarta. Weźmy punkty których współrzędna "igrekowa" jest równa dla przykładu $\frac{1}{2}$, możemy wybrać na nich dowolny ciąg, i on (pod warunkiem że punkty się nie powtarzają) jest niezbieżny w tej przestrzeni.
+      \item Tak, przestrzeń $X$ jest zupełna. Udowodnijmy że $\left ( \RR^2 , d_r \right )$ jest zupełna:
+        Weźmy dowolny ciąg Cauchy'ego $(a_n)^\infty_{n=1}$, czyli $a_n = (x_n, y_n)$. Z definicji metryki kolejowej mamy że:
+        \[
+            \abs{x_n - x_k} \leq d_r (a_n , a_k) \qquad \abs{y_n - y_k} \leq d_r (a_n, a_k)  
+        \]
+        czyli spełniają warunek Cauchy'ego na prostej. Mamy więc $x_n \to x$ i $y_n \to y$. Wystarczy pokazać: $a_n \to (x, y)$.
+        \begin{walk}
+            \item Jeśli $y \not = 0$ to dla dostatecznie dużego $N$ punkty leżą na tej samej prostopadłej do rzeki czyli od pewnego momentu mamy $x_n = x$ i $d_r = d_e$ więc zbieganie jest jak na prostej czyli $a_n \to (x,y)$
+            \item Jeśli $y = 0$ to dowolnym rombie wokół $(x,y)$ leża prawie wszystkie wyrazy $a_n$, gdyż prawie wszystkie leża w dowolnych odcinkach wokół $x$ i $y$, więc możemy wziąć takie dla których współędna "igrekowa" lub "iksowa" są stałe. 
+        \end{walk}
+        
+        co dowodzi że $(\RR^2, d_r)$ jest przestrzenią zupełną, a obcięcie jej do $X$ której jest domknięte, ciągle jest zupełne.
+        
+  \end{enumerate}
+  
+  \newpage
+
+  \begin{zadanie*}
+    Dla dowolnej liczby rzeeczywistej $a$ niech $X(a) = \left \{ f \in C[0,1] : f(0) = a \right \}$.
+    \begin{walk}
+    \item Udowodnij, że $X(a)$ jest zbiorem domkniętym i brzegowym w przestrzeni metrycznej $\left ( C[0,1]. d_{sup} \right )$.
+    \item Niech $X = \bigcup_{q \in \QQ} X(q)$. Czy przestrzeń $X$ przestrzeni $\left ( C[0,1], d_{sup} \right )$ jest metryzowalna w sposób zupełny?
+    \end{walk}
+    
+  \end{zadanie*}
+  
+    
+\end{document}

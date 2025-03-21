@@ -1,0 +1,114 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+    \title{Rachunek Prawdopodobieństwa I*}
+    \subtitle{Rozwiązanie zadania domowego nr.1}
+    \maketitle
+    \begin{zadanie*}
+        Niech $A_k$ będzie zbiorem liczb naturalnych podzielnych przez $k$. 
+        Wykazać że na $\NN$ nie istnieje takie \textbf{P}, że 
+        $\textbf{P} \left ( A_k \right ) = \frac{1}{k}$ dla $k \geq 1$.  
+    \end{zadanie*}
+
+    Przez sprzeczność oznaczmy że tak nie jest, w takim razie oznaczmy, 
+    że $p_n$ to n-ta liczba pierwsza, i mamy :
+    \[
+    \sum_{n=1}^{\infty } \mathbb{P}(A_{p_n}) = \sum_{n=1}^{\infty }  \frac{1}{p_n} = \infty   
+    \]
+
+    jest to fakt z ćwiczeń Analizy I.1, a moim ulubionym dowodem jest ten 
+    pana James'a  A. Clarkson'a z 1965 :
+
+    https://fermatslibrary.com/s/on-the-series-of-prime-reciprocals
+
+    \vspace{10px}
+    
+    skoro tak jest to pierwsze z założeń drugiego lematu Borel-Cantelli jest spełnione, 
+    a drugie o niezależności $A_{p_n}$ w naturalny sposób też jest.
+
+    Wynika więc z lematu że:
+    \[
+        \mathbb{P} \left ( \limsup_{n \to \infty } A_{p_n} \right ) = 1
+    \]
+
+    lecz łatwo zauważyć że żadna liczba $x$ nie może należeć do 
+    $\limsup_{n \to \infty } A_{p_n}$ bo istnieje takie $N$ że 
+    $\forall_{n \geq N} \; x < p_N < p_n \lthen x \not \in A_{p_n}$, 
+    więc mamy sprzeczność w postaci:
+    \[
+        0 = \mathbb{P} \left ( \varnothing \right ) = 
+        \mathbb{P} \left ( \limsup_{n \to \infty } A_n \right ) 
+        = 1
+    \]
+
+    \newpage
+
+    \begin{zadanie*}
+        Uzasadnij, że gdy \( k \to \infty \) oraz \( n - k \to \infty \), to
+        \[
+            p_{k,n} (\pi k^{\frac{1}{2}} (n - k)^{\frac{1}{2}}) \to 1.
+        \]
+
+        Przypomnijmy, że \( p_{k,n} = u_k u_{n-k} \) oraz \( u_n = \binom{2n}{n} 2^{-2n} \). 
+        Wywnioskuj stąd, że dla \( \alpha \in (1/2, 1) \)
+
+        \[
+            \sum_{n/2 < k < \alpha n} p_{k,n} \sim 
+            \frac{1}{\pi n} \sum_{n/2 < k < \alpha n} 
+                \left( \frac{k}{n} (1 - \frac{k}{n}) \right)^{-\frac{1}{2}}.
+        \]
+        Nadto
+
+        \[
+            \frac{1}{\pi n} \sum_{n/2 < k < \alpha n} 
+                \left( \frac{k}{n} (1 - \frac{k}{n}) \right)^{-\frac{1}{2}} \sim 
+            \pi^{-1} \int_{1/2}^{\alpha} \frac{dx}{(x(1-x))^{\frac{1}{2}}} = 
+            2 \pi^{-1} \arcsin \alpha^{\frac{1}{2}} - \frac{1}{2}.
+        \]
+    \end{zadanie*}
+
+    Zauważmy że z wzoru Stirlinga wynika że:
+    \[
+        u_n = 2^{-2n} \binom{2n}{n} = 2^{-2n} \frac{(2n)!}{(n!)^2} \sim 
+        2^{-2n} \frac{ \sqrt{4 \pi n} \left ( \frac{2k}{e} \right )^{2n}}
+            {2 \pi k \left ( \frac{k}{e} \right )^{2k}}
+        = \frac{1}{\sqrt{\pi k} }
+    \]
+    przy $n \to \infty$, więc otrzymujemy oszacowanie na $p_{k,n}$:
+    \[
+            p_{k,n} = 
+            u_k u_{n-k} \sim
+            \frac{1}{\sqrt{\pi k} } \, \cdot \, \frac{1}{\sqrt{\pi (n-k)} } =
+            \pi^{-1} \, \left( n (n - k) \right)^{-\frac{1}{2}}
+    \]
+
+    Z treści zadania mamy znaleźć asymptotykę pewnej sumy, 
+    zatem korzystając z wcześniejszego rachunku:
+    \begin{gather*}
+            \sum_{n/2 < k < \alpha n} p_{k,n} = 
+            \sum_{n/2 < k < \alpha n} u_k u_{n-k} \sim
+            \sum_{n/2 < k < \alpha n} \frac{1}{\sqrt{\pi k} } \, 
+                \cdot \, \frac{1}{\sqrt{\pi (n-k)} } = \\
+            \frac{1}{\pi n} \sum_{n/2 < k < \alpha n} 
+                \left( \frac{k}{n} (1 - \frac{k}{n}) \right)^{-\frac{1}{2}}
+    \end{gather*}
+    Warto zauważyć że ostatnie jest sumą Riemana całki z $\frac{1}{\sqrt{x(1 - x)}}$, czyli:
+
+    \begin{gather*}
+         \frac{1}{\pi n} \sum_{n/2 < k < \alpha n} 
+             \left( \frac{k}{n} (1 - \frac{k}{n}) \right)^{-\frac{1}{2}} \sim
+             \pi^{-1} \int_{\frac{1}{2}}^{\alpha} \frac{dx}{\sqrt{x(1-x)} }
+    \end{gather*}
+    całkę tę można rozwiązać poprzez podstawienie $x = \sin^2 u$:
+
+    \[
+        = \pi^{-1} \int_{\frac{\pi }{4}}^{\arcsin \sqrt{\alpha }} 2 du =
+        \frac{2}{\pi } \left ( \arcsin \sqrt{\alpha }  - \frac{\pi }{4} \right ) = 
+        \frac{2}{\pi } \arcsin \sqrt{\alpha } - \frac{1}{2}
+    \]
+    co mieliśmy udowodnić.
+\end{document}

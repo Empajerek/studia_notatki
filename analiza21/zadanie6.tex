@@ -1,0 +1,26 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza II.1*}
+  \subtitle{Rozwiązanie zadania domowego nr.6}
+  \maketitle
+    \begin{zadanie*} 
+      \begin{gather*}
+          F: \RR^3 \to \RR^2, \quad 
+          F(x,y,z) = \left ( \frac{x}{\sqrt{1 + z^2} }, \frac{y}{\sqrt{1 + z^2} } \right ), \\
+          V: \RR^3 \to \RR^3, V(x,y,z) = \left ( xz, yz, 1 + z^2 \right )
+      \end{gather*}
+
+        Niech $f: \RR^3 \to \RR $ równiczkowalna. Pokazać równoważność warunków:
+
+        \begin{enumerate}
+            \item $\exists g: \RR^2 \to \RR $ różn. takie że $f = g \circ F$
+            \item $\forall p \in \RR^3 \quad \nabla f(p) \bot V(p)$
+          \end{enumerate}
+    \end{zadanie*}
+    
+\end{document}

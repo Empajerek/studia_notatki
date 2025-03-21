@@ -1,0 +1,254 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{AM1.2* lato 2024}
+  \subtitle{rozwiązania zadań z serii V}
+  \maketitle
+    \section{Zadanie}
+        \begin{zadanie}
+            Wykaż zbieżność punktową poniższych szeregów na zadanych zbiorach. Zbadaj ich zbieżność jednostajną i niemal jednostajną:
+                \begin{walk}
+                    \item 
+                      \[
+                        \sum_{n = 1}^{\infty } \text{sin}^2 \left ( x \right ) \text{cos}^{2n} \left ( x \right ) \text{sin} \left ( n \text{arc tg} \left ( 1 + x^2 \right )  \right ), x \in \mathbb{R}
+                      \]
+                    \item 
+                      \[
+                        \sum_{n = 1}^{\infty } \frac{\text{cos} \left ( nx \right ) }{\sqrt{n} \left ( 1 + \text{sin}^{2n} \left ( x \right )  \right ) }, x \in \left ( 0, 2 \pi  \right ) 
+                      \]
+                    \item 
+                      \[
+                        \sum_{n = 1}^{\infty }  \frac{\text{sin} \left ( nx \right ) }{n^x}, x \in \left ( 0, \infty  \right )
+                      \]
+                \end{walk}            
+        \end{zadanie}
+
+        \begin{walk}
+            \item Pokażemy jednostajną zbieżnosć z kryterium Dirichleta. Niech
+              \[
+                f_n (x) = \text{sin}^2 \left ( x \right ) \text{cos}^{2n} \left (  x \right )
+              \]
+              wiemy że $f_n$ jest ciągiem monotonicznym, i możemy obliczyć jego maksimum (podstawiamy $c = \text{cos}^2 \left (  x \right ) $)
+              \[
+                (f_n (c)' = n c^{n-1} - (n+2) c^{n+1} = 0 
+              \]
+              i mamy że
+              \[
+                  f_n \leq \left ( 1 - \frac{n}{n+2} \right ) \cdot \left ( \frac{n}{n+2} \right )^n \to 0
+              \]
+              więc funkcja jest jednostajnie zbieżna do zera.
+
+              Wykażemy jeszcze że $\sum_{n = 1}^{\infty } \text{sin} \left ( n \text{arc tg} \left ( 1 + x^2 \right )  \right )$, jest jednostajnie ograniczony, fakt że szereg $\sum_{n = 1}^{\infty } \text{sin} \left ( n \alpha \right )  $ dla dowolnego $\alpha $ jest ograniczony, a zatem $\sum_{n = 1}^{\infty } \text{sin} \left ( n \text{arc tg} \left ( 1 + x^2 \right )  \right )  $ jest jednostajnie ograniczony.
+              Korzystając z kryterium Dirichleta mamy jednostajną zbieżnosć.
+
+            \item 
+
+            \item Niech 
+              \[
+                  f_m (x) = \sum_{n=1}^{m} \frac{\text{sin} \left ( nx \right ) }{n^x}  
+              \]
+              wtedy 
+              \[
+                f_m \left ( \frac{\pi }{2m} \right ) > \frac{\pi }{2m} \sum_{n=1}^{m} n^{1- \frac{\pi }{2m}} ~ O(m)
+              \]
+              co wynika ze wzoru Bernoulliego który udowadnialismy jako jedna z małych prac domowych, i niespełnia warunku Cauchy'ego.
+
+              Możemy wykazać za to zbieżnosć niemal jednostajną bo dla dowolnego przedziału $[a,b]$,
+              \[
+                  \sum_{n=1}^{\infty } \text{sin} \left ( nx \right )   
+              \]
+              jest ograniczony, a
+              \[
+                  \frac{1}{n^x} < \frac{1}{n^a} \rightrightarrows 0
+              \]
+              więc z kryterium Abela jest niemal jednostajnie zbieżny.
+              
+        \end{walk}
+        
+      \section{Zadanie}
+          \begin{zadanie}
+              Niech $a_n > 0$ będą takie że $\sum_{n=1}^{\infty } a_n < \infty  $
+              \begin{walk}
+              \item Wykaż że funkcja $f(x) = \prod_{n=1}^{\infty } (1 + a_n x) $ jest klasy $C^{\infty }$ na $(0, \infty )$
+                \item Wykaż, że $f'_+(0) = \sum_{n=1}^{\infty } a_n $
+              \end{walk}
+                        \end{zadanie}
+              \begin{walk}
+              \item Oczywistym jest że $f(0) = 1$, oraz że $\text{ln} \left ( f(x) \right ) = \sum_{n=1}^{\infty } \text{ln} \left ( 1 + a_n x \right )  $ (warto zauważyć że jesli $f$ jest klasy $C^{\infty }$ to w.t.w. $\text{ln} \left ( f \right ) $ też), skorzystamy z twierdzenia o różniczkowaniu szeregów funkcyjnych.
+                    Wystarczy pokazać że:
+                    \[
+                        \sum_{n=1}^{\infty } \frac{a_n}{1 + a_n x}  
+                    \]
+                    jest jednostajnie zbieżny, ale z kryterium Weiestrass'a i nierównosci $\frac{a_n}{1 + a_n x} < a_n$ mamy to.
+                    Zatem
+                    \[
+                        \left ( \text{ln} \left ( f \right )  \right )^{'} = \sum_{n=1}^{\infty } \frac{a_n}{1 + a_n x}   
+                    \]
+                    zauważmy że nasza nierównosć działa ogólniej $\left ( \frac{a_n}{1 + a_n x} \right )^k < a_n^k$, i pozwala nam powiedzieć że $\text{ln} \left ( f \right ) $ jest klasy $C^{\infty }$.
+                    
+                \item Skorzystajmy z poprzedniego rezulatu:
+                  \[
+                      \frac{f'(0)}{f(0)} = \left ( \text{ln} \left ( f(0) \right )  \right )^{'} = \sum_{n=1}^{\infty } a_n  
+                  \]
+                  więc 
+                  \[
+                      f'(0) = \sum_{n=1}^{\infty } a_n  
+                  \]
+              \end{walk}
+
+        \section{Zadanie}
+            \begin{zadanie}
+              Niech $f : [0,1] \to \mathbb{R} $
+              \begin{walk}
+                  \item Czy jesli $f$ spełnia warunek Lipschitza ze stałą 1, to również jej wielomina Bernsteina, $B_nf : [0, 1] \to \mathbb{R} $, spełnia ten warunek?
+                  \item Czy jeśli $f$ jest funkcją wypukłą na $[0, 1]$, to $B_nf$ też muszą być funkcjami wypukłymi na $[0, 1]$?
+              \end{walk}
+              
+            \end{zadanie}
+            
+            \begin{walk}
+                \item Chcemy pokazać że zachodzi:
+                  \[
+                    \abs{B_nf(x) - B_nf(y)} \leq \abs{x-y}  
+                  \]
+                  Z faktu że wielomiany są analityczne, z wzoru Taylora możemy zapisać, że dla pewnego $\theta \in (x,y)$
+                  \[
+                      B_nf(y) = B_nf(x)+ B'_nf(\theta) \cdot (y-x)
+                  \]
+                  więc wystarczy że dla dowolnego $x \in (0, 1)$
+                  \[
+                    \abs{ B'_nf(x) } \leq 1
+                  \]
+                  możemy teraz przywołać wzór na pochodną wielomianu Bernstein'a
+                  \[
+                    \abs{\left ( n+1 \right ) \sum_{k=0}^{n}  \binom{n}{k} x^k (1-x)^{n-k} \cdot \left ( f \left ( \frac{k+1}{n+1} \right )  - f \left ( \frac{k}{n+1} \right ) \right ) } \leq 1 
+                  \]
+                  Z faktu że $f$ spełnia warunek Lipschitz'a z stałą 1, możemy zapisać że:
+                  \[
+                     \abs{(n+1) \left ( f \left ( \frac{k+1}{n+1} \right )  - f \left ( \frac{k}{n+1} \right ) \right ) } = \abs{\frac{f \left ( \frac{k+1}{n+1} \right )  - f \left ( \frac{k}{n+1} \right )}{\frac{1}{n+1}}}\leq 1 
+                  \]
+                  więc możemy zapisać że
+                  \[
+                    \abs{B'_n f(x)} \leq \abs{\sum_{k=0}^{n} \binom{n}{k} x^k \left ( 1-x \right )^{n-k} } = \abs{\left ( x + (1-x) \right )^n} = 1   
+                  \]
+                  co kończy dowód.
+                \item Wystarczy obliczyć drugą pochodną, mianowicie:
+                  \begin{gather*}
+                    B''_n f(x) = (n+2) (n+1) \cdot ( \sum_{k=0}^{n+1} f \left ( \frac{k+1}{n+2} \right ) \left ( \binom{n}{k-1} x^{k-1} (1-x)^{n-k+1} - \binom{n}{k} x^k (1-x)^{n-k} \right ) \\
+                    - \sum_{k=0}^{n+1} f \left ( \frac{k}{n+2} \right ) \left ( \binom{n}{k-1} x^{k-1} (1-x)^{n-k+1} - \binom{n}{k} x^k (1-x)^{n-k} \right )  )
+                  \end{gather*}
+
+                  co po przekształceniach staje się
+
+
+                  \begin{gather*}
+                      B''_n f(x) = (n+2) (n+1) \cdot \sum_{k=0}^{n} \binom{n}{k} x^{k} (1-x)^{n-k} \left ( f \left ( \frac{k+2}{n+2} \right ) - 2 f \left ( \frac{k+1}{n+2} \right ) + f \left ( \frac{k}{n+2} \right ) \right )
+                  \end{gather*}
+                  którego dodaniosć wynika z faktu że dla $f$ wypukłej zachodzi nierównosć
+                  \[
+                      f \left ( \frac{k+2}{n+2} \right ) - 2 f \left ( \frac{k+1}{n+2} \right ) + f \left ( \frac{k}{n+2} \right ) \geq 0
+                  \]
+                  
+            \end{walk}
+            
+        \section{Zadanie}
+                 \begin{zadanie}
+                     Niech $F,G: \mathbb{R} \to \mathbb{R} $ będą różniczkowalne. Czy musi istnieć funkcja pierwotna funkcji $F'G$?
+                 \end{zadanie}
+                 
+        \section{Zadanie}
+        \begin{zadanie}
+            Oblicz całki oznaczone
+        \end{zadanie}
+        
+        \begin{walk}
+            \item Podstawmy $t^2 = x$, więc dostajemy że $2t dt = dx$ i mamy że:
+              \[
+                \int \frac{\sqrt{x} }{x + 1} dx = \int \frac{2 t^2}{t^2 + 1} = 2t - \int \frac{dt}{t^2 + 1} = 2\sqrt{x} - 2 \text{arc tg} \left ( \sqrt{x}  \right )  + c
+              \]
+            \item Całkując przez częsci:
+              \[
+                  \int x \text{sinh} \left ( x \right ) dx = x \text{cosh} \left ( x \right ) - \text{cosh} \left ( x \right ) + c
+              \]
+            \item Podstawiając $\text{tgh} \left ( x \right ) = u $ i $du = dx (\text{tgh}^2 \left ( x \right ) -1)$ mamy:
+              \[
+                  \int \frac{dx}{\text{tgh} \left ( x \right ) - 1 } = \int \frac{du}{(u-1)^2 (u+1)}
+              \]
+              który rozwiązujemy poprzez rozszczepienie na ułamki, zatem
+              \begin{gather*}
+                  \int \frac{du}{(u-1)^2 (u+1)} = \int \frac{1}{4(u+1)} - \frac{1}{4(u-1) + \frac{1}{2(u-1)^2}}du \\ = \frac{1}{4} \left ( \text{ln} \left ( \text{tgh} \left ( x \right ) + 1  \right ) - \text{ln} \left ( \text{tgh} \left ( x \right ) - 1  \right ) - \frac{2}{\text{tgh} \left ( x \right ) - 1 }  \right ) + c
+                \end{gather*}
+              \item Możemy tutaj zastosować klasyczne podstawienie $\alpha = \text{tg} \left ( \frac{x}{2} \right ) $ i otrzymamy (po uproszczeniu)
+                \begin{gather*}
+                  \int \frac{2 - 2 \alpha }{\alpha \cdot (1 + \alpha ) \cdot ( 1 + \alpha^2 )} d \alpha = -2 \int \frac{1}{\alpha + 1} + \frac{1}{\alpha^2 + 1} - \frac{1}{\alpha } d \alpha 
+                \end{gather*}
+              po podobnym jak wczesniej podstawianiu mamy więc wartosci
+              \[
+                  -x  + 2 \text{ln} \left ( \text{tg} \left ( \frac{x}{2} \right )  \right ) - 2 \text{ln} \left ( \text{tg} \left ( \frac{x}{2} \right ) + 1  \right ) + c 
+              \]
+          \item Z pomocą tożsamosci Sophie-Germain mamy rozkład na ułamki
+            \[
+                \int \frac{dx}{x^4 + 1} = \frac{\sqrt{2} }{8} \int \frac{2x + \sqrt{2} }{x^2 + x \sqrt{2} + 1 } dx - \frac{\sqrt{2} }{8} \int \frac{2x - \sqrt{2} }{x^2 - x \sqrt{2} + 1 } + \frac{1}{4} \int \frac{dx}{x^2 + \sqrt{2} + 1} + \frac{1}{4} \int \frac{dx}{x^2 - x \sqrt{2} + 1 }
+            \]
+            gdzie pierwsze dwie całki to pochodna logarytmu wielomianów, w pozostałych dokańczamy kwadrat i podstawiamy $t = x \pm \frac{\sqrt{2} }{2}$, i mamy całki na $\text{arc tg} \left (  \right ) $, i dostajemy 
+            \begin{gather*}
+                \int \frac{dx}{1 + x^4} = \frac{\sqrt{2} }{8} \text{ln} \left ( x^2 + x \sqrt{2} + 1  \right ) - \frac{\sqrt{2} }{8} \text{ln} \left ( x^2 - x \sqrt{2} + 1  \right ) + \\ \frac{\sqrt{2} }{4} \text{arc tg} \left ( x \sqrt{2} + 1  \right ) + \frac{\sqrt{2} }{4} \text{arc tg} \left ( x \sqrt{2} - 1  \right )  
+            \end{gather*}
+          \item Możemy podstawić $x^2 = u$ i $ (u+1) = \sqrt{2}  w$
+            \[
+                \int x \sqrt{x^4 + 2x^2 - 1} = \int \sqrt{(u+1)^2 - 2} = \int \sqrt{w^2 - 1}
+            \]
+            która jest klasyczną całką, więc możemy po ponowynym podstawieniu powiedzieć że wynik to
+            \begin{gather*}
+                \int x \sqrt{x^4 + 2x^2 - 1} dx = \frac{1}{4} ( - 2 \text{ln} \left ( x^2 + \sqrt{(x^2)^2 -2} + 1 \right ) + \sqrt{x^4 + 2x^2 - 1} x^2 \\
+                + \sqrt{x^4 + 2x^2 -1} + \text{ln} \left ( 2 \right ) )  + c
+              \end{gather*}
+            
+            
+            \item Dla $a = 0$ mamy
+              \[
+                  \int \frac{dx}{x \sqrt{3} } = \frac{\text{ln} \left ( x \right ) }{\sqrt{3} } + c
+              \]
+              możemy podstawić $t = x^a$, wtedy $dt = a x^{a-1} dx$ więc 
+              \[
+                \int \frac{dx}{x \sqrt{x^{2a} x^a + 1}  } = \frac{1}{a} \int \frac{dt}{t \sqrt{t^2 + t + 1} }
+              \]
+              i po podstawieniu $u = \frac{1}{t}$ mamy
+              \[
+                \frac{1}{a} \int \frac{dt}{t \sqrt{t^2 + t + 1} } = \frac{-1}{a} \int \frac{du}{\sqrt{u^2 + u + 1} } = \frac{-1}{a} \int \frac{du}{\sqrt{\left ( u + \frac{1}{2} \right )^2 + \frac{3}{4} } }
+              \]
+              i podstawiając do wzoru, i podstawiając nasze podstawienia mamy 
+              \[
+                \int \frac{dx}{x \sqrt{x^{2a} + x^a + 1} } = - \frac{1}{a} \text{sinh} \left ( \frac{\frac{2}{x^a} + 1}{\sqrt{3} } \right ) + c
+              \]
+            \item Liczymy przypadki graniczne $n = 1$ i $n = 2$. Mamy
+              \[
+                  \int \frac{x^2}{1 + x} dx = \frac{x^2}{2} + \text{ln} \left ( x + 1 \right ) - x 
+              \]
+              i
+              \[
+                  \int \frac{x^2}{\left ( 1 + x \right )^2} dx = x - \frac{1}{x+1} - \text{ln} \left ( x + 1 \right ) + c
+              \]
+              podstawiając $ t = x + 1$ mamy 
+              \[
+                  \int \frac{x^2}{(1+x)^n} dx = \int \frac{t^2 - 2t + 1}{t^n} dt
+              \]
+              jeszcze tylko dla $n = 3$ mamy jeden logarytm
+              \[
+                  \int \frac{x^2}{(1+x)^3} dx = \text{ln} \left ( x + 1 \right ) + \frac{2}{x+1} - \frac{1}{2(x+1)^2} 
+              \]
+              i dla $n > 3$ mamy
+              \[
+                \int \frac{x^2}{(x+1)^n} dx = - \frac{1}{n-3} \cdot \frac{1}{(x+1)^{n-3}} + \frac{2}{n-2} \cdot \frac{1}{(x+1)^{n-2}} - \frac{1}{n-1} \cdot \frac{1}{(x+1)^{n-1}} + c
+              \]
+              
+              
+        \end{walk}
+
+
+        
+\end{document}

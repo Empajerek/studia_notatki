@@ -1,0 +1,53 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza 2.1*}
+  \subtitle{Rozwiązanie zadania domowego nr. 11}
+  \maketitle
+    \begin{zadanie*}
+      Niech $(x_i)_{i \in \NN}$ będzie ciągiem liczb nieujemnych. Wykaż że jeżeli $\sum_{i = 1}^{n} x_i = a $ to 
+      \[
+        \sum_{1 \leq j < k \leq n} x_j x_k \leq \frac{n - 1}{2n} a^2
+      \]
+      
+    \end{zadanie*}
+    
+    \section{Rozwiązanie}
+      Przez mnożniki Lagrange'a:
+      Oznaczmy przez $f$ drugą funkcje, a przez $g$ warunek czyli $\sum_{i = 1}^{n} x_1 - a $, w takim razie, dzu,amy punktu stacjonarnego funkcji:
+      \[
+          F = f - \lambda g
+      \]
+      czyli
+      \[
+          \frac{\partial F}{\partial x_i} = \sum_{j \not = i} x_j - \lambda = a - x_i - \lambda \lthen a - \lambda = x_i   
+      \]
+      Mamy więc że punktem krytycznym jest przypadek że wszystkie $x_i$ są równe, wówczas:
+      \[
+        \sum_{1 \leq j < k \leq n} x_j x_k = \frac{n(n - 1)}{2} \cdot \frac{a^2}{n^2} = \frac{n - 1}{2n} a^2
+      \]
+      i zbiór takich $x_i$ że $g = 0$, jest zwarty, więc pozostaje sprawdzić krawiędzie. Ustawiamy $x_1 = 0$ (ustawienie $x_1 = a$ jest oczywiste, bo wtedy $f = 0$), i mamy zredukowaną wersje zadania do przypadku $n - 1$, stosując indukcje ($n = 1$ oczywisty) mamy tezę.
+
+      \section{Rozwiązanie}
+      \[
+          a^2 = \left ( \sum x_i \right )^2 = \sum x^2_i + \sum x_i x_j
+      \]
+      z nierówności między średnimi wiemy że
+      \[
+          \sqrt{\frac{\sum x^2_i}{n}} \geq \frac{\sum x_i}{n} = \frac{a}{n} 
+      \]
+      czyli łącząc mamy że
+      \[
+          \sum x_i x_j \leq \frac{a^2 - \sum x^2_i}{2} \leq \frac{a^2 - \frac{a^2}{n}}{2} \leq a^2 \frac{n - 1}{2n}
+      \]
+      
+      
+          
+      
+    
+    
+\end{document}

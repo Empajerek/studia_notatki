@@ -1,0 +1,111 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy, noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Topologia I}
+  \subtitle{Rozwiązanie zadań z serii 1}
+  \maketitle
+    \begin{zadanie*}
+        Niech $\left ( X, T_X \right )$ będzie przestrzenią topologiczną. Udowodnij, że dla dowolnego $A \subset X$ zachodzi
+        \[
+          \bar{A} = X \, \backslash \opname{Int} \left ( X \; \backslash \; A \right )
+        \]
+        
+    \end{zadanie*}
+
+   Pokażmy bezpośrednio: 
+    \begin{gather*}
+      X \; \backslash \; \opname{Int} \left ( X \; \backslash \; A \right ) = X \; \backslash \; \left \{ x \in X : \exists \; \text{otoczenie} \; x \subset X \; \backslash \; A \right \} \\
+      = \left \{ x \in X : \forall \; \text{otoczenie} \; x \cap A \not = \emptyset \right \} = \ol A
+    \end{gather*}
+    
+    \begin{zadanie*}
+        Niech $A = \left \{ \left ( x,y \right ) \in \mathbb{R}^2 : x \in \mathbb{Q} , 0 \geq y < 1  \right \}$, gdzie $\mathbb{Q} $ oznacza zbiór liczb rzeczywistych wymiernych. Znaleźć domknięcie i wnętrze zbioru $A$ \begin{walk}
+            \item na płaszczyźnie $\mathbb{R}^2$ z metryką kolejową $d_k$, \item na płaszczyźnie $\mathbb{R}^2$ z metryką rzeka $d_r$,
+        \end{walk}
+    \end{zadanie*}
+    
+    \begin{walk}
+        \item Domknięcie:
+          Dla punktów w postaci $\left \{ (x,y) \in \mathbb{R}^2 : 0 \leq y \leq 1 \right \}$ każde otoczenie jest w postaci odcinka otwartego na płaszczyźnie, więc zawiera taki punkt że jego współrzędna "iksowa" jest wymierna (łącznie z punktami na osi OY), w pozostałych przypadkach można znaleźć odpowienio małe otoczenie nie przecinające $A$, zatem
+          \[
+            \ol A = \left \{ (x, y) \in \mathbb{R}^2 : 0 \leq y \leq 1 \right \}
+          \]
+
+          Wnętrze:
+          Podobnie jak poprzednio zauważmy że każdy odcinek otwarty (tym razem bez odcinka na OY), zawiera punkt o współrzędnej "iksowej" niewymiernej więc żaden punkt nie będący na OY nie zawiera się we wnętrzu, a zatem pozostają nam
+          \[
+            \opname{Int} A = \left \{ (0,y) \in \mathbb{R}^2 : 0 < y < 1 \right \}
+          \]
+        \item Domknięcie:
+          W tej topologii dla punktów $(x,y)$ gdzie $y \not = 0$ istnieje otoczenie całkowcie leżące na tej samej współrzędnej "iksowej". Logicznym wnioskiem będzie że wszystkie punkty w postaci $\left \{ (x,y) \in \mathbb{R}^2 : x \in \mathbb{R} \backslash \mathbb{Q} \right \}$ nie należą do domknięcia. Kolejną obserwacją będzie że wszystkie punkty w postaci $\left \{ (x,y) \in \mathbb{R}^2 : y = 0 \right \}$ należą do domknięcia, ponieważ każde ich otoczenie zawiera zbiór otwarty czyli "romb", który zawiera przedział otwarty na osi OX, więc zawiera punkt z $A$, w konsekwencji te punkty są w domknięciu. Wystarczy jeszcze dołożyć oczywiste punkty z $A$ i $\left \{ (x,y) \in \mathbb{R}^2 : x \in \mathbb{Q}, y = 1 \right \}$, i mamy że:
+          \[
+              \ol A = \left \{ (x,y) \in \mathbb{R}^2 : x \in \mathbb{Q} , 0 \leq y \leq 1 \right \} \cup \left \{ (x,y) \in \mathbb{R}^2 : y = 0 \right \}
+          \]
+
+          Wnętrze: 
+          Tutaj podobnie jak poprzednio punkty $\left \{ (x,y) \in \mathbb{R}^2 : x \in \mathbb{R} \backslash \mathbb{Q} \right \}$ nie mogą należeć do wnętrza, a w pozostałych osiach równoległych do OY, leża wnętrza odcinków należących do $A$, czyli:
+          \[
+            \text{Int} \; A = \left \{ (x,y) \in \mathbb{R}^2 : x \in \mathbb{Q} , 0 < y < 1 \right \}
+          \]
+    \end{walk}
+
+    \begin{zadanie*}
+        Niech $f$ będzie przekształceniem określonym formułą:
+        \[
+            f(x,y) = (x - 1, 1)
+        \]
+        Znaleźć zbiór punktów ciągłości przekształcenia $f$ jeśli
+        \begin{walk}
+            \item $f : \left ( \mathbb{R}^2 , d_k  \right ) \to  \left ( \mathbb{R}^2, d_r \right )$. 
+            \item $f : \left ( \mathbb{R}^2 , d_r \right ) \to \left ( \mathbb{R}^2, d_k \right )$
+        \end{walk}
+    \end{zadanie*}
+    
+    \begin{walk}
+        \item Ustalmy punkt, np: $q = (x,y)$, sprawdźmy dla niego ciągłość przekształcenia. 
+          Zacznijmy od wybrania $U$ czyli odpowiednio małego otoczenia $f(x)$, że nie zawiera punktów z osi OX, i dla niego możemy powiedzieć że
+          \[
+            \forall_{a = (x', y')} f(a) \in U \iff  x' = x
+           \]
+        Wiemy że dla wszystkich punktów $q$ nie leżących na osi OY, istnieje otoczenie dla którego nie wszytkie punkty posiadają tą samą współrzędną "iksową". 
+        Kolejną rzeczą wartą uwagi jest gdy $q = 0$ to każde otoczenie zawiera otwarte "koło" którego obraz nie zawiera się w otoczeniu $U$.
+        Zatem funkcja jest ciągła w punktach:
+        \[
+            \left \{ (x, y) \in \mathbb{R}^2 : x \not = 0 , y = 0 \right \}
+        \]
+        \item Podobnie jak poprzednio możemy powiedzieć że dla dowolnego $q$, istnieje otoczenie $U$ punktu $f(q)$ posiadające własność:
+          \[
+              \forall_a f(a) \in U \iff x' = x
+          \]
+        Teraz użyjemy faktu że dla wszystkich punktów nie leżących na osi OX, istnieje otoczenie którego wszystkie punkty mają wspólną współrzędną "iksową", a zatem należą do zbioru ciągłości przekształcenia $f$. 
+        Dla pozostałych punktów, ich otoczenia, przechodzą na odcinki otwarte równoległe do OX, których nie obejmuje żadne otoczenie w $d_k$. Zatem punktów ciągłości jest:
+        \[
+            \left \{ (x,y) \in \mathbb{R}^2 : y \not = 0 \right \}
+        \]
+    \end{walk}
+    
+    \begin{zadanie*}
+      Niech $X = \left \{ 0 \right \} \cup \bigcup_{n=1}^\infty \left \{ \frac{1}{n} \right \}$ z topologią podprzestrzeni prostej euklidesowej. Podać przykład trzech niehomeomorficznych gęstych właściwych podprzestrzeni
+iloczynu kartezjańskiego $X \times X$. 
+    \end{zadanie*}
+
+    Ustalmy więc:
+    \[
+      U_1 = \{ (x,y) \in X \times X : x \not = 0 \wedge y \not = 0 \} \qquad 
+      U_2 = U_1 \cup \{ (0, 0) \} \qquad 
+      U_3 = U_1 \cup \{ (1, 0) , (0, 1) \}
+    \]
+    oczywistym jest że są one gęste (wystarczy rozważyć ich domknięcie), oraz wykażemy że są parami niehomeomorficzne. 
+
+    Załużmy że przekształcenie $f$ z $U_3$ do $U_2$ (lub $U_1$) jest ciągłe w punktach $(1,0)$ i $(0,1)$. Wtedy z definicji istnieją otoczenia $f(1,0)$ i $f(0,1)$, w którym zawierają się otoczenia punktów $(1,0)$ i $(0, 1)$, które są co najmniej policzalnie nieskończone. W takim razie punty $(1,0)$ i $(0,1)$ nie mogą przechodzić na punkty w postaci $(\frac{1}{i}, \frac{1}{j})$ (bo możemy je otoczyć odpowiednio małą kulką taką że ich otoczenia są jednoelementowe), czyli muszą przechodzić na $(0,0)$ sprawiając że funkcja nie jest różnowartościowa (i w przypadku $U_1$ nie istnieje) więc nie ciągła, sprzeczność. \\
+
+    Analogicznie w przekształceniu $f$ z $U_2$ do $U_1$ punkt $(0,0)$ nie może być punktem ciągłości funcji, zaprzeczając homeomorficzności przestrzeni. \\
+
+    Łącząc przestrzenie są nie homeomorficzne parami.
+
+\end{document}
+

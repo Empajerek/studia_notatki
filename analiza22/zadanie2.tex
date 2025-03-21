@@ -1,0 +1,210 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+    \title{Analiza II.2*}
+    \subtitle{Rozwiązanie zadań z serii nr. 2}
+    \maketitle
+
+    \begin{zadanie*}
+        Niech $f \in L^p \left ( \RR \right )$, $g \in L^q \left ( \RR \right )$ oraz 
+        $\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}$, $p,q,r > 1$. 
+        
+        Wykazać że:
+        \[
+            \norm{f * g}_r \leq \norm{f}_p \cdot \norm{g}_q 
+        \]
+    \end{zadanie*}
+
+    Rozpoczniemy od szacowania na $\abs{(f * g)(x)}$:
+    \begin{gather*}
+        \abs{(f * g)(x)} \leq \int_{\RR} \abs{f(x - y) g(y)} dy =
+        \int_{\RR} \abs{f(x-y)}^{1 + \frac{p}{r} - \frac{p}{r}} 
+            \cdot \abs{g(y)}^{1+\frac{q}{r}-\frac{q}{r}} dy = \\
+        \int_{\RR} \left ( \abs{f(x-y)}^p \cdot \abs{g(y)}^q \right )^{\frac{1}{r}}
+            \cdot \abs{f(x-y)}^{\frac{r-p}{r}} \cdot \abs{g(y)}^{\frac{r-q}{r}} dy
+    \end{gather*}
+    zauważmy teraz że:
+    \[
+        \frac{1}{\frac{rp}{r-p}} + \frac{1}{\frac{rq}{r-q}} + \frac{1}{r} =
+        \left ( \frac{1}{p} - \frac{1}{r} \right ) + 
+            \left ( \frac{1}{q} - \frac{1}{r} \right ) + \frac{1}{r} =
+        \frac{1}{p} + \frac{1}{q} - \frac{1}{r} = 1
+    \]
+    więc skorzystamy z uogólnionej nierówności Hölder'a dla tych właśnie wag:
+    \begin{gather*}
+        \leq \norm{\left ( f(x - y)^p  \cdot g(y)^q \right )^{\frac{1}{r}}}_r \cdot 
+        \norm{\abs{f(x-y)}^{\frac{r - p}{r}}}_{\frac{rp}{r - p}} \cdot 
+        \norm{\abs{f(y)}^{\frac{r - q}{r}}}_{\frac{rq}{r - q}} 
+    \end{gather*}
+    rozpiszmy każdy z tych czynników osobno:
+    \begin{gather*}
+        \norm{\left ( f(x - y)^p  \cdot g(y)^q \right )^{\frac{1}{r}}}_r 
+        = \left ( \int_{\RR} \abs{f(x-y)}^p \abs{g(y)}^q dy \right )^{\frac{1}{r}}
+        \\
+        \norm{\abs{f(x-y)}^{\frac{r - p}{r}}}_{\frac{rp}{r - p}} =
+        \left ( \int_{\RR} \abs{f(x-y)}^{\frac{r - p}{r} \cdot \frac{pr}{r-p}} \right )^
+        {\frac{r-p}{pr}} =
+        \norm{f}^{\frac{r - p}{r}}_p
+        \\
+        \norm{\abs{g(y)}^{\frac{r - q}{r}}}_{\frac{rq}{r - q}} =
+        \left ( \int_{\RR} \abs{g(y)}^{\frac{r - q}{r} \cdot \frac{qr}{r-q}} \right )^
+        {\frac{r-q}{qr}} =
+        \norm{g}^{\frac{r - q}{r}}_q
+    \end{gather*}
+    zatem mamy że:
+    \[
+        \abs{(f * g)(x)} \leq \left ( 
+            \norm{f}^{r-p}_p \cdot \norm{g}^{r-q}_q 
+            \cdot \int_{\RR} \abs{f(x - y)}^p \abs{g(y)}^q  
+        \right )^{\frac{1}{r}} 
+    \]
+
+    napiszmy w końcu że:
+    \begin{gather*}
+        \norm{f * g}^r_r = \left ( \int_{\RR} \abs{(f * g)(x)}^r  \right ) \leq
+        \norm{f}^{r-p}_p \cdot \norm{g}^{r-q}_q \cdot
+        \int_{\RR} \int_{\RR} \abs{f(x-y)}^p \abs{g(y)}^q dy \; dr 
+    \end{gather*}
+
+    skorzystajmy teraz z tw. Fubini'ego dla ostatniej całki:
+    \begin{gather*}
+        \leq \norm{f}^{r-p}_r \cdot \norm{g}^{r-q}_q \cdot 
+        \int_{\RR} \abs{f(x)}^p dx \cdot   
+        \int_{\RR} \abs{g(y)}^p dy \\
+        = \norm{f}^{r-p}_p \cdot \norm{g}^{r-q}_q \cdot \norm{f}^{p}_p \cdot \norm{g}^q_q 
+        = \norm{f}^r_p \cdot \norm{g}^r_q
+    \end{gather*}
+    co po spierwiastkowaniu daje tezę.
+    
+    \begin{zadanie*}
+        Niech $\varphi \in C^{\infty}_c \left ( \RR \right )$. Obliczyć wartość granicy
+        \[
+            \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+                \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+                \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \frac{\varphi (x)}{x} dl_1 (x)
+        \]
+    \end{zadanie*}
+
+    Skorzystajmy z rozwinięcia Taylor'a dla $n = 1$ i mamy:
+    \[
+        \varphi (x) = \varphi (0) + x \varphi' (0) + \frac{x^2}{2!} f''(\xi)
+        \lthen \frac{\varphi (x)}{x} = \frac{\varphi (0)}{x} + \varphi' (x) + \frac{x}{2} \varphi'' (\xi)
+    \]
+
+    zatem teraz nasza całka z zadania:
+    \begin{gather*}
+        \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+            \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+            \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \frac{\varphi (x)}{x} dl_1 (x) = \\
+        \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+            \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+            \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) 
+            \cdot \left ( 
+                \frac{\varphi (0)}{x} + 
+                \varphi' (0) + 
+                \frac{x}{2} \varphi''(\xi) 
+            \right ) dl_1 (x) = \\
+        \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+            \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+            \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \frac{\varphi (0)}{x} dl_1 (x) + \\
+        \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+            \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+            \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \varphi' (0) dl_1 (x) + \\
+        \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+            \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+            \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \frac{x}{2} \varphi''(\xi) dl_1 (x)
+    \end{gather*}
+    rozważmy każdą z powyższych całek:
+    \begin{enumerate}
+        \item Pierwsza to całka z funkcji nieparzystej zatem jest równa 0. 
+        \item Druga to całka z funkcja z funkcji $e^{-x^2}$ z odpowiednim skalowaniem 
+            zatem jej wartość to $f'(0)$.
+        \item Trzecią całkę możemy oszacować:
+            \begin{gather*}
+                \int_{\RR}
+                    \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) 
+                    \frac{x}{2} \varphi''(\xi) dl_1 (x) \leq
+                \int_{\RR}
+                    \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) 
+                    \abs{\frac{x}{2} \varphi''(\xi)} dl_1 (x) \leq \\
+                2M \cdot \int_0^{\infty}
+                    \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \frac{x}{2} = 
+                2M \cdot \frac{n}{\sqrt{\pi}} \cdot \frac{1}{2 n^2} \to 0
+            \end{gather*}
+    \end{enumerate}
+    zatem w granicy mamy że:
+    \begin{gather*}
+        \lim_{n \to \infty } \lim_{\varepsilon \to 0^+} 
+            \int_{\RR \backslash [- \varepsilon , \varepsilon]}
+            \frac{n}{\sqrt{\pi } } \exp \left ( -n^2 x^2 \right ) \frac{\varphi (x)}{x} dl_1 (x) = \\
+            0 + f'(0) + 0 = f'(0)
+    \end{gather*}
+
+    \newpage
+
+    \begin{zadanie*}
+        Wykazać, że:
+        \begin{gather*}
+            \mathcal{F} \left ( \frac{\sin x}{x} \right ) (k) = A \chi_{[- B, B]} (k)
+        \end{gather*}
+    \end{zadanie*}
+
+    Zastosujmy twierdzenie o inwersji Fouriera
+    \[
+        f(x) = \int_{\RR} A \chi_{[-B, B]} \cdot e^{2 \pi i x k} dk = 
+        A \cdot \int_{[-B, B]} \css{2 \pi i x k} + i \snn{2 \pi i x k} dk =
+    \]
+    skorzystamy z faktu że $\sin$ jest funkcją nieparzystą a $\cos$ jest parzystą więc:
+    \[
+        = 2A \cdot \int_0^B \css{2 \pi x k} dk
+    \]
+    zastosujmy teraz podstawienie $a = 2 \pi x k$:
+    \[
+        = \frac{A}{\pi x} \cdot \int_0^{2 \pi x B} \cos a \; da 
+        = \frac{A}{\pi} \cdot \frac{\snn{2 \pi x B}}{x}
+    \]
+    zatem porównując mamy że współczynniki $A, B$ to odpowiednio:
+    \[
+        \begin{cases}
+            A = \pi \\
+            B = \frac{1}{2 \pi}
+        \end{cases}
+    \] 
+
+    \begin{zadanie*}
+        Definujemy:
+        \[
+            S := \left \{ f \in C^{\infty } (\RR) : 
+                \forall_{k,l} \sup_{\RR} \abs{x^k f^{(l)} (x)} < + \infty   \right \}
+        \]
+
+        \begin{walk}
+            \item Wykazać, że dla dowolnego $\varphi \in S$ istnieje granica
+                \[
+                    \lim_{\varepsilon \to 0^+} \int_{\RR \backslash [-\varepsilon, \varepsilon]} 
+                        \frac{\varphi (x)}{x} dl_1 (x)  
+                \]
+            \item Wykazać, że:
+                \[
+                     \lim_{\varepsilon \to 0^+} \int_{\RR \backslash [-\varepsilon, \varepsilon]} 
+                         \frac{1}{x} \cdot \left ( \mathcal{F} \varphi  \right ) (x) \; dl_1 (x) =
+                         C \cdot \int_{\RR} \sgn (x) \cdot \varphi (x) \; dl_1(x)
+                \]
+                Znaleźć stałą C.
+        \end{walk}
+
+        \textit{Uwaga-wniosek:} "$F \left ( \frac{1}{x} \right ) = C \cdot \sgn (k)$" 
+    \end{zadanie*}
+    
+    
+    
+    
+    
+    
+ \end{document}

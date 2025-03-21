@@ -1,0 +1,80 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Topologia I}
+  \subtitle{Rozwiązanie zadań z serii 2}
+  \maketitle
+   \begin{zadanie*}
+     Udowodnić, że podzbiór $[1, 2] \times [1, 2]$ płaszczyzny z metryką rzeka jest homeomorficzny z produktem przestrzeni metrycznych $X_1$ i $X_2$, gdzie $X_1 = [1, 2]$ z metryką dyskretną, a $X_2 = [1, 2]$ z metryką euklidesową.
+   \end{zadanie*}
+
+   Z wykładu wiemy że przestrzeń $X_1 \times X_2$ generowana jest przez metryke:
+   \[
+       d((x_1, y_1), (x_2, y_2)) = 
+       \begin{cases}
+         \abs{y_1 - y_2}  \quad & x_1 = x_2 \\
+         1 \quad & \text{w p. p.}
+       \end{cases}
+   \]
+
+   Aby wykazać że $( \left [ 1, 2 \right ]) \times [1,2], d_r ) \cong (X_1 \times X_2, d)$, pokażemy że przekształcenie identycznościowe jest homeomorfizem.
+   Warunek na różnowartościowość i surjekcje są oczywiście spełnione, zatem należy wykazać że identyczność jest ciągła z $X_1 \times X_2 \to [1,2] \times [1,2]$ i odwrotnie.
+   Zaobserwujmy jednak jeśli odległość między punktami w $X_1 \times X_2$ lub $[1,2] \times [1,2]$ jest mniejsza od 1, leżą na tej samej współrzędnej iksowej, i $d = d_r$ i w definicji $(\varepsilon - \delta)$ ciągłości wystarczy wstawić $\delta < \varepsilon$, aby warunek przekstałcenie i jego odwrotność były ciągłe, czyniąc przestrzenie homeomorficznymi.
+
+   \begin{zadanie*}
+       Udowodnić, że jeżeli $A$ jest zwartym podzbiorem prostej rzeczywistej z topologią strzałka, to $A$ jest zbiorem brzegowym.
+   \end{zadanie*}
+
+   Musimy więc wykażać że
+   \[
+     \opname{Int} \left ( A \right ) \not = \varnothing
+   \]
+   wykażemy to przez sprzeczność:
+
+   Niech $\exists a \in \opname{Int} A$, zatem istnieje otoczenie $( c, b ] \in A$ (gdzie $c < a < b$).
+   Z warunku że $A$ jest zwarty wynika że z każdego pokrycia można wybrać skończone, ale dla odcinka $( c, b]$ istnieje rodzina zbiorów $\mathcal{B}$:
+   \[
+     \mathcal{B} = \left \{ ( a + \frac{1}{i + 1} , a + \frac{1}{i} ] , i = N, N + 1, \dots \right \} \cup \left \{ (c, a] , (a + \frac{1}{N}, b] \right \}
+   \]
+
+   w której każdy element pokrywa dokładnie jeden zbiór, zatem nie możemy go zawsze pokryć skończoną liczbą zbiorów z $\mathcal{B}$, a odcinek jest cześcią podzbioru zwartego, czyli sprzeczność. 
+   
+   \newpage
+   
+   \begin{zadanie*}
+       Niech $(X, d)$ będzie przestrzenią metryczną zwartą, zaś $A$ jej domkniętym podzbiorem. Pokazać, że jeśli $x_1, x_2, \dots$ jest ciągiem punktów przestrzeni $X$ takim, że $d(x_i, A) < \frac{1}{i}$, dla każdego $i \in \mathbb{N}$, to podprzestrzeń
+        \[
+          B = A \cup \{x_i : i \in \NN \}
+        \]
+      przestrzeni $X$ jest zwarta.
+   \end{zadanie*}
+
+   Weźmy dowolny nieskończony ciąg punktów $(x_i)_{i \in \NN}$ w $B$. Z zwartości $X$ wiemy że ten ciąg ma zbieżny podciąg w X, czyli BSO możemy założyć że ciąg $(a_i)_{i \in \NN}$ ma granice.
+
+   Pozostały nam dwa przypadki: albo mamy nieskończenie wiele punktów w $A$ (który jest domknięty czyli granica $\lim_{i \to \infty } a_i \to a_0 \in A $), albo mamy że nieskończenie wiele elementów leży w $\left \{ x_i : i \in \NN \right \}$.
+   W pierwszym przypadku granica $a_0 \in A \subset B$, więc $B$ spełnia warunek zwartości (z każdego ciągu punktów w $B$ można wybrać podciąg zbieżny w tej przestrzeni).
+   W drugim przypadku BSO zakładamy że wszystkie punkty należą do $\left \{ x_i : i \in \NN \right \}$, czyli granica tego ciągu $a_0$, ma własność $\forall_{i \in \NN} d(a_0, A) < \frac{1}{i}$, czyli $d(a_0, A) = 0$ co mówi że $a_0 \in \ol A = A \in B$, więc w tym przypadku zbiór $B$ też spełnia warunek zbieżności, czyli $B$ jest zwarty.
+
+   \begin{zadanie*}
+       Niech $(X_1, T_1)$, $(X_2, T_2)$, \dots, $(X_n, T_n)$ będą przestrzeniami topologicznymi. Udowodnij, że $X_1 \times X_2 \times \dots \times X_n$ jest ośrodkowa wtedy i tylko wtedy gdy, dla każdego $i \in \{1, 2, \dots, n\}$, przestrzeń $X_i$ jest ośrodkowa.
+   \end{zadanie*}
+
+   \begin{enumerate}
+     \item $(\Rightarrow)$ Niech $D$ będzie gęstym podzbiorem $X_1 \times X_2 \times \dots \times X_n$, rozważmy rzuty $\pi_i : X_1 \times X_2 \times \dots \times X_n \to X_i$.
+       Wiemy że zbiór $\pi_i (D)$, jest przeliczalny (jako obraz podzbioru przeliczalnego). Pokażemy teraz że jest gęsty, czyli dla dowolnego zbioru otwartego $U_i$ w $X_i$, przecięcie $U_i \cap \pi_i (D)\not = \varnothing$.
+       Skorzystajmy z faktu że $D$ jest gęsty, czyli wiemy że $\pi_i \inv \left ( U_i \right ) \cap D \not = \varnothing$, i po rzutowaniu na $X_i$ przy pomocy $\pi_i$, mamy:
+       \[
+           U_i \cap \pi_i (D) \not = \varnothing
+       \]
+       czyli przestrzeń $X_i$ jest ośrodkowa.
+     \item $(\Leftarrow)$ Niech $D_i$ oznacza przeliczalny zbiór gęsty w $X_i$. Rozważmy teraz zbiór $D = \left \{ (x_1, \dots, x_n) : \forall_i x_i \in D_i \right \}$, który jest przeliczalnym zbiorem. Pokażmy że jest gęsty mianowicie:
+       Niech $U = U_1 \times \dots \times U_n$ będzie otwartym zbiorem w $X_1 \times \dots \times X_n$. Jako że $\pi_i (U) = U_i$, to zbiory $U_i$ są otwarte, zatem $\exists_{a_i} a_i \in U_i \cap D_i$. W takim razie $(a_1, \dots , a_n) \in U \cap D$, dla dowolnego otwartego $U$, więc $X_1 \times \dots \times X_n$ posiada skończony podzbiór gęsty, czyli jest ośrodkowa.
+   \end{enumerate}
+   
+   
+   
+\end{document}

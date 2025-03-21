@@ -1,0 +1,132 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Topologia}
+  \subtitle{Rozwiązanie zadań z serii III}
+  \maketitle
+    \begin{zadanie*}
+        Niech $X$ będzie zbiorem liczb naturalnych, zaś
+        \[
+          T = \{\emptyset, X\} \cup \{\{1, 2, \dots, k\}\}_{k \in \mathbb{N}}
+        \]
+
+        \begin{itemize}
+            \item[a)] Udowodnij, że rodzina $T$ jest topologią na $X$.
+            \item[b)] Czy istnieje ciągłe przekształcenie prostej euklidesowej na $(X, T)$?
+            \item[c)] Czy istnieje ciągłe przekształcenie odcinka $[0, 1]$ na $(X, T)$?
+        \end{itemize}
+
+        W punktach b i c odpowiedzi uzasadnij podając przykład takiego przekształcenia i dowodząc, że jest ciągłe lub udowadniając, że nie istnieje.
+        \end{zadanie*}
+
+        \begin{itemize}
+          \item[a)] Zgodnie z definicją sprawdzamy:
+            \[
+                \varnothing, \NN \in \mathcal{T}
+            \]
+            i 
+            \begin{gather*}
+                \left \{ 1, \dots, k \right \} \cup \left \{ 1, \dots, l \right \} = \left \{ 1, \dots, \max (l,k) \right \} \\
+                \left \{ 1, \dots, k \right \} \cap \left \{ 1, \dots, l \right \} = \left \{ 1, \dots, \min (l,k) \right \}
+              \end{gather*}
+
+            wiec analogicznie przecięcie i iloczyn skończenie wielu zbiorów otwartych jest otwarty.
+          \item[b)]
+            Tak, istnieje takie przekształcenie, np:
+            \[
+                f (x) = \lfloor \abs{x} \rfloor 
+            \]
+            
+            Zgodnie z definicją sprawdzamy: \\
+            Dla każdego otwartego $U \in \mathcal{T}$ (czyli $\left \{ 1, \dots, k \right \}$), mamy że $f \inv (U) = (-k-1 , k+1)$ czyli jest otwarty.            
+
+          \item[c)]
+            Nie, nie istnieje taka funkcja, dowiedzmy to przez sprzeczność. Zakładamy że istnieje taka funkcja $f$.
+            Oznaczmy ciąg $(x_n)_{n \in \NN}$ taki że $f(x_n) = n$. Z twierdzenia Bolzano-Weierstrassa mamy że posiada on ciąg zbieżny powiedzmy więc że
+            \[
+                f(x_n) = y_n \in X
+            \]
+            skoro $x_n$ jest zbieżny to ma granice $x$, i powiedzmy że $f(x) = y$, ale tu widzimy sprzeczność bo w takim razie każde otoczenie $y$ zawiera rosnący nieskończony ciąg liczb naturalnych, a takie nie istnieje. 
+            
+        \end{itemize}
+        
+
+
+        
+    \begin{zadanie*}
+        Czy przestrzeń ilorazowa $\mathbb{R} / \mathbb{Z}$ jest przestrzenią zwartą? Odpowiedź uzasadnij.
+    \end{zadanie*}
+
+    \begin{center}
+        \begin{tikzpicture}
+          \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em] {
+            \RR \\
+            \RR / \mathbb{Z} & S^1 \\
+          };
+          \path[-stealth]
+            (m-1-1) edge node [left] {$\pi$} (m-2-1)
+                edge node [above] {$f$} (m-2-2)
+            (m-2-1) edge node [below] {} (m-2-2);
+        \end{tikzpicture}
+    \end{center}
+
+    Oznaczmy $f: \RR \to S^1$ jako $f(x) = (\css{2 \pi x}, \snn{2 \pi x})$, oczywiste jest że 
+    $$
+      f(x) = f(y) \iff  x - y \in \mathbb{Z}
+    $$ 
+    Oznaczmy również jako $K = [0,1]$, mamy $\pi (K) = \RR / \mathbb{Z}$, i korzystając z uwagi 5.1.1 B ze skryptu mamy że $\RR / \mathbb{Z} \simeq S^1$. Skoro okrąg jest przestrzenią zwartą to mamy że nasza przestrzeń ilorazowa też. 
+    
+    \begin{zadanie*}
+        Niech $X$ będzie podprzestrzenią płaszczyzny euklidesowej opisaną wzorem:
+        \[
+            X = (\{0\} \times [-1, 1]) \cup \left( \bigcup_{n=1}^\infty \left\{ \frac{1}{n} \right\} \times [-1, 0] \right) \cup \left( \bigcup_{n=1}^\infty [0, a_n] \times \left\{ \frac{1}{n} \right\} \right),
+        \]
+        gdzie $a_n > 0$.
+        \begin{itemize}
+            \item[a)] Wykazać, że dla $a_n = 1 - \frac{1}{n+1}$, przestrzeń $X$ jest spójna, ale nie jest zwarta.
+            \item[b)] Czy istnieje ciąg liczb dodatnich $a_n$ taki, że $X$ jest jednocześnie spójna i zwarta? Odpowiedź uzasadnij.
+        \end{itemize}
+    \end{zadanie*}
+
+    \begin{itemize}
+      \item[a)]
+         Przestrzeń nie jest zwarta:
+         Niech $Y = X \cap {(x,y) : y = 1 - \frac{3}{2} x, x > 0, y > 0}$, układjąc w ciąg punkty są zbieżne ale nie do punktu należącego do $X$.
+         Przestrzeń jest spójna:
+         Oczywistym jest że:
+        \[
+          X' = \left ( \left \{ 0 \right \} \times [-1, 1] \right ) \cup \left( \bigcup_{n=1}^\infty [0, a_n] \times \left\{ \frac{1}{n} \right\} \right)
+        \]
+        jest spójny, czyli zakładając że zbiór nie jest spójny, jeden $A_1$ zawiera $X'$ oraz część pozostałych "odcinków", a drugi $A_2$ pozostałe odcinki czyli:
+        \[
+            \ol A_1 \cap A_2 \not = \varnothing
+        \]
+        czyli zbiór $X$ jest spójny.
+
+      \item[b)]
+        Nie, nie istnieje taki ciąg liczb. Skoro przestrzeń jest spójna to dla $A_1 = \left \{ 1 \times [0, -1] \right \}$, mamy:
+        \[
+          A_1 \cap \ol{X \backslash A_1} \not = \varnothing
+        \]
+        Więc istnieje ciąg zbieżny $(x_n)$ do $(1, 0)$. Mamy z tego $a_n \to 1$. Z tego wynika sprzeczność podobnie jak w $a$, przecinamy go z prostą równoległą do OY, i otrzymujemy ciąg przeczący zbieżności.
+        
+
+        
+    \end{itemize}
+    
+
+    \begin{zadanie*}
+        Czy istnieje spójna przestrzeń metryczna $X$, taka że $|X| < \infty$. Odpowiedź uzasadnij.
+    \end{zadanie*}
+
+    Widać że przestezeń jednoelementowa jasno przeczy treści, załużmy że $\abs{X} > 1$.
+
+    Jeśli $X$ byłaby skończenie elementowa to dowolne dwa z nich możemy rozdzielić kulami, a potem wziąść minium po ich promieniach dla wszystkich otrzymując spójne składowe, czyli przestrzeń nie jest spójna. 
+    
+\end{document}

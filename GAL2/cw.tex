@@ -1,0 +1,323 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{GAL2, lato 2024}
+  \subtitle{notatki z ćwiczeń}
+  \maketitle
+  \section{cwiczenia 26 luty}
+      \begin{definicja}
+          $A \in M_n (K)$ jest skalarna, jesli $A = aI$, $a \in K$
+      \end{definicja}
+
+      \begin{fakt}
+          $A$ jest skalarna $\iff $ jedyna macierz w $M_n(k)$ podobna do A jest A.
+      \end{fakt}
+      
+      \begin{enumerate}
+          \item $\Rightarrow $
+
+          \item $\Leftarrow $
+            Załóżmy że $A$ nie jest taka, że $a_{ij} \not = 0$ dla jakis $i, j$.
+            \begin{uwaga}
+              \[
+                I_i(c) = \begin{bmatrix}
+                           1 & 0 & \cdots \\
+                           \cdots & c & \cdots \\
+                           0 & \cdots & 1
+                        \end{bmatrix}
+              \]
+            \end{uwaga}
+            Więc $A' = I_i(c) \cdot A \cdot I_i(\frac{1}{c}) \not A$
+      \end{enumerate}
+  \section{Endomorfizmy}
+      \begin{zadanie}
+          Niech $W \subset V$, $dim W = n$, $dim V = 2n$, $n \geq 1$ \\
+          \[
+              \exists f \in End(V) \qquad (f: V \to V)
+          \]
+          taki, że: $ker (f) = im (f) = W$
+           
+      \end{zadanie}
+
+      Wystarczy zdefiniować na bazie.
+       
+      \begin{zadanie}
+          $f,g \in End(V) \quad 
+          \begin{cases}
+              r(f) = r(g) = 1 \\
+              Ker(f) = Ker(g) \\
+              Im(f) = Im(g)
+          \end{cases}
+          \Rightarrow f \circ g = g \circ f $
+      \end{zadanie}
+
+      \begin{zadanie}
+          Niech $A$ będzie macieżą nieodwracalną. Pokaż że jest podobna do jakiejs macierzy z zerowym wierszem.
+      \end{zadanie}
+      
+      Skoro $ det A = 0 $ to $ dim ker \phi \geq 1 $, a stąd $ \exists v \not = 0 $ taki że $ \phi (v) = 0$ z tw. Steiniza o wymianie możemy uzupełnic zbiór $\{ v \}$ do bazy nazwijmy $A$.
+
+      Drugie rozwiązanie:
+      Z faktu że rzędy są linowo zależne, z pomocą operacji elementarnych możemy wyzerować jeden z wierszy tworząc macierz z zerowym wierszem.
+
+  \section{ćwiczenia 4 marca}
+    Rozwiązania zadań:
+
+    \begin{zadanie}
+        Dla każdego z endomorfizmów $\varphi$ znaleźć wartosci własne i bazy ich przestrzeni własnych
+        \begin{walk}
+            \item $\phi : \mathbb{R}^2 \to \mathbb{R}^2, \varphi \left ( x_{1}, x_{2} \right ) = \left ( 2 x_{1} - x_{2}, -x_{1} + 2x_{2} \right )$.
+            \item $\varphi : \mathbb{R}^2 \to \mathbb{R}^2, \varphi \left ( x_{1}, x_{2} \right ) = \left ( 5x_{1} - x_{2}, -x_{1} + 2x_{2} \right )$.
+            \item $\varphi : \mathbb{R}^3 \to \mathbb{R}^3 , \varphi \left ( x_{1}, x_{2}, x_{3} \right ) = \left ( 4x_{1} + x_{2}, 3x_{1} + 2x_{2}, 7x_{1} - 7x_{2} + 5x_{3} \right )$.
+            \item $\varphi : \mathbb{R}^3 \to \mathbb{R}^3, \varphi \left ( x_{1}, x_{2}, x_{3} \right ) = \left ( x_{1} - x_{2}, x_{1} + 3x_{2} + x_{3}, 2x_{3} \right )$ 
+            \item $\varphi : \mathbb{R}^4 \to \mathbb{R}^4, \varphi \left ( x_{1}, x_{2}, x_{3}, x_{4} \right )= $ \\
+              $\left ( -6x_{1} - x_{2} + 2x_{3}, 3x_{1} + 2x_{2} + x_{4}, -14x_{1} - 2x_{2} + 5x_{3}, -x_{4} \right )$
+        \end{walk}
+    \end{zadanie}
+
+    \begin{walk}
+        \item Weźmy bazę $\mathcal{A}  = \left \{ \left ( 1, 1 \right ), \left ( 1, -1 \right ) \right \}$, dla której macierz przekształcenia $\varphi$ wygląda następująco, 
+          \[
+            M \left ( \varphi \right )^{\mathcal{A} }_{\mathcal{A} } = 
+            \begin{bmatrix}
+                1 & 0 \\
+                0 & 3 \\
+            \end{bmatrix}
+          \]
+          więc wartosci własne to 1, i 3, a bazą podprzestrzeni własnej jest $\mathcal{A} $.
+        \item Wielomian charakterystyczny w bazie standardowej to 
+          \[
+              \left ( 5 - \lambda \right ) \cdot \left ( 2 - \lambda \right ) - \left ( -1 \right )\left ( 1 \right ) = 11 - 7 \lambda + \lambda^2
+          \]
+          co po rozwiązaniu równania kwadratowego daje nam dwie wartosci własne: $\frac{7 + \sqrt{5} }{2}$, oraz $\frac{7 - \sqrt{5} }{2}$, które po dalszych obliczeniach dają wektory własne $\left ( \frac{-3 + \sqrt{5} }{2}, 1 \right )$, i $\left ( \frac{-3 - \sqrt{5} }{2}, 1 \right )$, które przy okazji są bazą podprzesterzeni własnej.
+        \item Łatwo zauważyć że $\varphi \left ( \left ( 0, 0, 1 \right ) \right ) = \left ( 0, 0, 5 \right )$, czyli znaleźlismy wektor własny i jego wartosc własną (przyjmijmy że znajduje się w bazie podprzestrzeni własnej), zauważyć można jeszcze że wektorem własnym jest $\left ( 1,1 \right )$, z wartoscią 5. Rozwiązując teraz wielomian charakterystyczny otrzymujemy ostatnią wartosć własną czyli $1$, więc znaleźć metodą macierzową pozostały wektor $\left ( 1, -3 \right )$.
+        \item Postępując podobnie mamy: $\lambda = 2$, $v_{1} = \left ( 1, -1, 0 \right ) $
+        \item Analogicznie mamy:
+          \begin{gather*}
+            \left ( v_{1}, v_{2}, v_{3} \right ) = \left ( \left ( 1, -3, 2, 0 \right ) \right )
+          \end{gather*}
+          ze swoimi wartosciami własnymi kolejno $-1$, i $1$.
+    \end{walk}
+    
+   \begin{zadanie}
+        Niech $V$ będzie przestrzeni bazą funkcji $\mathbb{R}  \to \mathbb{R} $ mających pochodne i-tego stopnia dla każdego $i \in \mathbb{N} $ i niech $\phi : V \to V$ będzie różniczkowaniem, to znaczy $\phi \left ( f \right ) = f'$ dla każdego $f \in V$. Wykazać, że każda liczba $a \in \mathbb{R} $ jest wartoscią własną endomorfizmu $\phi $. Dla każdego $a \in R$ znaleźć $V_{(a)}$.
+   \end{zadanie}
+    
+   Rozwiązanie zadania sprowadza się do rozwiązania równiania:
+   \[
+       f' = \phi \left ( f \right ) = af
+   \]
+   czyli $f = c \cdot e^{ax}$.
+   Dodatkowo można zauważyć że $V_{(a)} = \left ( \left ( e^{ax} \right ) \right )$.
+   
+   \begin{zadanie}
+     \begin{walk}
+     \item Niech $\mathcal{A} = \left \{ \alpha_{1}, \alpha_{2}, \alpha_{3}, \cdots, \alpha_{n} \right \} $ będzie bazą podprzestrzeni $V$, niech $ \varphi: V \to V$, z warunkiem $\varphi \left ( \alpha_{i} \right ) = \alpha_{i+1}$, oraz
+       \[
+         \varphi \left ( \alpha_n \right ) = a_{0} \alpha_{1} + \cdots + a_{n-1} \alpha_{n}
+       \]
+       Znaleźć wielomian charakterystyczny.
+      
+    \item Wykazać że dla wielomianu w postaci:
+      \[
+        w \left ( \lambda \right ) = \sum_{i = 0}^{n} a_i \lambda_i \qquad a_n = (-1)^n
+      \]
+      o współczynnikach w ciele $K$ istnieje macierz $A \in M_n \left ( K \right )$, taka że $w$ jest jej wielomianem charakterystycznym.
+    \end{walk}
+   \end{zadanie}
+   
+   \begin{walk}
+       \item Wystarczy napisać macierz i ze wzorów Laplace'a mamy że:
+         \[
+           det \left ( A \right ) = (-1)^{n-1} a_{0} + \lambda \left ( -1 \right )^{n-2} + \cdots + \lambda_{n-1} a_{n-1} 
+         \]
+      \item Wystarczy rozpatrzeć macierz w postaci
+        \[
+            \begin{bmatrix}
+              0 & 1 & 0 & \cdots  \\
+              0 & 0 & 1 & \cdots  \\
+              \vdots & \vdots  & \vdots  & \vdots \\
+              -q_{1} & -q_{2} & -q_{3} & \cdots 
+            \end{bmatrix}
+        \]
+   \end{walk}
+   
+   \begin{zadanie}
+       Czy istnieje endomorfizm, który ma conajmniej jeden wektor własny, ale nie ma ich niekskończnie wiele?
+   \end{zadanie}
+   
+   Wtedy i tylko wtedy gdy ciało jest skończone.
+
+   \section{5 marca}
+       
+
+   \begin{zadanie}
+       Dla każdego z endomorfizmów $ \varphi  : V \to V$ zbadać czy istnieje baza $\mathcal{A} $ przestrzeni $V$ złożona z wektorów własnych $\varphi$ (czytaj jest diagonalizowalna). Jesli tak to podaj przykład takiej bazy oraz $\text{M} \left ( \varphi \right )_{\mathcal{A}}^{\mathcal{A}}$.
+   \end{zadanie}
+   
+   \begin{walk}
+       \item Licząc wartosci własne macierzy endomorfimu $
+         \begin{bmatrix}
+             1 & -1 \\
+             1 & 3 \\
+         \end{bmatrix}
+         $
+         znajdujemy że ma ona jeden wektor własny czyli $\left ( 1, -1 \right )$, więc nie ma bazy.
+       \item Pdobnie jak w zadaniu 3.1 a, wektorami własnymi są $\left ( 0,1,1 \right )$ i $\left ( 0, 1, -1 \right )$, i szybko licząc wielomian mamy pozostały wektor $\left ( 1,1, 0 \right )$, które razem rozpinają $\mathbb{R}^3$, więc są bazą $\mathcal{A} $,  macierz to:
+         \[
+           \text{M} \left ( \varphi \right )_{\mathcal{A}}^{\mathcal{A}} = 
+             \begin{bmatrix}
+               1 & 0 & 0 \\
+              0 & 3 & 0 \\
+               0 & 0 & 3 
+             \end{bmatrix}
+         \]
+      \item Macierz $\text{M} \left ( \varphi \right )_{id}^{id}$, jest w postaci blokowej, więc możemy ją rozbić na dwie pomniejsze, zatem w tej pierwszej mamy wektory $\left ( 1, -1 \right )$, i $\left ( \frac{1}{5}, \frac{1}{4} \right )$,  w drugiej są $\left ( 1,1 \right )$, oraz $\left ( 1, -3 \right )$, które równierz rozpinają i razem z poprzednimi tworzą bazę.
+   \end{walk}
+
+   \begin{zadanie}
+       Niech
+       \[
+           A_{1} = 
+           \begin{bmatrix}
+             1 & 2 & 0 \\
+             2 & -2 & 0\\
+             0 & 0 & -3
+           \end{bmatrix}
+           \quad 
+           A_{2} = 
+           \begin{bmatrix}
+             -3 & 1 & 1 \\
+             0 & 1 & 2 \\
+             0 & 2 & -2
+           \end{bmatrix}
+           \quad 
+           A_{3} = 
+           \begin{bmatrix}
+             0 & 2 & 0 \\
+             -2 & 0 & 0 \\
+             0 & 0 & 2
+           \end{bmatrix}
+           \quad 
+           A_{4} = 
+           \begin{bmatrix}
+             0 & 1 & 0 \\
+             -4 & 4 & 0 \\
+             -2 & 1 &2
+           \end{bmatrix}
+       \]
+       Dla każdej z powyższych macierzy $A_i$, $i = 1, \dots ,4$ zbadać czy $A_i$ jest diagonalizowalna nad $\mathbb{R} $ oraz czy $A_i$ jest diagonalizowalna nad $\CC$
+   \end{zadanie}
+   \begin{enumerate}
+       \item Łatwo zauważyć wektory własne: $\left ( 0,0,1 \right )$, $\left ( 2,1,0 \right )$, $\left ( 1, -2 \right )$, które rozpinają $\mathbb{R}^3$, i należą do $\QQ^3$, zatem jest diagonalizowalna nad $\QQ$.
+       \item Podobnie znajdujemy wektor $\left ( 1, 0, 0 \right )$, i licząc dalej znajdujemy kolejny wektor własny $\left ( 2, 10, 5 \right )$, lecz tylko jeden więc nie jest diagonalizowalna.
+        \item \dots 
+        \item \dots
+   \end{enumerate}
+   
+
+   \begin{zadanie}
+       Podaj przykład macierzy $A \in M_2 \left ( \QQ \right )$, która nie jest diagonalizowana nad $\QQ$ a jest nad $\mathbb{R}$ .
+   \end{zadanie}
+
+   Weżmy macierz Fibo czyli
+   \[
+       \begin{bmatrix}
+           1 & 1 \\
+           1 & 0 \\
+           
+       \end{bmatrix}
+   \]
+  Która ma wartosci własne niewymierne.
+
+  \begin{zadanie}
+      Wykaż że jesli macierz $A \in M_n \left ( K \right )$, ma dokładnie jedną wartosć własną, oraz jest diagonalizowalna to jest macierzą diagonalną.
+  \end{zadanie}
+  
+  Po prostej kalkulacji:
+  \[
+    A = C \lambda \text{Id} C^{-1} = \lambda \text{Id}  
+  \]
+
+  \begin{zadanie}
+      Niech $\varphi$ będzie odwracalnym endomorfizmem. Wykaż że jesli $\varphi$ jest diagonalizowalym endomorfizmem to ${\varphi}^{-1} $ też jest.
+  \end{zadanie}
+  
+  Przez kalkulację:
+  \[
+    A = C D C^{-1} \Rightarrow  {A}^{-1} = (CDC^{-1})^{-1} = C D' C^{-1}    
+  \]
+  
+  \begin{zadanie}
+      Czy $f : M_n \left ( \mathbb{R}  \right ) \to M_n \left ( \mathbb{R}  \right )$, $f(A) = A^T$ jest diagonalizowalny? Jesli tak to podać bazę $\mathcal{A} $ w której macierz przekształcenia $f$ jest diagonalna i znaleźć $\text{M} \left ( f \right )_{\mathcal{A}}^{\mathcal{A}}$.
+  \end{zadanie}
+  
+  Zadanie już się pojawiło jako 6 z drugiej serii.
+
+  \begin{zadanie}
+      Wykazać że $A \in M_n \left ( K \right )$, jest diagonalizowalna wtedy gdy $A^T$ też jest. Podaj przykład gdy nie mają tych samych wektorów własnych.
+  \end{zadanie}
+  
+  Podobnie jak w zadaniu 4.5
+  \[
+    A = C D C^{-1} \Rightarrow  {A}^{T} = {CDC^{-1}}^{T} = {C^T}^{-1} D C^T     
+  \]
+
+  \section{11 marca}
+      \begin{zadanie}
+          \begin{walk}
+              \item Niech $A \in M_n(K)$. Wykazac, ze dla kazdej wartosci własnej $\lambda_i$, $\dim V( \lambda_i )$ równa się liczbie klatek Jordana odpowiadających wartosci własnej $\lambda_i$ w postaci Jordana $A$.
+              \item Niech $n \in \{1, 2, 3\}$ i niech $A \in M_n(K)$ będzie taka, że $w_A(\lambda) = (\lambda_{1} - \lambda)^n$. Wykazać, że $\dim V(\lambda_{1})$ wyznacza postać Jordana A.
+              \item Czy 1b) jest prawdą dla $n \geq 4$?
+              \item Niech $A \in M_n(K)$ będzie taka, że $w_A(\lambda) = (\lambda_{1} - \lambda)_{k1} \cdot  (\lambda_r - \lambda)_{kr}$ , gdzie $k_i \in {1, 2, 3}$ dla wszystkich $i = 1, \dots  , r$. Wykazać, że wszystkie $\dim V(\lambda_i )$ razem wyznaczają postać Jordana A.
+          \end{walk}
+          
+      \end{zadanie}
+
+      \begin{walk}
+      \item Wystarczy zapisać $\dim V_{(a)} = n - r(A - aI) = \dim A - aI$.
+      \item \dots 
+      \end{walk}
+    
+      
+      \begin{zadanie}
+          Niech
+          \[
+              A_{1} = 
+              \begin{bmatrix}
+                2 & 0 & 1 \\
+                1 & 2 & 0 \\
+                0 & 0 & 2 \\
+              \end{bmatrix}
+              \qquad 
+              A_{2} = 
+              \begin{bmatrix}
+                2 & 0 & 0 \\
+                1 & 2 & 1 \\
+                0 & 0 & 2
+              \end{bmatrix}
+              \qquad 
+              A_{3} = 
+              \begin{bmatrix}
+                2 & 0 & 0 \\
+                0 & 2 & 0 \\
+                0 & 1 & 2
+              \end{bmatrix}
+              \qquad 
+              A_4 = 
+              \begin{bmatrix}
+                2 & 0 & 0 \\
+                1 & 2 & 0 \\
+                1 & 1 & 2
+              \end{bmatrix}
+          \]
+          Sprawdź które z tych macierzy są podobne. 
+      \end{zadanie}
+
+      Wystarczy znaleźć bazy Jordana i porównać, z czego wynika tylko że $A_1 \sim A_4$
+      
+\end{document}

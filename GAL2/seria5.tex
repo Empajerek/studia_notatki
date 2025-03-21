@@ -1,0 +1,220 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{GAL2 lato 2024}
+  \subtitle{rozwiązania zadań z serii V}
+  \maketitle
+    \section{Zadanie}
+        \begin{zadanie}
+            W przestrzeni afinicznej euklidesowej $\mathbb{R}^3$ ze standardowym iloczynem skalarnym dane jest przekształcenie $\varphi_{r,s} : \mathbb{R}^3 \to \mathbb{R}^3$ wzorem
+            \begin{gather*}
+                \varphi_{(r,s)}(x_1, x_2, x_3) = \\
+                \left( \frac{r}{3} x_1 - \frac{2}{3} x_2 - \frac{1}{3} x_3 + 1, 
+                    \frac{2}{3} x_1 + \frac{1}{3} x_2 + \frac{2}{3} x_3 + 1, 
+                    \frac{s}{3} x_1 + \frac{2}{3} x_3 - \frac{2}{3} x_3 + 1 
+                \right),
+            \end{gather*}
+            gdzie $r,s \in \mathbb{R}$.
+
+\begin{itemize}
+    \item[a)] Dla jakich wartości parametrów $r, s \in \mathbb{R}$ przekształcenie $\varphi_{(r,s)}$ jest izometrią?
+    \item[b)] Dany jest równoległościan $R \subseteq \mathbb{R}^3$ o objętości 54. Znaleźć objętość obrazu $\varphi_{(1,-3)}(R)$ tego równoległościanu przy przekształceniu $\varphi_{(1,-3)}$.
+    \item[c)] Dla jakich wartości parametru $s \in \mathbb{R}$ przekształcenie $\varphi_{1,s}$ zmienia orientację ale zachowuje objętość 3-wymiarowych równoległościanów? Odpowiedź uzasadnić.
+\end{itemize}
+        \end{zadanie}
+        
+        \begin{walk}
+            \item 
+              \[
+                \varphi_{(r,s)} (x_1, x_2, x_3 ) = \frac{1}{3} 
+                \begin{bmatrix}
+                  r & 2 & -1 \\
+                  2  & 1 & 2 \\
+                  s & 2 & -2
+                \end{bmatrix}
+                + 
+                \begin{bmatrix}
+                  0 & 1 & 1 \\
+                \end{bmatrix}
+              \]
+              Wystarczy sprawdzić czy $\varphi'_{(r,s)}$ jest izometrią liniową, czyli czy
+              \[
+                 \begin{bmatrix}
+                   r & 2 & -1 \\
+                   2  & 1 & 2 \\
+                   s & 2 & -2
+                 \end{bmatrix}^T
+                 \cdot 
+                 \begin{bmatrix}
+                   r & -2 & -1 \\
+                   2 & 1 & 2  \\
+                   s & 2 & -2
+                 \end{bmatrix}
+                 =
+                 \begin{bmatrix}
+                   9 & 0 & 0 \\
+                   0 & 9 & 0  \\
+                   0 & 0 & 9
+                 \end{bmatrix}
+              \]
+              i po przeliczeniu mamy, że zachodzi to tylko dla 
+              \[
+                  \begin{cases}
+                      r = 2 \\
+                      s = 1
+                  \end{cases}
+              \]
+              i widzimy że wtedy $\varphi'$ jest izomorfizmem, czyli $\varphi$ też jest, więc z definicji tylko  $\varphi_{(2,1)}$ jest izometrią afiniczną.
+            \item Korzystając z faktów udowodnionych na wykładzie wystarczy obliczyć
+              \[
+                54 \cdot \abs{\text{det}\left ( \varphi'_{(1,-3)} \right )} = 54 \cdot \frac{1}{3} = 18 
+              \]
+            \item Podobnie jak porzednio wnioskujemy że $\abs{\text{det}\left ( \varphi_{(1,s)} \right )} = 1 $ oraz wiemy że przekształcenie ma zmieniać orientacje (np. bazy standardowej), czyli $\text{det}\left ( \varphi_{(1,s)} \right ) < 0$, mamy więc że 
+              \[
+                \text{det} \left ( \varphi'_{(1,s)} \right ) = -1 \Rightarrow -\frac{1}{9} \left ( s+6 \right ) = -1 \Rightarrow s + 6 = 9 \Rightarrow s = 3
+              \]
+              
+        \end{walk}
+        
+        \section{Zadanie}
+            \begin{zadanie}
+              Rozważamy $\mathbb{R}^2$ ze standardowym iloczynem skalarnym. Niech $A = \begin{pmatrix} 1 & 3 \\ 2 & 6 \end{pmatrix}$.
+
+\begin{itemize}
+    \item[(a)] Podać wzory na dwa różne $f, g \in \text{End}(\mathbb{R}^2)$ samosprzężone oraz bazy $A, \mathcal{B}$ takie, że $A = M(f)_A^A = M(g)_\mathcal{B}^\mathcal{B}$.
+    \item[(b)] Opisać wszystkie wektory $v \in \mathbb{R}^2$ takie, że $\mathcal{C} = \{(1,0), v\}$ jest bazą $\mathbb{R}^2$ i $f \in \text{End}(\mathbb{R}^2)$ dany warunkiem $M(f)_\mathcal{C} = A$ jest samosprzężone.
+\end{itemize}
+            \end{zadanie}
+            
+            \begin{walk}
+                \item Wystarczy znaleźć macierze podobne do $A$ które dodatkowo są symetryczne (aby przekształcenia które definiują były samosprzężone) dla przykładu mogą to być
+                  \[
+                     \begin{bmatrix}
+                         0 & 0 \\
+                         0 & 7 \\
+                     \end{bmatrix}
+                     \qquad \qquad 
+                     \begin{bmatrix}
+                         1 & \sqrt{6}  \\
+                         \sqrt{6}  & 6 \\
+                     \end{bmatrix}
+                  \]
+                  oraz bazy im odpowiadające to 
+                  \[
+                      \mathcal{A} = \left \{ \left ( - \frac{2}{7} , \frac{1}{7} \right ) , \left ( \frac{1}{7} , \frac{3}{7} \right ) \right \}
+                      \qquad 
+                      \mathcal{B} = \left \{ \left ( \frac{13}{6} \sqrt{6}, -1  \right ) , \left ( - \frac{1}{2} \sqrt{6} , 4  \right ) \right \} 
+                  \]
+                \item Niech $v = (a,b)$ żeby razem z $\left ( 1 , 0 \right )$ było bazą wystarczy że $b \not = 0$, a żeby endomofizm był samosprzężony wystarczy że 
+                  \[
+                      \begin{bmatrix}
+                         1  & a \\
+                         0  & b \\
+                      \end{bmatrix}
+                      \cdot 
+                      \begin{bmatrix}
+                          1 & 3 \\
+                          2 & 6 \\
+                      \end{bmatrix}
+                      \cdot 
+                      \begin{bmatrix}
+                          1 & -\frac{a}{b} \\
+                          0 & \frac{1}{b} \\
+                      \end{bmatrix}
+                      =
+                      \frac{1}{b}
+                      \begin{bmatrix}
+                          \cdots  & 3 + 5a - 2a^2 \\
+                          2 b^2 & \cdots  \\
+                      \end{bmatrix}
+                  \]
+                  było symetryczne, czyli $2b^2 = 3 + 5a - 2a^2$. Jest to równanie okręgu,
+                  \[
+                      \left ( a - \frac{5}{4} \right )^2 + b^2 = \left ( \frac{7}{4} \right )^2
+                  \]
+                  i dowolny punkt (poza $a = 3 , b = 0 $, i $a = - \frac{1}{2}, b = 0 $), spełnia warunki.
+            \end{walk}
+            \newpage
+      \section{Zadanie}
+          \begin{zadanie}
+              Forma dwuliniowa $h : \mathbb{R}^4 \times \mathbb{R}^4 \to \mathbb{R}$ dana jest warunkiem
+\[
+G(h, st) = \begin{pmatrix}
+0 & -1 & 0 & 1 \\
+-1 & -1 & 0 & 1 \\
+0 & 0 & 0 & -1 \\
+1 & 1 & -1 & -1
+\end{pmatrix},
+\]
+gdzie $st = \{\varepsilon_1, \varepsilon_2, \varepsilon_3, \varepsilon_4\}$ jest bazą standardową przestrzeni $\mathbb{R}^4$.
+
+\begin{itemize}
+    \item[(a)] Znaleźć bazę prostopadłą przestrzeni dwuliniowej $(\mathbb{R}^4, h)$ oraz znaleźć sygnaturę macierzy $G(h, st)$.
+    \item[(b)] Czy w przestrzeni $W = \text{lin}(\varepsilon_2, \varepsilon_4) \subseteq \mathbb{R}^4$ jest niezerowy wektor izotropowy formy $h$? Czy istnieje dwuwymiarowa podprzestrzeń $Z \subseteq \mathbb{R}^4$ złożona z wektorów izotropowych formy $h$? Odpowiedzi uzasadnić.
+\end{itemize}
+          \end{zadanie}
+
+          \begin{walk}
+              \item Znajdowanie bazy prostopadłej jest procesem algorytmicznym,
+                \begin{itemize}
+                    \item Wybieramy wektor prostopadły do już wybranych
+                    \item Sprawdzamy czy przypadkiem nie jest izotropowy 
+                    \item Jesli nie, to dodajemy ten wektor do bazy
+                    \item Powtarzamy proces
+                \end{itemize}
+                
+                Zatem zaczynamy:
+                Niech $v_1 = (0,0,0,1)$, sprawdzamy czy nie jest izotropowy (nie jest), i sprawdzamy warunek na prostopadłosć z $v_1$: $x_{1} + x_2 - x_3 - x_4 = 0$, wybieramy zatem np. $v_2 = (1, -1, 0, 0)$ (nie jest izotropowy), mamy równanie $x_1 = 0$, i powtarzając do końca mamy bazę $\mathcal{A} = \left \{ \left ( 0,0,0,1 \right ), \left ( 1,-1,0,0 \right ), \left ( 0,0,1,-1 \right ), \left ( 0,1,1,0 \right ) \right \} $, i wtedy nasza forma to 
+                \[
+                    G(h, \mathcal{A} ) = 
+                    \begin{pmatrix}
+                      -1 & 0 & 0 & 0 \\
+                      0  & 1 & 0 & 0 \\
+                      0 &  0 & 1 & 0 \\
+                      0 & 0 & 0 & -1
+                    \end{pmatrix}
+                \]
+                więc sygnatura $A$ to 
+                \[
+                    s(A) = 0
+                \]
+            \item Dla $W$ mamy formę:
+              \[
+                G(h\big|_{W}, W) = 
+                \begin{bmatrix}
+                    -1 & 1 \\
+                    1 & -1 \\
+                \end{bmatrix}
+              \]
+              więc dla wektora $v = (a,b)$, aby był izotropowy wystarczy
+              \[
+                  \begin{bmatrix}
+                      a & b \\
+                  \end{bmatrix}
+                  \cdot 
+                  \begin{bmatrix}
+                      -1 & 1 \\
+                      1 & -1 \\
+                  \end{bmatrix}
+                  \cdot 
+                  \begin{bmatrix}
+                      a \\
+                      b \\
+                  \end{bmatrix}
+                  = 
+                  -a^2 + 2ab -b^2 = 0
+              \]
+              więc $a = b$, czyli $v := (1,1)$ jest izotropowy. 
+
+              Wystarczy więc znaleźć wektor $w \bot v$, który jednoczesnie jest izotropowy.
+              Aby spełnić pierwszy warunek wystarczy że $x_3 = 0$, a patrząc na przekątną macierzy $G(h,st)$, 
+              narzuca się kandydat $w = \epsilon_1$, który spełnia warunki. 
+              Zatem $Z = \text{lin} \left ( \left ( 1,0,0,0 \right ), (0,1,0,1) \right )$, 
+              w której wszystkie wektory są izotropowe, macierz formy $h$ w niej jest zerowa.
+          \end{walk}
+          
+\end{document}

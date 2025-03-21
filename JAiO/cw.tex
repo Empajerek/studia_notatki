@@ -1,0 +1,99 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{JAiO lato 2024}
+  \subtitle{notatki z ćwiczeń}
+  \maketitle
+  \section{27 luty}
+  \begin{zadanie}
+      Znajdź liczbę wszystkich języków na alfabetem $\{ a, b \}$ o następujących własnosciach:
+      \begin{enumerate}
+          \item Wszystkie słowa są długosci c o najwyżej $n$
+          \item Wszystkie słowasą długosci $n \geq 2 $ i każde słowo zawiera in fiks $aa$
+          \item Słowa nie zawierają symbolu $b$.
+          \item Język jest skończony.
+      \end{enumerate}
+  \end{zadanie}
+  
+  \begin{enumerate}
+    \item Wystaryczy zauważyć że liczba słów to $\sum_{i = 0}^{n} 2^i = 2^{n+1} -1$
+      Więc języków jest $\lvert \alpha \rvert = 2^{2^{n+1} - 1}$
+    \item Fibonacci
+    \item Słów jest przeliczalnie nieskończenie, więc języków jest $2^{\aleph_0}$.
+    \item $\aleph_0$ bo możemy języki możemy ustawić względem ich najdłuższego słowa
+  \end{enumerate}
+
+  \begin{zadanie}
+    Udowodnij że poniższe definicje pewnego języka $L$ nad alfabetem $\{ ( , ) \}$ są równoważne:
+    \begin{enumerate}
+        \item Słowo puste należy do $L$ oraz jesli $w , v \in L $ to również $wv \in L$ i $(w) \in L$.
+        \item $L$ jest zbiorem słów $w$ o następującej własnosci: liczby wystąpień $($ oraz $) $w słowie $w$ sątakie same oraz w dowolnym prefiksie $w$ liczba wystąpień $($ jest większa lub równa liczbie wystąpień $)$.
+      
+    \end{enumerate}
+  \end{zadanie}
+      \begin{enumerate}
+          \item $L \subset P$
+            \begin{gather*}
+                \eps \in P \\
+                w \in P \\
+                (w) \in P \\
+                v, w \in L \\
+                vw \in B
+            \end{gather*}
+          \item $P \subset L$
+            Indukcja po długosci słowa, i szukamy pierwszego miejsca gdy liczba nawiasów otwierających jest taka sama jak zamykających, i dwa przypadki które idą z założenia.
+      \end{enumerate}
+  \begin{zadanie}
+    Słowo $w \in \sum^*$ nazwiemy \textit{pierwotnym} jesli nie istnieje słowo 
+  \end{zadanie}
+
+  \section{5 marca}
+      
+  \begin{zadanie}
+      Reprezentujemy liczby binarne jako słowa nad alfabetem $\left \{ 0, 1 \right \}$, wyraź z pomocą wyrażenia regularnego słowa podzielne przez 3 
+  \end{zadanie}
+  
+  Rozwiązaniem jest $1\left ( 01^*0 \right ) 1 \left ( 1 \left ( 01^*0 \right )^* 1 + 0 \right )^*$, albo prosciej (jednak niepoprawnie) jako $(1(01^*0)^*1+ 0)^*$, gdzie wystarczy pokazać że:
+  \begin{walk}
+      \item wyrażenie generuje liczby podzielne przez 3
+      \item wszystkie liczby podzielne przez 3 mogą być wygenerowane przez wyrażenie
+  \end{walk}
+  
+  \begin{zadanie}
+      Roztrzygnij czy języków regularnych jest przeliczalnie czy nieprzeliczalnie wiele.
+      \begin{uwaga}
+          Nie mamy ustalonego alfabetu, ale przyjmujemy że każdy alfabet będzie skończonym podzbiorem pewnego przeliczalnego zbioru.
+      \end{uwaga}
+  \end{zadanie}
+
+  Każdy alfabet jest sk. podzbiorem $\left \{ a_{1}, a_{2}, a_{3}, \cdots  \right \}$
+  Rozważmy następujące skończone zbiory:
+  \begin{enumerate}
+      \item wszystkie wyr. reg. długosci $\leq 1$ , i wykorzystujące litery $\left \{ a_{1} \right \}$
+      \item ------------||-------------- $\leq 2$ , -----------||--------- $\left \{ a_{1}, a_{2} \right \}$
+      \item \dots 
+  \end{enumerate}
+  
+  I zauważmy że każdy krok jest skończony, i każde słowo znajdzie się jakiejs kategorii.
+
+  \begin{przykład}
+      Jaką głębokosć gwiazdkowa ma $\left ( a^* b^* \right )^*$ ?
+  \end{przykład}
+  
+  Zauważmy że: $\left ( a^* b^* \right )^* = (a+b)^*$, więc 1.
+
+  \begin{zadanie}
+      Udowodnij, że dla każdego $k \in \NN$ istnieje język regularny o głębokości gwiazdkowej $k$. Czy można ograniczyć się do alfabetu z dwoma symbolami? A z jedym symbolem? Co się dzieje jeśli dopuścimy do wyrażeń regularnych dopełnienie?
+  \end{zadanie}
+
+  Weźmy alfabet $\left \{ a_{1}, a_{2}, a_{3}, \cdots , a_{k} \right \}$, i rozważmy:
+  \[
+    \left ( a_k \left ( a_{k-1} \left ( \dots a_{1}^* \right )^* \right )^* \right )^*
+  \]
+  i spróbować wykazać że ma on porządaną głębokosć gwiazdkową.
+
+\end{document}

@@ -1,0 +1,45 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza I.2*}
+  \subtitle{Rozwiązanie zadania domowego}
+  \maketitle
+    \section{Zadanie 1}
+        Zauważmy że
+        \[
+          P_n (x) = f^{(n)} (\text{tg} \left ( x \right ) ) = \left ( f^{(n-1)} (\text{tg} \left ( x \right ) ) \right )^{'} = \left ( 1 + \text{tg}^2 \left ( x \right )  \right ) \left ( P_{n-1} (\text{tg} \left ( x \right ) ) \right )^{'}
+        \]
+        Więc indukcyjnie możemy stwierdzić że istnieje taki wielomian $P_n(x)$ o współczynnikach nieujemnych. Wypiszmy parę pierwszych wielomianów:
+        \begin{gather*}
+            P_0 (x) = x \\
+            P_1 (x) = 1 + x^2 \\
+            P_2 (x) = (1 + x^2) 2x = 2x + 2x^3 \\
+            P_3 (x) = (1+x^2)(2 + 6x^2) = 2 + 8x^2 + 6x^4 \\
+            P_4 (x) = (1+x^2)(16x + 24 x^3) = 16x + 40x^3 + 24 x^5 \\
+            P_5 (x) = (1+x^2)(16 + 120 x^2 + 120 x^4) = 16 + \dots 
+        \end{gather*}
+        Więc wypisując wzór Taylora mamy:
+        \begin{gather*}
+            \text{tg} \left ( x \right ) = \text{tg} \left ( 0 \right ) + \frac{P_1 (\text{tg} \left ( 0 \right ) )}{1!} x + \frac{P_2 (\text{tg} \left ( 0 \right ) )}{2!} x^2 + \frac{P_3 (\text{tg} \left ( 0 \right ) )}{3!} x^3 + \frac{P_4 (\text{tg} \left ( 0 \right ) )}{4!} x^4 \\ + \frac{P_5 (\text{tg} \left ( 0 \right ) )}{5!} x^5 + o(x^5) = x + \frac{1}{3} x^3 + \frac{2}{15} x^5 + o(x^5)
+          \end{gather*}
+        
+       \section{Zadanie 2}
+           Ponownie korzystając z wzoru Taylora mamy:
+           \[
+             (1+x)^{\alpha } = 1 + \alpha x - \frac{\alpha (\alpha - 1)}{2} x^2 + R_2 (x)
+           \]
+           Zauważmy że reszte możemy zapisać w postaci Lagrange'a i mamy 
+           \[
+             R_2 (x) = \frac{\left ( (1+x)^{\alpha } \right )'''}{6} x^3 = \frac{(2-\alpha )(1-\alpha )\alpha }{6 \cdot (1+x)^{3 -\alpha }}
+           \]
+           Zatem należy wykazać że
+           \begin{gather*}
+                 \frac{(2-\alpha )(1-\alpha )\alpha }{6 \cdot (1+x)^{3 -\alpha }} - \frac{3}{4} \frac{\alpha (\alpha - 1)}{2} x^2 > 0 \\
+               2 \left ( \alpha - 2 \right ) - 9 x^2 (1+x)^{3-\alpha } < 0
+             \end{gather*}
+             I tutaj mamy sume wyrazów ujemnych, zatem teza zachodzi.
+\end{document}

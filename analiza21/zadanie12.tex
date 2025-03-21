@@ -1,0 +1,21 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza II.1*}
+  \subtitle{Rozwiązanie zadania domowego nr. 12}
+  \maketitle
+    \begin{zadanie*}
+        Dane jest 10 zbiorów. Ile nowych zbiorów można z nich skonstrować za pomocą (wielokrotnego) stosowania operacji: przecięcie, sumy, różnicy, i sym. różnicy?
+    \end{zadanie*}
+    
+    Oczywistym jest że każdy element albo należy do zbioru albo nie, zatem dla każdego elementu w $A_1 \cup \dots  \cup A_{10}$ istnieje ciąg liter $T, N$ mówiący czy zbiór należy do konkretnego zbioru np: $TTTTTTTTTT$ odpowiada elementom zawierającym się w przecięciu wszystkich zbiorów, a $TNNNNNNNNN$ odpowiada elementom zawierającym się tylko w $A_1$ (zanaczmy że ciąg $NNNNNNNNNN$ odpowiada zbiorowi pustemu). 
+
+
+    Zauważmy że relacja $\sim$ definiowana przez ten sam ciąg liter jest relacją równoważnosci względem operacji przecięcia, sumy itd. (co można pokazać dla każdej operacji z osobna), zatem możemy klasę równoważności traktować jako jeden element. 
+    
+    Czyli możemy sytułacje uprościć do przypdku gdzie elementów jest $2^{10} - 1$ (ile możliwych ciągów liter z zbiorem pustym), oraz postawić że wynik to $2^{2^{10}-1}$ gdyż łatwo skonstuować dla dowolnego elementu singletony (wystarczy odpowiednia suma i przecięcie), a z nich skonstruować dowolny zbiór elementów.
+\end{document}

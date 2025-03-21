@@ -1,0 +1,155 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza I.2* lato 2024}
+  \subtitle{Rozwiązanie zadań z serii VI}
+  \maketitle
+    \section{Zadanie}
+        \begin{zadanie}
+            Funkcja $f: [a,b] \to \mathbb{R} $ jest całkowalna w sensie Riemanna. Udowodnij, że istnieje ciąg $(f_n)$ funkcji schodkowych taki, że dla dowolnej funkcji $\phi$ całkowalnej w sensie Riemanna zachodzi
+            \[
+              \lim_{n \to \infty } \int_a^b \phi (x) f_n (x) dx = \int_a^b \phi(x) f(x) dx 
+            \]
+            
+        \end{zadanie}
+
+        Rozwiązanie rozpocznijmy od uzasadnienia że $f \cdot  \phi$ jest R-całkowalna, który wynika z faktu że jesli $g$ jest R-całkowalne to $g^2$ też jest (funkcja $g$ więc $g^2$ jest ograniczone przez np. $M$ a $g^2 (x) - g^2(y) = (g(x)+g(y))(g(x) - g(y)) < 2M (g(x) - g(y))$) i że $f \cdot \phi = \frac{1}{2} \left ( (f+\phi)^2 - f^2 - \phi^2 \right )$.
+
+        Teraz możemy zapisać że
+        \begin{gather*}
+          \lim_{n \to \infty } \int_a^b f_n (x) \phi (x) dx = \lim_{n \to \infty } \sum_{k=0}^{n} \int_{a + \frac{b-a}{n} (k-1)}^{a+ \frac{b-a}{n} k } f_n(x) \phi(x) dx = \\
+          \lim_{n \to \infty } \sum_{k=0}^{n} \phi (\xi_k) \int_{a + \frac{b-a}{n} (k-1)}^{a+ \frac{b-a}{n} k } f_n(x) dx =
+          \lim_{n \to \infty } \sum_{k=0}^{n} \phi ( \xi_k ) f_n ( \xi_k ) \frac{b-a}{n} = \\
+          \int_a^b f(x) \phi (x) dx
+        \end{gather*}
+
+        gdzie po drodze skorzytalismy z całkowego tw. o wartosci sredniej, oraz ustalilismy takie $f_n$, żeby było stałe na przedziałach, $[ a + \frac{a-b}{n}(k-1) , a + \frac{b-a}{n} k)$ i równe wartosci $f$, na początku przedziału.
+
+      \newpage
+        
+
+      \section{Zadanie}
+      
+          \begin{zadanie}
+              Oblicz granice
+              \begin{walk}
+                  \item $\lim_{n \to \infty } \sum_{k=n}^{2n} \frac{\text{tg} \left ( \frac{1}{n} \right ) }{2 + \sqrt{\frac{k}{n}} }  $
+                  \item $\lim_{n \to \infty } \frac{\prod_{k=1}^{n} \sqrt[k+n]{k}   }{e^{\sum_{k=n}^{2n} \frac{n}{k} }} $
+              \end{walk}
+            
+          \end{zadanie}
+
+          \begin{walk}
+          \item 
+            \begin{gather*}
+              \lim_{n \to \infty } \sum_{k = n}^{2n} \frac{\text{tg} \left ( \frac{1}{n} \right ) }{2 + \sqrt{\frac{k}{n}}} = \lim_{n \to \infty } \frac{\text{tg} \left ( \frac{1}{n} \right ) }{\frac{1}{n}} \cdot \frac{1}{n} \sum_{k=n}^{2n} \frac{1}{2 + \sqrt{\frac{k}{n}} } = \lim_{n \to \infty } \frac{1}{n} \sum_{k=n}^{2n} \frac{1}{2 + \sqrt{\frac{k}{n}} } = \\ \int_1^2 \frac{1}{2 + \sqrt{x} } dx = 2 \left ( \sqrt{2} - 1 + 2 \text{ln} \left ( 3 \right ) - 2 \text{ln} \left ( 2 + \sqrt{2}  \right )   \right )
+            \end{gather*}
+          \item Z logarytmujmy naszą granicę i mamy
+            \begin{gather*}
+              \text{ln} \left ( \lim_{n \to \infty } \frac{\prod_{k=1}^{n} \sqrt[k+n]{k}   }{e^{\sum_{k=n}^{2n} \frac{n}{k} }}    \right ) = \lim_{n \to \infty } \sum_{k=1}^{n} \frac{\text{ln} \left ( k \right )  - n}{k + n} - 1 \leq \lim_{n \to \infty }   \sum_{k=1}^{n} \frac{\frac{k}{n} - 1}{\frac{k}{n} + 1} \leq \\ \lim_{n \to \infty }   \frac{1}{2} \sum_{k=1}^{n} \left ( \frac{k}{n} - 1 \right ) = - \lim_{n \to \infty }   \frac{n+1}{4} = - \infty 
+            \end{gather*}
+            więc logarytm zbiega to minus nieskończonosci, zatem cała suma zbiega do $e^{-\infty } = 0$. 
+          \end{walk}
+          
+        
+      \section{Zadanie}
+          \begin{zadanie}
+              Zadanie $f,g : \mathbb{R} \to \mathbb{R} $ są ciągłe, a ponadto $g$ jest funkcją okresową o okresie 1. Udowodnij równosć
+              \[
+                  \lim_{n \to \infty } \int_0^1 f(x) g(nx)dx = \int_0^1 f(x) dx \cdot \int_0^1 g(x) dx 
+              \]
+              
+          \end{zadanie}
+
+          \begin{gather*}
+            \lim_{n \to \infty } \int_0^1 f(x) g(nx) dx = 
+            \left [ \begin{array}{rcl}
+                      nx &=& u \\
+                      dx &=& \frac{1}{n} du \\
+                      x &=& \frac{u}{n} \\
+            \end{array} \right ] = \\
+            \lim_{n \to \infty }  \frac{1}{n} \int_0^{nx} f( \frac{u}{n} ) g(u) du = \\
+            \lim_{n \to \infty }  \frac{1}{n} \sum_{k=0}^{n-1} \int_k^{k+1} f(\frac{u}{n}) g(u) du = \\
+            \lim_{n \to \infty }  \frac{1}{n} \sum_{k=0}^{n-1} \int_0^1 f(\frac{u}{n} + \frac{k}{n}) g(u) du = \\
+            \lim_{n \to \infty } \int_0^1 \frac{1}{n} \sum_{k=0}^{n-1} f( \frac{u}{n} + \frac{k}{n} ) g(u) du 
+          \end{gather*}
+
+          Z zajęć wiemy że dla każdego $x \in \mathbb{R} $:
+          \[
+              \frac{1}{n} \sum_{k=0}^{n-1} f( x + \frac{k}{n} ) \rightrightarrows \int_0^1 f(x + w) dw
+          \]
+          oraz zbieżnosć wynikającą z ograniczonosci $f$ :
+          \[
+            \lim_{n \to \infty }  \int_0^1 f(\frac{u}{n} + w) dw = \lim_{n \to \infty } \int_{\frac{u}{n}}^{1+\frac{u}{n}} f(w) dw \to \int_0^1 f(w) dw 
+          \]
+          zatem z faktu że $g$ jest równierz ograniczona mamy że
+          \[
+              \frac{1}{n} \sum_{k=0}^{n-1} f( \frac{u}{n} + \frac{k}{n} ) g(u) \rightrightarrows \int_0^1 f(x) dx \cdot g(u)  
+          \]
+          z z przejscia granicznego mamy tezę
+          \[
+              \lim_{n \to \infty } \int_0^1 \frac{1}{n} \sum_{k=1}^{n-1} f( \frac{u}{n} + \frac{k}{n} ) g(u) du = \int_0^1 f(x) dx \cdot \int_0^1 g(x) dx   
+          \]
+
+      \section{Zadanie}
+      
+          \begin{zadanie}
+              Udowodnij, że
+              \[
+                  9 < \int_0^3 \sqrt[4]{x^4 + 1} dx + \int_1^3 \sqrt[4]{x^4 - 1} dx < 9.0001  
+              \]
+              
+          \end{zadanie}
+          
+          Z całki funkcji odwrotnej wiemy że
+          \[
+            \int_1^3 \sqrt[4]{x^4 - 1} = 3 \sqrt[4]{3^4-1} - \int_0^{\sqrt[4]{3^4 -1} } \sqrt[4]{x^4 + 1} dx  
+          \]
+          więc możemy rozpisać
+          \[
+              \int_0^3 \sqrt[4]{x^4 + 1} dx + \int_1^3 \sqrt[4]{x^4 - 1} dx = 3 \sqrt[4]{3^4 - 1} + \int_{\sqrt[4]{3^4 -1} }^3 \sqrt[4]{x^4 + 1} dx 
+          \]
+          z wypukłosci funkcji $\sqrt[4]{x^4 + 1} $ możemy zapisać zapisać że jest mniejsza od funkcji linowej przecinającej w dwóch miejscach
+          \begin{gather*}
+              3 \sqrt[4]{3^4 - 1} + \int_{\sqrt[4]{3^4 -1} }^3 \sqrt[4]{x^4 + 1} dx < 3 \sqrt[4]{3^4 - 1} + \frac{1}{2} \left ( 3 + \sqrt[4]{3^4 + 1}  \right ) \cdot \left ( 3 - \sqrt[4]{3^4 - 1}  \right ) = \\ 9 + \frac{1}{2} ( 3 - \sqrt[4]{3^4 - 1} ) ( \sqrt[4]{3^4 + 1} - 3 )    
+            \end{gather*}
+          i po dodatowych kalkulacjach możemy zauważyć że dodatowy czynnik jest równy $\approx 0.0000428688808$ czyli jest mniejszy niż $0.0001$.
+          
+          Z drugiej strony funkcja jest większa od funkcji stałej przecinającej na początku przedziału
+          \[
+              3 \sqrt[4]{3^4 - 1} + \int_{\sqrt[4]{3^4 -1} }^3 \sqrt[4]{x^4 + 1} dx > 3 \sqrt[4]{3^4 - 1} + 3 \left ( 3 - \sqrt[4]{3^4 - 1}  \right ) = 9 
+            \]
+        \newpage 
+
+        \section{Zadanie}
+            \begin{zadanie}
+                Udowodnij że 
+                \[
+                    \int_0^1 \frac{x}{\text{ln} \left ( \frac{1}{1-x} \right ) } dx = \text{ln} \left ( 2 \right ) 
+                \]
+                
+            \end{zadanie}
+            
+            Po podstawieniu $1 - x = u$ mamy że nasza całka to
+            \[
+                \int_0^1 \frac{x - 1}{\text{ln} \left ( x \right ) } dx
+            \]
+            skorzystamy z Twierdzenia Leibniza o różniczkowaniu pod znakiem całki, i okreslimy
+            \[
+            I(\alpha ) = \int_0^1 \frac{x^{\alpha} - 1}{\text{ln} \left ( x \right ) } dx
+            \]
+            widzimy że warunki są spełnione oraz 
+            \[
+              I'(\alpha ) = \int_0^1 \frac{\partial}{\partial \alpha } \frac{x^{\alpha } - 1}{\text{ln} \left ( x \right ) } = \int_0^1 x^{\alpha } dx = \frac{1}{\alpha + 1}
+            \]
+            a także znamy wartosć w punkcie $\alpha = 0 $, gdyż jest to zero.
+            Zatem możemy podsumować że
+            \[
+                \int_0^1 \frac{x - 1}{\text{ln} \left ( x \right ) } dx = I(1) = I(1) - I(0) = \int_0^1 \frac{1}{\alpha + 1} d \alpha = \text{ln} \left ( 2 \right ) 
+            \]
+            
+\end{document}

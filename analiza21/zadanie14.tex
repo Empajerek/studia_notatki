@@ -1,0 +1,42 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza Matematyczna II.1*}
+  \subtitle{Rozwiązanie zadania domowego nr.14}
+  \maketitle
+    \begin{zadanie*}
+        Pokazać nierówność
+        \[
+          \text{exp} \left ( \frac{1}{b - a} \int_{[a,b]} f dl_1  \right ) \leq \frac{1}{b - a} \int_{[a,b]} \text{exp} (f) dl_1
+        \]
+
+        gdzie $f$ jest mierzalna i całkowalna na $[a,b]$.
+        
+    \end{zadanie*}
+
+    Niech:
+    \[
+      x_0 = \frac{1}{b - a} \int_{[a,b]} \text{exp} (f) dl_1
+    \]
+
+    z pierwszego semestru analizy znamy fakt że styczna do wykresu funkcji wypukłej jest "pod" nim, czyli:
+
+    \[
+      \exists_{c, d} \; e^x > cx + d \; \wedge \; e^x_0 = cx_0 + d
+    \]
+
+    czyli mamy nierówności:
+
+    \begin{gather*}
+      \int_{[a, b]} \text{exp} (f) dl_1 \geq \int_{[a,b]} cx + d dl_1 \\
+      = c \int_{[a,b]} f dl_1 + d (b - a) = (b - a)(cx_0 + d) = (b - a) \; e^x_0 \\
+      = (b - a) \text{exp} ( \frac{1}{b - a} \int_{[a,b]} f dl_1 )
+    \end{gather*}
+
+    \fbox{\rule{1.3in}{0pt} \tiny miejsce na tensora \rule[-0.5ex]{0pt}{2in}}
+    
+\end{document}

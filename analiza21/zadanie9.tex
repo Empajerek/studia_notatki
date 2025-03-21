@@ -1,0 +1,30 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza 2.1*}
+  \subtitle{Rozwiązanie zadania domowego nr.8}
+  \maketitle
+    \begin{zadanie*}
+      \[
+        SO(3) = \{ A \in M_{3 \times 3}(\mathbb{R}) : A A^\top = I_d, \det A = 1 \}
+      \]
+
+      Pokaż, że \( SO(3) \) jest podrozmaitością gładką wymiaru \( 3 \) w \( \mathbb{R}^9 \).
+    \end{zadanie*}
+
+    Niech $F(A) = A A^T - I \in S_{3 \times 3}$. $F$ spełnia warunek twierdznia o funkcji odwrotnej czyli:
+    \begin{gather*}
+        F (A + H) - F(A) = (A + H) (A + H)^T - I - (AA^T - I) \\ = AA^T - AA^T + HA^T + AH^T \\ = HA^T + AH^T + HH^T \\ = F'(A) H + HH^T
+    \end{gather*}
+    Z warunku twierdzenia mamy że
+    \[
+      \forall_{S \in S_{3 \times 3}} \exists_{H \in M_{3 \times 3}} HA^T + AH^T = S
+    \]
+    czyli $H = \half S A$. A zatem rząd macierzy przekształcenia $F$ to $6$, (warto zauważyć że warunek $\opname{det} A = 1$ wybiera tylko spójną składową wśród macierzy ortogonalnych), czyli z twierdzenia o rzędzie rozmaitość gładka $SO(3)$ jest wymiaru $3$. 
+
+    
+\end{document}

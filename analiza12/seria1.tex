@@ -1,0 +1,123 @@
+\documentclass[12pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{Analiza I.2*}
+  \subtitle{Rozwiązanie zadań z serii I}
+  \maketitle
+    \begin{zadanie}
+        Znajdź jakąkolwiek prostą, która w jednym punkcie jest prostopadła, a w drugim styczna do
+wykresu funkcji $y = 2x^3 - 2x^2 - x + 3$. Ile jest takich prostych?
+    \end{zadanie}
+    
+    Wiemy że jest to wykres funkcji $y = x^3$ zatem spróbujmy przesunąć punkt symetrii naszej krzywej do $(0, 0)$, zatem wyznaczmy wektor przesunięcia z pomocą wektora.
+    \[
+        0 = y' = 6 x^2 - 4 x - 1 \Rightarrow x = \frac{4 \pm \sqrt{16 + 24} }{12} = \frac{1}{3} \pm \frac{\sqrt{10} }{6}
+    \]
+    Więc przesuwamy o wektor $(-\frac{1}{3}, -\frac{68}{27}) $, i nasza krzywa redukuje się do postaci $y = 2x^3 - \frac{5}{3} x$
+    Następnie możemy zauważyć że funkcja jest wypukła na przedziale $\left ( 0, \infty  \right )$, i wklęsła na przedziale $\left ( - \infty , 0 \right )$, gdyż:
+    \[
+        f''(x) = 12x =
+        \begin{cases}
+          > 0 \qquad & x > 0 \\
+          < 0 \qquad & x < 0
+        \end{cases}
+    \]
+    zatem jeżeli funkcja jest styczna na jednym z tych przedziałów, i przecina prostopadle wykres, to następuje to na drugim z przedziałów.
+    Rozpatrzmy więc przypadki gdy prosta jest styczna na przedziale $\left ( - \infty, 0 \right )$, i oznaczmy przez $x_{0}$, punkt stycznosci, i przez $x_{1}$ punkt prostopadłego przecięcia, zatem mamy warunki:
+    \begin{gather*}
+        f'(x_{1}) \cdot f'(x_0) = -1 \\
+        f'(x_{0}) (x - x_{0}) + f(x_0) = \frac{-1}{f'(x_{1})} \left ( x -  x_{1} \right ) + f \left ( x_1 \right ) \\
+    \end{gather*}
+    Gdzie drugie wyrażenie po skróceniu daje nam:
+    \begin{gather*}
+        \left ( 6 x^2_0 - \frac{5}{3} \right ) \cdot  \left ( x_{1} - x_{0} \right ) = 2 \left ( x_{1} - x_{0} \right ) \cdot  \left ( x^2_{1} + x_{1} x_{0} + x^2_0 \right ) - \frac{5}{3} \left ( x_{1} - x_{0} \right ) \\
+        4x_0^2 = 2x_{1} x_{0} + 2x^2_{1} \\
+        a^2 + a - 2 = 0 \qquad a = \frac{x_{1}}{x_{0}} \\
+        a = 1 \vee a = -2
+    \end{gather*}
+    
+    Przyjmując że $x_{1} \not = x_{0}$, mamy więc że $x_{1} = - 2 x_{0}$, wystarczy rozwiązać równanie:
+    \begin{gather*}
+        \left ( 6 x^2_0 - \frac{5}{3} \right ) \cdot \left ( 24 x^2_0 - \frac{5}{3} \right ) = -1 \\
+        144 x^4_0 - 50 x^2_0 + \frac{34}{9} = 0
+    \end{gather*}
+
+    Które ma cztery rozwiązania i niech przykładowym jest $x_0 = \frac{1}{3}$, $x_{1} = - \frac{2}{3}$, więc znajdujemy rozwiązanie $y = - x - \frac{4}{27}$, i przesuwając wektor mamy przykładową prostą $y = -x + \frac{73}{27}$
+    \begin{zadanie}
+        Wyznacz granice
+        \begin{walk}
+            \item $\lim_{n \to \infty } \left ( \frac{f(a + \frac{1}{n})}{f(a)} \right )^n $, gdzie $f: \mathbb{R}  \to \mathbb{R} $ jest funkcją różniczkowalną w punkcie $a$.
+            \item $\lim_{x \to 0} \frac{1}{x} \left ( f(x) + f(\frac{x}{2}) + \cdots + f(\frac{x}{k})\right ) $, gdzie $f$ jest różniczkowalna, $f(0) = 0$, i $k \in \mathbb{N}$ jest ustalone. 
+        \end{walk}
+    \end{zadanie}
+    
+    \begin{walk}
+        \item Zauważmy że:
+          \[
+            \lim_{n \to \infty } \left ( 1+ \frac{f(a + \frac{1}{n}) - f(a)}{f(a)} \right )^n = \lim_{n \to \infty } \left ( 1 + a_n \right )^{b_n} = e^{a_n b_n}  
+          \]
+          Ostatni fakt pojawił się na ćwiczeniach w pierwszym semestrze.
+          Wyznaczmy:
+          \[
+              \lim_{n \to \infty } n \frac{f \left ( a + \frac{1}{n} \right ) - f(a)}{f(a)} = \frac{1}{f(a)} \lim_{m \to 0 } \frac{f(a + m) - f(a)}{m} = \frac{f'(a)}{f(a)}
+          \]
+          Więc wynikiem jest $e^{\frac{f'(a)}{f(a)}}$
+        \item Odnotujmy:
+          \[
+             \lim_{x \to 0}  \frac{f(\frac{x}{n})}{x} = \frac{1}{n} \lim_{x \to 0} \frac{f(\frac{x}{n}) - f(0)}{\frac{x}{n}} = \frac{1}{n} \lim_{y \to 0 } \frac{f(y) - f(0)}{y} = \frac{f'(0)}{n}  
+          \]
+          więc korzystając w własnosci arytmetycznych granic:
+          \[
+             \lim_{x \to 0} \frac{1}{x} \left ( f \left ( x \right ) + f \left ( \frac{x}{2} \right ) + \cdots  + f \left ( \frac{x}{k} \right )\right ) = f'(0) + \frac{f'(0)}{2} + \cdot + \frac{f'(0)}{k} = f'(0) H_k 
+          \]
+    \end{walk}
+
+    \begin{zadanie}
+        Uzasadnij, że równanie
+        \[
+            \left ( x - \sqrt{2}  \right ) \text{ln} \left ( x - \sqrt{2}  \right ) + \left ( x + \sqrt{2}  \right ) \text{ln} \left ( x + \sqrt{2}  \right ) = 2x
+        \]
+        ma dokładnie 2 rozwiązania.
+    \end{zadanie}
+    
+    zauważmy że równoważne jest równanie
+    \[
+        \left ( x -\sqrt{2}  \right ) \left ( \text{ln} \left ( x - \sqrt{2}  \right ) - 1 \right ) + \left ( x+ \sqrt{2}  \right ) \left ( \text{ln} \left ( x + \sqrt{2}  \right ) - 1 \right ) = 0
+    \]
+    Następnie możemy wziąsć pochodną wyrażenia po lewej:
+    \[
+        \left ( \left ( x -\sqrt{2}  \right ) \left ( \text{ln} \left ( x - \sqrt{2}  \right ) - 1 \right ) + \left ( x+ \sqrt{2}  \right ) \left ( \text{ln} \left ( x + \sqrt{2}  \right ) - 1 \right ) \right )^{'} = \text{ln} \left ( x^2 - 2 \right ) 
+    \]
+    Łatwo zatem zauważyć że nasza funkcja ma dwa miejsca zerowe, bo pochodna zeruje się gdy funkcja jest ujemna i na początku przedziału jest dodatnia.
+
+    \begin{zadanie}
+        Funkcja $f: \mathbb{R} \to \mathbb{R} $ jest różniczkowalna, a ponadto dla pewnych $a < b$ zachodzi $f'(a) = f'(b)$. Udowodnij, że istnieje $x \in (a, b)$ takie, że
+        \[
+             f(x) - f(a) = f'(x)(x - a)
+        \]
+    \end{zadanie}
+
+    \begin{zadanie}
+        Funkcja ciągła $f: [a, b) \to \mathbb{R} $ jest różniczkowalna na przedziale otwartym $(a, b)$ i istnieje granica $A:= \lim_{x \to a^+} f'(x)$. Udowodnij, że $f'_+(a) = A$.
+    \end{zadanie}
+    
+    Ustalmy $\varepsilon > 0$.
+    Korzystając z definicji A mamy, że istnieje $\delta > 0$, że dla każdego $0 < h < \delta$,
+    \[
+        \abs{f'(a+h) - A} < \varepsilon 
+    \]
+
+    Przeliczmy teraz:
+    \[
+        f'_+(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}   
+    \]
+    Dla naszego $\varepsilon$, ustalamy to samo $delta$, i korzystając z twierdzenia Lagrange'a mamy że:
+    \[
+        \abs{\frac{f(a + h) - f(a)}{a + h - a} - A} = \abs{f'( \xi) - A} < \varepsilon \qquad \xi \in (a,a+h)  
+    \]
+    korzystając z poprzedniego faktu, zatem $f'_+(a) = A$.
+\end{document}

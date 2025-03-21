@@ -1,0 +1,43 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+  \title{JAiO lato 2024}
+  \subtitle{Rozwiązania zadań z serii II}
+  \maketitle
+   \section{Zadanie}
+       \begin{zadanie}
+           Dla języka $L \in \Sigma^*$ definiujemy:
+           \[
+             \sqrt{L} := \{ w \in \Sigma \; ww \in L \}
+           \]
+           \begin{walk}
+               \item Czy język $L$ jest bezkontekstowy, to język $\sqrt{L} $ jest bezkontekstowy?
+                \item Czy jesli język $\sqrt{L} $ jest bezkontekstowy, to język $L$ jest bezkontekstowy?
+                \item Czy odpowiedzi zmieniają się, gdy ograniczymy się do alfabetów dwu- lub jednoliterowych?
+           \end{walk}
+           
+       \end{zadanie}
+       
+       \begin{walk}
+           \item Nie, weźmy za przykład $L = a^n b^n a^* b^m a^m$ (który jest bezkontekstowy jako konkatenacja języków $a^n b^n$, $a^*$, $b^m a^m$ które są oczywiscie bezkontekstowe), dla którego język $\sqrt{L} $ to 
+             \[
+                 \sqrt{L} = a^n b^n a^n 
+             \]
+             który już bezkontekstowy nie jest (z lematu o pompowaniu dla języków bezkontekstowych).
+           \item Nie, weźmy za przykład $L = \{ a^p \; | \; p \in \mathbb{P} \}$ (który oczywiscie nie jest bezkontekstowy), ale za to
+             \[
+               \sqrt{L} = \{ \varepsilon , a \} 
+             \]
+             jest bezkontekstowy, co zaprzecza.
+
+          \item Widzimy że dla ograniczając się do automatów jedno- i dwuliterowych teza w podpunkcie (b) pozostaje taka sama, oraz że dla dwuliterowych w podpunkcie (a) też. Pozostaje zatem pokazać że dla jednoliterowych teza pierwszego się zmieni.
+
+            Zatem, korzystając z tw. Parikh'a mamy i że nasz alfabet jest jednoliterowy mamy że dowolny język bezkontekstowy $L$ jest regularny, ale wtedy język $\sqrt{L} $ też jest regularny (fakt ten pojawił się na ćwiczeniach \url{https://www.mimuw.edu.pl/~lk406698/teaching/JAiO2024/tutorial3.pdf} ), a więc bezkontekstowy, co kończy dowód.
+       \end{walk}
+       
+   
+\end{document}
