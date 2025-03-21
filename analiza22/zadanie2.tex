@@ -202,9 +202,56 @@
         \textit{Uwaga-wniosek:} "$F \left ( \frac{1}{x} \right ) = C \cdot \sgn (k)$" 
     \end{zadanie*}
     
-    
-    
-    
-    
-    
+    \begin{walk}
+        \item Rozpiszmy:
+            \begin{gather*}
+                \lim_{\varepsilon \to 0^+} \int_{\RR \backslash [-\varepsilon, \varepsilon]} 
+                    \frac{\varphi (x)}{x} dl_1 (x) = \\
+                \lim_{\varepsilon \to 0^+} 
+                    \int_{\RR \backslash [-1,1]} \frac{\varphi (x)}{x} dl_1 (x) +
+                    \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{\varphi (x)}{x} dl_1 (x)
+            \end{gather*}
+            Obliczmy pierwszą całkę:
+            \begin{gather*}
+                \int_{\RR \backslash [-1,1]} \frac{\varphi (x)}{x} dl_1 (x) = 
+                \int_{\RR \backslash [-1,1]} x \cdot \varphi (x) \cdot \frac{1}{x^2} dl_1(x) \leq \\
+                \sup_{x \in \RR \backslash [-1, 1]} \left ( \abs{x \cdot \varphi (x)} \right ) \cdot  
+                    \int_{\RR \backslash [-1,1]} \abs{\frac{1}{x^2}} dl_1 (x) \leq
+                M \cdot (0 - (-1) + 1 - 0) = 2M
+            \end{gather*}
+            
+            Przy drugiej całce skorzystamy z obserwacji:
+            \[
+                \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{\varphi (0)}{x} dl_1 (x) =
+                \varphi (0) \cdot \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{1}{x} dl_1 (x) = 0 
+            \]
+            zatem:
+            \begin{gather*}
+                \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{\varphi (x)}{x} dl_1 (x) = \\
+                \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} 
+                    \frac{\varphi (x) - \varphi (0)}{x - 0} dl_1 (x)
+            \end{gather*}
+            oznaczmy przez $g(x) = \frac{\varphi (x) - \varphi (0)}{x - 0}$, i zauważmy że:
+            \[
+                g(x) = \frac{\varphi (x) - \varphi (0)}{x - 0} \to^{x \to 0} \varphi' (0)
+            \]
+            czyli definując $g(0) = \varphi' (0)$ mamy że $g(x) \in C (\RR)$ 
+            (co oczywiście wynika z faktu że $\varphi (x) \in C^{\infty }(\RR)$)
+
+            Teraz zostało powiedzieć że całka z funkcji ciągłej na przedziale zwartym 
+            jest ograniczona, czyli niezależnie od $\varepsilon$ mamy:
+            \begin{gather*}
+                \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{\varphi (x)}{x} dl_1 (x) =
+                \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} g(x) dl_1 (x) \\
+                \leq \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \abs{ g(x)} dl_1 (x) =
+                \int_{[-1,1]} \abs{g(x)} dl_1 (x) = N
+            \end{gather*}
+            więc nasza granica istnieje:
+            \begin{gather*}
+               \lim_{\varepsilon \to 0^+} \int_{\RR \backslash [-\varepsilon, \varepsilon]} 
+                   \frac{\varphi (x)}{x} dl_1 (x) \leq
+                2M + N
+            \end{gather*}
+    \end{walk}
+     
  \end{document}
