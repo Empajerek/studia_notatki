@@ -155,27 +155,29 @@
         \end{gather*}
     \end{zadanie*}
 
-    Zastosujmy twierdzenie o inwersji Fouriera
+    Zastosujmy twierdzenie o inwersji Fouriera:
     \[
-        f(x) = \int_{\RR} A \chi_{[-B, B]} \cdot e^{2 \pi i x k} dk = 
-        A \cdot \int_{[-B, B]} \css{2 \pi i x k} + i \snn{2 \pi i x k} dk =
+        f(x) = \int_{\RR} A \chi_{[-B, B]} \cdot e^{i x k} dk = 
+        A \cdot \int_{[-B, B]} \css{x k} + i \snn{x k} dk =
     \]
     skorzystamy z faktu że $\sin$ jest funkcją nieparzystą a $\cos$ jest parzystą więc:
     \[
-        = 2A \cdot \int_0^B \css{2 \pi x k} dk
+        = 2A \cdot \int_0^B \css{x k} dk
     \]
-    zastosujmy teraz podstawienie $a = 2 \pi x k$:
+    zastosujmy teraz podstawienie $a = x k$:
     \[
-        = \frac{A}{\pi x} \cdot \int_0^{2 \pi x B} \cos a \; da 
-        = \frac{A}{\pi} \cdot \frac{\snn{2 \pi x B}}{x}
+        = \frac{2 A}{x} \cdot \int_0^{x B} \cos a \; da 
+        = 2 A \cdot \frac{\snn{x B}}{x}
     \]
     zatem porównując mamy że współczynniki $A, B$ to odpowiednio:
     \[
         \begin{cases}
-            A = \pi \\
-            B = \frac{1}{2 \pi}
+            A = \frac{1}{2} \\
+            B = 1
         \end{cases}
-    \] 
+    \]
+
+    \newpage
 
     \begin{zadanie*}
         Definujemy:
@@ -223,7 +225,8 @@
             Przy drugiej całce skorzystamy z obserwacji:
             \[
                 \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{\varphi (0)}{x} dl_1 (x) =
-                \varphi (0) \cdot \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \frac{1}{x} dl_1 (x) = 0 
+                \varphi (0) \cdot \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} 
+                    \frac{1}{x} dl_1 (x) = 0 
             \]
             zatem:
             \begin{gather*}
@@ -246,12 +249,67 @@
                 \leq \int_{[-1,1] \backslash [-\varepsilon, \varepsilon]} \abs{ g(x)} dl_1 (x) =
                 \int_{[-1,1]} \abs{g(x)} dl_1 (x) = N
             \end{gather*}
-            więc nasza granica istnieje:
+            więc nasza granica:
             \begin{gather*}
                \lim_{\varepsilon \to 0^+} \int_{\RR \backslash [-\varepsilon, \varepsilon]} 
                    \frac{\varphi (x)}{x} dl_1 (x) \leq
                 2M + N
             \end{gather*}
-    \end{walk}
-     
+            
+        \item Ponownie rozpiszmy:
+            \begin{gather*}
+                \lim_{\varepsilon \to 0^+} \int_{\RR \backslash [-\varepsilon, \varepsilon]} 
+                    \frac{1}{x} \cdot \left ( \mathcal{F} \varphi  \right ) (x) \; dl_1 (x) =
+                \lim_{\varepsilon \to 0^+} \int_{\varepsilon}^{\infty}
+                    \frac{ 
+                        \left ( \mathcal{F} \varphi  \right ) (x) - 
+                        \left ( \mathcal{F} \varphi \right ) (-x) 
+                    }{x} \; dl_1 (x)
+            \end{gather*}
+
+            zauważmy że:
+            \begin{gather*}
+                \left ( \mathcal{F} \varphi  \right ) (x) - \left ( \mathcal{F} \varphi \right ) (-x) =
+                \frac{1}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) e^{-ikx} \, dl_1 (k) - 
+                \frac{1}{\sqrt{2 \pi } } \int_{\RR} \varphi (-k) e^{-ikx} \, dl_1 (k) = 
+                \\
+                \frac{1}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \cos (-kx) \, dl_1 (k) + 
+                \frac{i}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \sin (-kx) \, dl_1 (k) \, \\ - 
+                \frac{1}{\sqrt{2 \pi } } \int_{\RR} \varphi (-k) \cos (kx) \, dl_1 (k) -
+                \frac{i}{\sqrt{2 \pi } } \int_{\RR} \varphi (-k) \sin (kx) \, dl_1 (k) \\ = 
+                \frac{1}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \cos (kx) \, dl_1 (k) + 
+                \frac{i}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \sin (-kx) \, dl_1 (k) \, \\ - 
+                \frac{1}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \cos (kx) \, dl_1 (k) +
+                \frac{i}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \sin (-kx) \, dl_1 (k) \\ = 
+                \frac{2i}{\sqrt{2 \pi } } \int_{\RR} \varphi (k) \sin (-kx) \, dl_1 (k)
+            \end{gather*}
+            skorzystajmy teraz z tw. Fubiniego:
+            \begin{gather*}
+                \lim_{\varepsilon \to 0^+} \int_{\varepsilon}^{\infty}
+                    \frac{ 
+                        \left ( \mathcal{F} \varphi  \right ) (x) - 
+                        \left ( \mathcal{F} \varphi \right ) (-x) 
+                    }{x} \; dl_1 (x) = \\
+                \lim_{\varepsilon \to 0^+} \int_{\varepsilon}^{\infty} \frac{1}{x}
+                    \frac{2i}{\sqrt{2 \pi } } \int_{\RR} \varphi (x) \sin (-kx) \, dl_1 (k) \, dl_1 (x) = \\
+                    -i \sqrt{\frac{2}{\pi}} \cdot \lim_{\varepsilon \to 0} \int_{\RR} \varphi (k) \cdot 
+                    \int_{\varepsilon}^{\infty } \frac{1}{x} \cdot \sin (kx) \, dl_1 (x) dl_1(k)
+            \end{gather*}
+            Obliczmy wewnętrzną całkę korzystając z faktu, że bezproblemowo możemy 
+            zabrać granicę pod całkę (z twierdzenia o Lebesgue'a o zbieżności zmajoryzowanej 
+            bo $\varphi$ należy do $S$):
+            \begin{gather*}
+                \lim_{\varepsilon \to 0} \int_{\varepsilon}^{\infty } \frac{\sin (kx)}{x} dx = 
+                \int_0^{\infty } \frac{\sin (kx)}{x} dx = \sgn (k) \int_0^{\infty } \frac{\sin x}{x} dx = 
+                \frac{\pi }{2} \cdot \sgn (k)
+            \end{gather*}
+            Kończąc zapisujemy zatem że:
+            \begin{gather*}
+                   -i \sqrt{\frac{2}{\pi}} \cdot \lim_{\varepsilon \to 0} \int_{\RR} \varphi (k) \cdot 
+                   \int_{\varepsilon}^{\infty } \frac{1}{x} \cdot \sin (kx) \, dl_1 (x) \; dl_1(k) = \\
+                   -i \sqrt{\frac{2}{\pi}} \cdot \frac{\pi }{2} \cdot 
+                       \int_{\RR} \varphi (k) \cdot \sgn (k) \, dl_1 (k) = 
+                   -i \sqrt{\frac{\pi }{2}} \cdot \int_{\RR} \varphi (k) \cdot \sgn (k) \, dl_1 (k)
+            \end{gather*}
+        \end{walk}
  \end{document}
