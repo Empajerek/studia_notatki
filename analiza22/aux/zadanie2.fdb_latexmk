@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1742662340.77869 "zadanie2.tex" "out/zadanie2.pdf" "zadanie2" 1742662344.77687 0
+["pdflatex"] 1742732977.58861 "zadanie2.tex" "out/zadanie2.pdf" "zadanie2" 1742732981.6061 0
   "/home/Konrad/texmf/tex/latex/local/evan.sty" 1736765635.80029 27927 c49dbc3297b1561d6bd063fe529a4e35 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1741938398 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1741938398 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -270,9 +270,9 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1741938398 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1742563943 336380 83b5a5391cc5c95d873f6fe277543b99 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1742563870 2704626 27e2b6191f9c22cc7fa764ee33542a8f ""
-  "aux/zadanie2.aux" 1742662344.50775 1254 5d48daef5e9ab11caaa21d67865a8e1d "pdflatex"
-  "aux/zadanie2.out" 1742662344.03775 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "zadanie2.tex" 1742662339.06774 14951 a55d4e663c0032f756d17423a0326af3 ""
+  "aux/zadanie2.aux" 1742732981.32636 1254 5d48daef5e9ab11caaa21d67865a8e1d "pdflatex"
+  "aux/zadanie2.out" 1742732980.90636 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "zadanie2.tex" 1742732975.94636 15087 09ae431d647a4b5e32bb67453fcc47ad ""
   (generated)
   "aux/zadanie2.aux"
   "aux/zadanie2.log"

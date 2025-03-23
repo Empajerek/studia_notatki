@@ -157,22 +157,22 @@
 
     Zastosujmy twierdzenie o inwersji Fouriera:
     \[
-        f(x) = \int_{\RR} A \chi_{[-B, B]} \cdot e^{i x k} dk = 
-        A \cdot \int_{[-B, B]} \css{x k} + i \snn{x k} dk =
+        f(x) = \frac{1}{\sqrt{2 \pi } } \cdot \int_{\RR} A \chi_{[-B, B]} \cdot e^{i x k} dk = 
+        \frac{A}{\sqrt{2 \pi } } \cdot \int_{[-B, B]} \css{x k} + i \snn{x k} dk =
     \]
     skorzystamy z faktu że $\sin$ jest funkcją nieparzystą a $\cos$ jest parzystą więc:
     \[
-        = 2A \cdot \int_0^B \css{x k} dk
+        = A \sqrt{\frac{2}{\pi }}  \cdot \int_0^B \css{x k} dk
     \]
     zastosujmy teraz podstawienie $a = x k$:
     \[
-        = \frac{2 A}{x} \cdot \int_0^{x B} \cos a \; da 
-        = 2 A \cdot \frac{\snn{x B}}{x}
+        = A \sqrt{\frac{2}{\pi }}  \cdot \frac{1}{x} \cdot \int_0^{x B} \cos a \; da 
+        = A \sqrt{\frac{2}{\pi }}  \cdot \frac{\snn{x B}}{x}
     \]
     zatem porównując mamy że współczynniki $A, B$ to odpowiednio:
     \[
         \begin{cases}
-            A = \frac{1}{2} \\
+            A = \sqrt{\frac{\pi }{2}} \\
             B = 1
         \end{cases}
     \]
