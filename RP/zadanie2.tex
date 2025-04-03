@@ -1,0 +1,149 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+
+
+\begin{document}
+    \title{Rachunek prawdopodobieństwa I*}
+    \subtitle{Rozwiazanie zadania domowego nr. 2}
+    \maketitle
+
+    \section{Zadanie}
+
+    \section{Zadanie}
+
+    \begin{zadanie*}
+        Niech \( A_1, A_2, \dots \) będą zdarzeniami. 
+        Załóżmy, że \( \sum_k \mathbf{P}(A_k) = \infty \). Wykaż, że jeśli
+        \[
+            \limsup_{n \to \infty} 
+                \frac{\left( \sum_{k=1}^{n} \mathbf{P}(A_k) \right)^2}
+                {\sum_{1 \leq j, k \leq n} \mathbf{P}(A_j \cap A_k)} 
+                = \alpha > 0,
+        \]
+        wówczas \( \mathbf{P} (\limsup A_n) \geq \alpha \), 
+        gdzie \( \limsup_{n \to \infty} A_n = \bigcap_n \bigcup_{m \geq n} A_m \).
+    \end{zadanie*}
+
+    Rozwiązanie zacznijmy od lematu, wynikającego z tw. Jensen'a:
+    \begin{lemat}
+        \label{lem:cauchy}
+        Niech $Z \geq 0$ będzie zmienną losową, wówczas:
+        \[
+            \left ( \mathbb{E} Z \right )^2 \leq \mathbb{P} (Z \geq 0) \cdot \mathbb{E} Z^2 
+        \]
+    \end{lemat}
+
+    \textit{Dowód}:
+
+    Skorzystajmy z wzoru na warunkową wartość oczekiwaną dla $Z$ i $Z^2$:
+    \begin{gather*}
+        \mathbb{E} Z = \mathbb{P} (Z > 0) \cdot \mathbb{E} \left [ Z \mid Z > 0 \right ] \\
+        \mathbb{E} Z^2 = \mathbb{P} (Z^2 > 0) \cdot \mathbb{E} \left [ Z^2 \mid Z > 0 \right ] 
+    \end{gather*}
+
+    zauważmy że $ \mathbb{P} (Z^2 > 0) = \mathbb{P} (Z > 0) $, skorzystajmy więc z tw. Jensen'a:
+    \begin{gather*}
+        \left ( \frac{\mathbb{E} [Z]}{\mathbb{P} (Z > 0)} \right )^2 = 
+        \left ( \mathbb{E} \left [ Z \mid Z > 0 \right ] \right )^2 
+        \; \stackrel{\text{Jensen}}{\geq} \;
+        \mathbb{E} \left [ Z^2 \mid Z > 0 \right ] =
+        \frac{\mathbb{E} [Z^2]}{\mathbb{P} (Z^2 > 0)} =
+        \frac{\mathbb{E} [Z^2]}{\mathbb{P} (Z > 0)}
+    \end{gather*}
+    co po wymnożeniu daje tezę lematu.
+
+    Udowodnijmy teraz więc drugi lemat, który pozwoli rozwiązać zadanie:
+    \begin{lemat}
+        \label{lem:nier}
+        Niech $A_1, \dots, A_n$ będą zdarzeniami, wówczas zachodzi:
+        \[
+            \PP \left ( \bigcup_{k = 1}^n A_k \right ) \geq 
+                \frac{\left( \sum_{k=1}^{n} \mathbf{P}(A_k) \right)^2}
+                {\sum_{1 \leq j, k \leq n} \mathbf{P}(A_j \cap A_k)} 
+        \]
+    \end{lemat}
+    
+    \textit{Dowód}:
+
+    Ustalmy zmienne losowe:
+    \[
+        X_k = \chi_{A_k}
+    \]
+    i korzystając z \Cref{lem:cauchy} mamy że:
+    \[
+        \left ( \EE \left [ \sum_{k = 1}^{n} X_k \right ] \right )^2 \leq 
+        \PP \left ( \sum_{k=1}^{n} X_k > 0 \right ) \cdot 
+        \EE \left [ \left ( \sum_{k=1}^{n} X_k \right )^2 \right ]
+    \]
+    korzystając z faktu że:
+    \[
+        X_k \cdot X_l = \chi_{A_k} \cdot \chi_{A_l} = \chi_{A_k \cap A_l}
+    \]
+    możemy interpretować powyższą nierówność jako:
+    \[
+        \left ( \sum_{k=1}^{n} \PP (A_k) \right )^2 \leq 
+        \PP \left (\bigcup_{k=1}^{n} A_k \right ) \cdot 
+        \sum_{l,k = 1}^{n} \PP \left ( A_k \cap A_l \right )  
+    \]
+    co po przekształceniu dowodzi lematu.
+
+    Korzystając z powyższego lematu możemy popełnić dwie obserwacje 
+
+    Pierwszą, oznaczając:
+    \begin{gather*}
+        s_n = \sum_{k=1}^{n} A_k \qquad  
+        t_n = \sum_{k,l = 1}^{n} \PP \left ( A_k \cap A_l \right )
+    \end{gather*}
+    z tezy zadania wiemy że $s_n \to \infty $ czyli:
+    \[
+        1 \geq \PP \left ( \bigcup_{k=1}^{n} A_k \right ) = 
+        \frac{s_n^2}{t_n} \lthen t_n \to \infty 
+    \]
+
+    Drugą, szacując:
+    \begin{gather*}
+        \sum_{l,k=m+1}^{n} \PP (A_l \cap A_k) = \\
+        \sum_{l,k = 1}^{n} \PP (A_l \cap A_k) -   
+        \sum_{\mathclap{\substack{
+                1 \leq l \leq m \\
+                m + 1 \leq k \leq n
+        }}} \PP (A_l \cap A_k) -
+        \sum_{\mathclap{\substack{
+                1 \leq k \leq m \\
+                m + 1 \leq l \leq n
+        }}} \PP (A_l \cap A_k) -
+        \sum_{l,k=1}^{m} \PP (A_l \cap A_k)  \\
+        \leq t_n - t_m
+    \end{gather*}
+    i korzystając z \Cref{lem:nier} mamy:
+    \begin{gather*}
+        \PP \left ( \bigcup_{k = m}^{\infty} A_k \right ) = 
+        \lim_{n \to \infty} \PP \left ( \bigcup_{k = m}^{n} A_k \right ) \geq
+        \lim_{n \to \infty} \frac{\left( \sum_{k=m}^{n} \mathbb{P}(A_k) \right)^2}
+            {\sum_{m \leq j, k \leq n} \mathbb{P}(A_j \cap A_k)} \\
+        = \lim_{n \to \infty} \frac{(s_n - s_m)^2}
+            {\sum_{l,k=m+1}^{n} \PP (A_l \cap A_k)}
+        \geq \lim_{n \to \infty} \frac{(s_n - s_m)^2}{t_n - t_m} = \\
+        \lim_{n \to \infty } \frac{t_n}{t_n - t_m} \cdot 
+            \left ( \frac{s_n^2}{t_n} + 2 \frac{s_n s_m}{t_n} + \frac{s_m^2}{t_n} \right )
+    \end{gather*}
+    korzystając zatem z obserwacji (czyli $s_n \to \infty, t_n \to \infty$) 
+    oraz warunku zadania (czyli $\frac{s_n^2}{t_n} \to \alpha $), mamy:
+    \[
+        = 1 \cdot ( \alpha + 0 + 0 ) = \alpha 
+    \]
+    czyli łacząc:
+    \[
+        \PP \left ( \bigcup_{k = m}^{\infty} A_k \right ) \geq \alpha 
+    \]
+    dla dowolnego $m$, a wiemy że przy granicy $m \to \infty $: 
+    \[
+        \alpha \leq \lim_{m \to \infty} \PP \left ( \bigcup_{k = m}^{\infty} A_k \right ) = 
+        \PP \left ( \limsup_k A_k \right )
+    \]
+    co kończy dowód.
+\end{document}
