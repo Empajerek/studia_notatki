@@ -13,7 +13,105 @@
 
     \section{Zadanie}
 
-    \section{Zadanie}
+    \begin{zadanie*}
+        Ponumerujmy genotypy \( AA, Aa, aa \) odpowiednio \( 1,2,3 \) 
+        i niech \( p_{ik}, i,k \in \{1,2,3\} \) oznacza prawdopodobieństwo warunkowe, 
+        że potomek będzie należał do genotypu \( k \) jeśli jego ojciec (lub matka) 
+        należą do genotypu \( i \). Oblicz \( p_{ik} \) zakładając, że prawdopodobieństwo, 
+        że drugi z rodziców jest genotypu \( 1,2,3 \) wynosi odpowiednio 
+        \( p^2, 2pq, q^2 \). Ogólnie pokaż, że \( p_{ik}^{(n)} \)-prawdopodobieństwa, 
+        że potomek w \( n \)-tym pokoleniu będzie należał do genotypu \( k \) 
+        jeśli ustalony przodek należał do genotypu \( i \) wynosi
+        \[
+        \left\{
+            \begin{array}{lll}
+                p^2 + \frac{pq}{2^{n-1}} & 2pq + \frac{q(q-p)}{2^{n-1}} & q^2 - \frac{q^2}{2^{n-1}} \\
+                p^2 + \frac{p(q-p)}{2^n} & 2pq + \frac{1 - 4pq}{2^n} & q^2 + \frac{q(p-q)}{2^n} \\
+                p^2 - \frac{p^2}{2^{n-1}} & 2pq + \frac{p(p - q)}{2^{n-1}} & q^2 + \frac{pq}{2^{n-1}}
+            \end{array}
+        \right\}.
+        \]
+
+        Oznacza to, że wpływ genotypu przodka maleje z pokolenia na pokolenie o \( 1/2 \).
+    \end{zadanie*}
+
+    Skorzystajmy z indukcji
+
+    Dla $n = 1$ poprzez ręczne rachunki mamy że powinna być to macierz:
+    \[
+        \left\{
+            \begin{array}{lll}
+                p^2 + \half \cdot 2pq & q^2 + \half \cdot 2pq & 0 \\
+                \half p^2 + \frac{1}{4} \cdot 2pq & \half & \half q^2 + \frac{1}{4} pq \\
+                0 & p^2 + pq & q^2 + pq
+            \end{array}
+        \right\}.
+    \]
+    co po podstawieniu do tezy działa.  
+
+    Zauważmy że zachodzą zależności:
+    \begin{gather*}
+        p_{k1}^{(n+1)} = p_{k1}^{(n)} \cdot (p^2 + pq) + 
+            p_{k2}^{(n)} \cdot (\half p^2 + \half pq) \\
+        p_{k2}^{(n+1)} = p_{k1}^{(n)} \cdot (pq + q^2) +
+            p_{k2}^{(n)} \cdot (\half p^2 + pq + \half q^2) +
+            p_{k3}^{(n)} \cdot (p^2 + pq) \\
+        p_{k3}^{(n+1)} = p_{k2}^{(n)} \cdot (\half pq + \half q^2) +
+            p_{k3}^{(n)} \cdot (pq + q^2)
+    \end{gather*}
+    korzystając z oczywistego faktu że $p + q = 1$ mamy że:
+    \begin{gather*}
+        p_{k1}^{(n+1)} = p_{k1}^{(n)} \cdot p + 
+            p_{k2}^{(n)} \cdot \half p  \\
+        p_{k2}^{(n+1)} = p_{k1}^{(n)} \cdot q +
+            p_{k2}^{(n)} \cdot \half +
+            p_{k3}^{(n)} \cdot p \\
+        p_{k3}^{(n+1)} = p_{k2}^{(n)} \cdot \half q +
+            p_{k3}^{(n)} \cdot q
+    \end{gather*}
+    czyli w postaci macierzy:
+    \begin{gather*}
+        \begin{bmatrix}
+            p_{11}^{(n+1)} & p_{12}^{(n+1)} & p_{13}^{(n+1)} \\
+            p_{21}^{(n+1)} & p_{22}^{(n+1)} & p_{23}^{(n+1)} \\
+            p_{31}^{(n+1)} & p_{32}^{(n+1)} & p_{33}^{(n+1)}
+        \end{bmatrix} =
+        \begin{bmatrix}
+            p_{11}^{(n)} & p_{12}^{(n)} & p_{13}^{(n)} \\
+            p_{21}^{(n)} & p_{22}^{(n)} & p_{23}^{(n)} \\
+            p_{31}^{(n)} & p_{32}^{(n)} & p_{33}^{(n}
+        \end{bmatrix}
+        \cdot 
+        \begin{bmatrix}
+            p       & q     & 0       \\
+            \half p & \half & \half q \\
+            0       & p     & q
+        \end{bmatrix}
+    \end{gather*}
+
+    wystarczy zatem sprawidzić czy:
+    \begin{gather*}
+        \begin{bmatrix}
+                p^2 + \frac{pq}{2^{n-1}} & 2pq + \frac{q(q-p)}{2^{n-1}} & q^2 - \frac{q^2}{2^{n-1}} \\
+                p^2 + \frac{p(q-p)}{2^n} & 2pq + \frac{1 - 4pq}{2^n} & q^2 + \frac{q(p-q)}{2^n} \\
+                p^2 - \frac{p^2}{2^{n-1}} & 2pq + \frac{p(p - q)}{2^{n-1}} & q^2 + \frac{pq}{2^{n-1}}
+        \end{bmatrix}
+        \cdot 
+        \begin{bmatrix}
+            p       & q     & 0       \\
+            \half p & \half & \half q \\
+            0       & p     & q
+        \end{bmatrix} \\
+        =
+        \begin{bmatrix}
+                p^2 + \frac{pq}{2^{n}} & 2pq + \frac{q(q-p)}{2^{n}} & q^2 - \frac{q^2}{2^{n}} \\
+                p^2 + \frac{p(q-p)}{2^{n+1}} & 2pq + \frac{1 - 4pq}{2^{n+1}} & q^2 + \frac{q(p-q)}{2^{n+1}} \\
+                p^2 - \frac{p^2}{2^{n}} & 2pq + \frac{p(p - q)}{2^{n}} & q^2 + \frac{pq}{2^{n}}
+        \end{bmatrix}
+    \end{gather*}
+    co zachodzi i kończy dowód zadania.
+
+    \vspace{2cm}
 
     \begin{zadanie*}
         Niech \( A_1, A_2, \dots \) będą zdarzeniami. 
@@ -79,17 +177,37 @@
         \PP \left ( \sum_{k=1}^{n} X_k > 0 \right ) \cdot 
         \EE \left [ \left ( \sum_{k=1}^{n} X_k \right )^2 \right ]
     \]
-    korzystając z faktu że:
+    korzystając z faktów że:
     \[
         X_k \cdot X_l = \chi_{A_k} \cdot \chi_{A_l} = \chi_{A_k \cap A_l}
+        \qquad \qquad \EE [X_k] = \PP (A_k)
     \]
-    możemy interpretować powyższą nierówność jako:
-    \[
-        \left ( \sum_{k=1}^{n} \PP (A_k) \right )^2 \leq 
-        \PP \left (\bigcup_{k=1}^{n} A_k \right ) \cdot 
-        \sum_{l,k = 1}^{n} \PP \left ( A_k \cap A_l \right )  
-    \]
-    co po przekształceniu dowodzi lematu.
+    przekształcając mamy:
+    \begin{gather*}
+        \left ( \sum_{k = 1}^{n} \EE [ X_k ] \right )^2 \leq 
+        \PP \left ( \sum_{k=1}^{n} \chi_{A_k} > 0 \right ) \cdot 
+        \EE \left [ \sum_{l,k=1}^{n} X_l X_k \right ] 
+        \\
+        \left ( \sum_{k = 1}^{n} \PP (A_k) \right )^2 \leq 
+        \PP \left ( \sum_{k=1}^{n} \chi_{A_k} > 0 \right ) \cdot 
+        \EE \left [ \sum_{l,k=1}^{n} \chi_{A_k \cap A_l} \right ] 
+        \\
+        \left ( \sum_{k = 1}^{n} \PP (A_k) \right )^2 \leq 
+        \PP \left ( \bigcup_{k=1}^{n} A_k \right ) \cdot 
+        \sum_{l,k=1}^{n} \EE \left [ \chi_{A_k \cap A_l} \right ]
+        \\
+        \left ( \sum_{k = 1}^{n} \PP (A_k) \right )^2 \leq 
+        \PP \left ( \bigcup_{k=1}^{n} A_k \right ) \cdot 
+        \sum_{l,k=1}^{n} \PP (A_k \cap A_l)
+        \\
+        \PP \left ( \bigcup_{k=1}^{n} A_k \right ) \geq
+        \frac{
+            \left ( \sum_{k = 1}^{n} \PP (A_k) \right )^2
+        }{
+            \sum_{l,k=1}^{n} \PP (A_k \cap A_l)
+        }
+    \end{gather*}  
+    co po dowodzi lematu.
 
     Korzystając z powyższego lematu możemy popełnić dwie obserwacje 
 
@@ -117,6 +235,14 @@
                 m + 1 \leq l \leq n
         }}} \PP (A_l \cap A_k) -
         \sum_{l,k=1}^{m} \PP (A_l \cap A_k)  \\
+        \leq t_n - \sum_{\mathclap{\substack{
+                1 \leq l \leq m \\
+                m + 1 \leq k \leq n
+        }}} \PP (A_l \cap A_k) -
+        \sum_{\mathclap{\substack{
+                1 \leq k \leq m \\
+                m + 1 \leq l \leq n
+        }}} \PP (A_l \cap A_k) - t_m
         \leq t_n - t_m
     \end{gather*}
     i korzystając z \Cref{lem:nier} mamy:

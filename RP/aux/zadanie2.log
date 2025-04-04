@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.21)  4 APR 2025 00:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.4.4)  4 APR 2025 21:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1077,25 +1077,31 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 19.
-Package hyperref Info: bookmark level for unknown zadanie* defaults to 0 on input line 19.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 33.
-Package hyperref Info: bookmark level for unknown lemat defaults to 0 on input line 33.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 61.
+(mdframed)              on input line 17.
+Package hyperref Info: bookmark level for unknown zadanie* defaults to 0 on input line 17.
 
 
 [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 117.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 131.
+Package hyperref Info: bookmark level for unknown lemat defaults to 0 on input line 131.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 159.
+
 
 [2]
 
-[3] (aux/zadanie2.aux)
+[3]
+
+[4] (aux/zadanie2.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -1104,18 +1110,18 @@ Package rerunfilecheck Info: File `zadanie2.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 40479 strings out of 475136
- 844513 string characters out of 5766299
- 1443797 words of memory out of 5000000
- 62718 multiletter control sequences out of 15000+600000
- 584451 words of font info for 144 fonts, out of 8000000 for 9000
+ 40493 strings out of 475136
+ 844765 string characters out of 5766292
+ 1453799 words of memory out of 5000000
+ 62723 multiletter control sequences out of 15000+600000
+ 584691 words of font info for 148 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
- 145i,21n,143p,10932b,1197s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on aux/zadanie2.pdf (3 pages, 263813 bytes).
+ 145i,21n,143p,10932b,1195s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
+Output written on aux/zadanie2.pdf (4 pages, 283242 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 11 named destinations out of 1000 (max. 500000)
- 47229 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 174 PDF objects out of 1000 (max. 8388607)
+ 108 compressed objects within 2 object streams
+ 12 named destinations out of 1000 (max. 500000)
+ 47221 words of extra memory for PDF output out of 51595 (max. 10000000)
 
