@@ -9,16 +9,93 @@
     \subtitle{Rozwiązanie zadań z serii nr. 3}
     \maketitle
 
+    \section{Zadanie}
+        
     \begin{zadanie*}
         Niech $
         U = \RR^3 \backslash \{ 0 \}, 
-        \omega = x \ed y \wedge \ed z + y \ed z \wedge \ed x + z \ed x \wedge \ed y
+        \omega = x \ed y \wedge \ed z 
+            + y \ed z \wedge \ed x 
+            + z \ed x \wedge \ed y
         $
         oraz $f \in C^\infty (U)$. Wykazać, że $\ed (f(y \; dx - x \; dy))$ jest
         proporcjonalna do formy $\omega$ wtedy i tylko wtedy gdy $f$ jest 
         dodatnio jednorodna stopnia $-2$. Jaki warunek na $f$ jest równoważny 
         równaniu $\ed (f(y \; \ed x - x \ed y)) = 0$?
     \end{zadanie*}
+
+    Rozpiszmy:
+    \begin{gather*}
+        \ed f (y \, \ed x - x \, \ed y) = 
+        \ed f \wedge (y \, \ed x - x \, \ed y) 
+            + f \, \ed (y \, \ed x - x \, \ed y) \\
+        = \left ( 
+            - x \frac{\partial f}{\partial x} \, \ed x \wedge \ed y 
+            + y \frac{\partial f}{\partial y} \, \ed y \wedge \ed x 
+            + y \frac{\partial f}{\partial z} \, \ed z \wedge \ed y 
+            - x \frac{\partial f}{\partial z} \, \ed z \wedge \ed x 
+        \right ) - 2f \, \ed x \wedge \ed y \\
+        = \left ( 
+            - x \frac{\partial f}{\partial x} 
+            - y \frac{\partial f}{\partial y} - 2f 
+        \right ) \, \ed x \wedge \ed y 
+        - y \frac{\partial f}{\partial z} \, \ed z \wedge \ed y
+        + x \frac{\partial f}{\partial z} \, \ed z \wedge \ed x \\
+        = \left ( 
+            - x \frac{\partial f}{\partial x} 
+            - y \frac{\partial f}{\partial y} 
+            - z \frac{\partial f}{\partial z} - 2f
+        \right ) \, \ed x \wedge \ed y 
+        + z \frac{\partial f}{\partial z} \, \ed x \wedge \ed y
+        + y \frac{\partial f}{\partial z} \, \ed y \wedge \ed z
+        + x \frac{\partial f}{\partial z} \, \ed z \wedge \ed x \\
+        = \left ( 
+            - x \frac{\partial f}{\partial x} 
+            - y \frac{\partial f}{\partial y} 
+            - z \frac{\partial f}{\partial z} - 2f
+        \right ) \, \ed x \wedge \ed y 
+        - \frac{\partial f}{\partial z} \cdot \omega
+    \end{gather*}
+
+    Wiemy, że warunek dodatnio jednorodności stopnia $-2$ to:
+    \[
+        x \frac{\partial f}{\partial x} 
+        + y \frac{\partial f}{\partial y} 
+        + z \frac{\partial f}{\partial z}  
+        = - 2f
+    \]
+    z którego jeżeli założymy że zachodzi mamy że:
+    \[
+        \ed f (y \, \ed x - x \, \ed y) = 
+        - \frac{\partial f}{\partial z} \cdot \omega
+    \]
+    czyli formy są proporcjonalne, jeśli $f$ jest dodatnio jednorodna 
+    stopnia $-2$.
+
+    Załużmy zatem że że formy są proporcjonalne, 
+    w takim razie mamy że $\exists \lambda$:
+    \[
+        \lambda \omega = 
+        \left ( 
+            - x \frac{\partial f}{\partial x} 
+            - y \frac{\partial f}{\partial y} 
+            - z \frac{\partial f}{\partial z} - 2f
+        \right ) \, \ed x \wedge \ed y 
+    \]
+    co porównaniu na pochodnych daje nam $\lambda = 0$, więc spełniony jest 
+    warunek dodatniej jednorodności $f$. 
+
+    Przejdźmy do przypadku $\ed f (y \, \ed x - x \, \ed y) = 0$, 
+    który na podstawie poprzednich obliczeń jest równoważny:
+    \[
+        \begin{cases}
+            x \frac{\partial f}{\partial x} + 
+            y \frac{\partial f}{\partial y} = -2 f \\
+            \frac{\partial f}{\partial z} = 0
+        \end{cases}
+    \]
+    czyli są to dowolne funkcje dodatnie jednorodne na zmiennych $x \, y$, 
+    i niezależne od $z$.
 
     \begin{zadanie*}
         Niech
@@ -27,8 +104,8 @@
             \frac{(x+1) \ed y - y \ed x}{(x+1)^2 + y^2}
         \]
         \begin{walk}
-            \item Wykazać, że nie istnieje funkcja 
-                $f \in C^\infty \left ( \RR^2 \backslash \{ \pm 1, 0 \} \right )$
+            \item Wykazać, że nie istnieje funkcja $f \in C^\infty \left ( 
+                \RR^2 \backslash \{ \pm 1, 0 \} \right )$
                 taka, że $\omega = \ed f$.
             \item Czy istnieje funkcja 
                 $f \in C^\infty \left ( 
@@ -40,14 +117,17 @@
     \begin{zadanie*}
         Niech $U$ będzie dopełnieniem w $\RR^3$ półprostej 
         $\left \{ x = y = 0, z \leq 0 \right \}$, 
-        $W = \left \{ (u,v, w) : w > 0 \right \}$ oraz $\phi : W \to U$ dane jest wzorem
+        $W = \left \{ (u,v, w) : w > 0 \right \}$ oraz $\phi : W \to U$ 
+        dane jest wzorem
         \[
             \phi (u, v, w) = \left ( uw, vw, \half (-u^2 - v^2 + w^2) \right ).
         \]
 
         Dana jest 2-forma $\omega \in \Omega^2 (U)$: 
         $\omega = \frac{1}{(x^2 + y^2 + z^2)^{\frac{3}{2}}} 
-            ( x \, \ed y \wedge \ed z + y \, \ed z \wedge \ed x + z \, \ed x \wedge \ed y)$
+            ( x \, \ed y \wedge \ed z + 
+            y \, \ed z \wedge \ed x + 
+            z \, \ed x \wedge \ed y)$
         
         \begin{walk}
             \item Wykazać, że $\phi$ jest dyfeomorfizmem $W$ na $U$.
