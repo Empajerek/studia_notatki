@@ -1,0 +1,63 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy,noasy]{evan}
+\author{Konrad Kaczmarczyk}
+\usepackage{amsmath,systeme}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\begin{document}
+\title{Analiza II.1*}
+    \subtitle{Rozwiązanie zadań z serii nr. 3}
+    \maketitle
+
+    \begin{zadanie*}
+        Niech $
+        U = \RR^3 \backslash \{ 0 \}, 
+        \omega = x \ed y \wedge \ed z + y \ed z \wedge \ed x + z \ed x \wedge \ed y
+        $
+        oraz $f \in C^\infty (U)$. Wykazać, że $\ed (f(y \; dx - x \; dy))$ jest
+        proporcjonalna do formy $\omega$ wtedy i tylko wtedy gdy $f$ jest 
+        dodatnio jednorodna stopnia $-2$. Jaki warunek na $f$ jest równoważny 
+        równaniu $\ed (f(y \; \ed x - x \ed y)) = 0$?
+    \end{zadanie*}
+
+    \begin{zadanie*}
+        Niech
+        \[
+            \omega = \frac{(x-1) \ed y - y \ed x}{(x-1)^2 + y^2} -
+            \frac{(x+1) \ed y - y \ed x}{(x+1)^2 + y^2}
+        \]
+        \begin{walk}
+            \item Wykazać, że nie istnieje funkcja 
+                $f \in C^\infty \left ( \RR^2 \backslash \{ \pm 1, 0 \} \right )$
+                taka, że $\omega = \ed f$.
+            \item Czy istnieje funkcja 
+                $f \in C^\infty \left ( 
+                    \RR^2 \backslash \left \{ [-1, 1] \times 0 \right \} 
+                \right )$ taka, że $\omega = \ed f$?
+        \end{walk}
+    \end{zadanie*}
+
+    \begin{zadanie*}
+        Niech $U$ będzie dopełnieniem w $\RR^3$ półprostej 
+        $\left \{ x = y = 0, z \leq 0 \right \}$, 
+        $W = \left \{ (u,v, w) : w > 0 \right \}$ oraz $\phi : W \to U$ dane jest wzorem
+        \[
+            \phi (u, v, w) = \left ( uw, vw, \half (-u^2 - v^2 + w^2) \right ).
+        \]
+
+        Dana jest 2-forma $\omega \in \Omega^2 (U)$: 
+        $\omega = \frac{1}{(x^2 + y^2 + z^2)^{\frac{3}{2}}} 
+            ( x \, \ed y \wedge \ed z + y \, \ed z \wedge \ed x + z \, \ed x \wedge \ed y)$
+        
+        \begin{walk}
+            \item Wykazać, że $\phi$ jest dyfeomorfizmem $W$ na $U$.
+            \item Obliczyć $\phi* \omega$.
+            \item Znaleźć 1-formę $\alpha \in \Omega^1 (W)$ taką, że 
+                $\ed \alpha = \phi* \omega$.
+            \item Wywnioskować, że istnieje 1-forma $\beta \in \Omega^1 (U)$ 
+                taka, że $\ed \beta = \omega$
+        \end{walk}
+    \end{zadanie*}
+
+
+\end{document}

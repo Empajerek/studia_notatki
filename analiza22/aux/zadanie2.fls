@@ -1,4 +1,4 @@
-PWD /home/Konrad/notatki/analiza22
+PWD /home/konrad/studia_notatki/analiza22
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT zadanie2.tex
@@ -27,8 +27,8 @@ INPUT /usr/share/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
 INPUT /usr/share/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texmf-dist/tex/latex/koma-script/typearea.sty
-INPUT /home/Konrad/texmf/tex/latex/local/evan.sty
-INPUT /home/Konrad/texmf/tex/latex/local/evan.sty
+INPUT ./evan.sty
+INPUT evan.sty
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
